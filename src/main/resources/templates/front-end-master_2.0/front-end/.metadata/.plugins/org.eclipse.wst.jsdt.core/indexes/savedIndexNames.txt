@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+D:\bootstrap\Bootstrap\Bootstrap\startbootstrap-simple-sidebar-gh-pages\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3252085095.index
+1350423672.index
+144905983.index
+1863969050.index
+20847937.index
+1908461850.index

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+<body>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempCustomer : ${contractors}">
+
+        <td th:text="${tempCustomer.contractorFname}" />
+        <td th:text="${tempCustomer.contractorLname}" />
+
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <class>com.example.demo.AccessLevel</class>
+        <class>com.example.demo.ArticleAuthor</class>
+        <class>com.example.demo.Assignment</class>
+        <class>com.example.demo.AssignmentStatus</class>
+        <class>com.example.demo.Contact</class>
+        <class>com.example.demo.ContactStatus</class>
+        <class>com.example.demo.ContactType</class>
+        <class>com.example.demo.Contractor</class>
+        <class>com.example.demo.ContractorIncident</class>
+        <class>com.example.demo.ContractorSkill</class>
+        <class>com.example.demo.ContractorStatus</class>
+        <class>com.example.demo.ContractorType</class>
+        <class>com.example.demo.Country</class>
+        <class>com.example.demo.CustomerSite</class>
+        <class>com.example.demo.CustomerSiteHw</class>
+        <class>com.example.demo.CustomerSiteHwStatus</class>
+        <class>com.example.demo.CustomerSiteStatus</class>
+        <class>com.example.demo.CustomerSiteType</class>
+        <class>com.example.demo.HwInventory</class>
+        <class>com.example.demo.HwInventoryStatus</class>
+        <class>com.example.demo.HwManufacturer</class>
+        <class>com.example.demo.HwManufacturerStatus</class>
+        <class>com.example.demo.HwModel</class>
+        <class>com.example.demo.HwModelStatus</class>
+        <class>com.example.demo.HwProvider</class>
+        <class>com.example.demo.HwProviderStatus</class>
+        <class>com.example.demo.HwSeries</class>
+        <class>com.example.demo.HwSeriesStatus</class>
+        <class>com.example.demo.HwSvoLine</class>
+        <class>com.example.demo.HwType</class>
+        <class>com.example.demo.Incident</class>
+        <class>com.example.demo.IncidentStatus</class>
+        <class>com.example.demo.IncidentType</class>
+        <class>com.example.demo.KnowledgeBaseCategory</class>
+        <class>com.example.demo.KnowledgeBaseEntry</class>
+        <class>com.example.demo.KnowledgeBaseEntryPhoto</class>
+        <class>com.example.demo.Payment</class>
+        <class>com.example.demo.PaymentStatus</class>
+        <class>com.example.demo.PaymentType</class>
+        <class>com.example.demo.PhotoType</class>
+        <class>com.example.demo.RequiredSkill</class>
+        <class>com.example.demo.ServiceOrder</class>
+        <class>com.example.demo.ServiceOrderLine</class>
+        <class>com.example.demo.ServiceOrderPhoto</class>
+        <class>com.example.demo.ServiceOrderStatus</class>
+        <class>com.example.demo.ServiceStatus</class>
+        <class>com.example.demo.ServiceType</class>
+        <class>com.example.demo.Skill</class>
+        <class>com.example.demo.SocialMediaAccount</class>
+        <class>com.example.demo.SocialMediaAccountStatus</class>
+        <class>com.example.demo.SocialMediaAccountType</class>
+        <class>com.example.demo.StateProvince</class>
+        <class>com.example.demo.Svc</class>
+        <properties>
+            <property name="toplink.jdbc.url" value="jdbc:sqlserver://localhost"/>
+            <property name="toplink.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="hibernate.connection.url" value="jdbc:sqlserver://localhost"/>
+            <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:sqlserver://localhost"/>
+            <property name="openjpa.ConnectionDriverName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:sqlserver://localhost"/>
+            <property name="eclipselink.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+        </properties>
+    </persistence-unit>
+</persistence>
