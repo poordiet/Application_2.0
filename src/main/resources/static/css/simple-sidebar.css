@@ -3,6 +3,13 @@
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
 body {
   overflow-x: hidden;
 }
@@ -73,6 +80,54 @@ body {
 	
 }
 
+i.fa-users{
+    margin-right: 5px;
+}
+
+i.fa-users:after{
+    content: "New Contractors";
+    font-size: medium;
+    color: white;
+    margin-left: 10px;
+    font-family: Arial;
+}
+
+
+i.fa-desktop{
+    margin-right: 5px;
+}
+
+i.fa-desktop:after{
+   content: "Hardware Sales";
+    font-size: large;
+    color: white;
+    margin-left: 10px;
+    font-family: Arial;
+}
+
+i.fa-child{
+    margin-right: 5px;
+}
+
+i.fa-child:after{
+    content: "New Customers";
+    font-size: medium;
+    color: white;
+    margin-left: 10px;
+    font-family: Arial;
+}
+
+i.fa-exclamation-circle{
+    margin-right: 5px;
+}
+
+i.fa-exclamation-circle:after{
+    content: "Last Incident";
+    font-size: medium;
+    color: white;
+    margin-left: 10px;
+    font-family: Arial;
+}
 
 
 #sidebar-wrapper .sidebar-heading {
@@ -87,10 +142,21 @@ body {
 }
 
 #page-content-wrapper {
-  min-width: 100vw;
+  padding-left: 241px;
+  padding-top: 58px;
  
   
 }
+
+#dashArea {
+    position: fixed;
+    padding-left: 100px;
+    padding-top:  40px;
+}
+
+
+
+
 
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;

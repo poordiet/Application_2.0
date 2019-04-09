@@ -1,6 +1,7 @@
 package com.example.demo.Presentation;
 
-import com.example.demo.*;
+import com.example.demo.Models.ServiceOrder;
+import com.example.demo.Models.ServiceOrderLine;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

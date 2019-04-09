@@ -1,12 +1,13 @@
 package com.example.demo.Service;
 
-import com.example.demo.Assignment;
+import com.example.demo.Models.Assignment;
+import com.example.demo.Models.ServiceOrder;
+import com.example.demo.Models.ServiceOrderLine;
+import com.example.demo.Models.ServiceOrderStatus;
 import com.example.demo.Presentation.ServiceOrderPresentation;
 import com.example.demo.Repositories.ServiceOrderLineRepository;
 import com.example.demo.Repositories.ServiceOrderRepository;
-import com.example.demo.ServiceOrder;
-import com.example.demo.ServiceOrderLine;
-import com.example.demo.Svc;
+import com.example.demo.Repositories.ServiceOrderStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,9 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
     @Autowired
     ServiceOrderLineRepository serviceOrderLineRepository;
 
+    @Autowired
+    ServiceOrderStatusRepository serviceOrderStatusRepository;
+
     @Override
     public void addServiceOrder(ServiceOrder serviceOrder) { serviceOrderRepository.save(serviceOrder);}
 
@@ -31,7 +35,28 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         return serviceOrderRepository.findAllByOrderByDateScheduledDesc();
     }
 
-    public List<ServiceOrderPresentation> setServiceOrderPresentation(List<ServiceOrder> serviceOrders){
+    @Override
+    public List<ServiceOrder> findServiceOrderInProgress(){
+        return serviceOrderRepository.findServiceOrderInProgress();
+    }
+
+    @Override
+    public ServiceOrder findServiceOrderBySvoId(int svoId){
+        return serviceOrderRepository.findServiceOrderBySvoId(svoId);
+    }
+
+    @Override
+    public void saveServiceOrder(ServiceOrder serviceOrder)
+    {
+        serviceOrderRepository.save(serviceOrder);
+    }
+
+    @Override
+    public ServiceOrderStatus findServiceOrderStatusBySvoStatusId(int svoStatusId){
+        return serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(svoStatusId);
+    };
+
+    public List<ServiceOrderPresentation> getServiceOrderPresentation(List<ServiceOrder> serviceOrders){
 
         List<ServiceOrderPresentation> serviceOrderPresentations = new ArrayList<>();
 
@@ -80,7 +105,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
                     svcName += ", ";
                 }
                 svcName+=serviceOrderLine1.getSvc().getSvcName();
-                System.out.println(svcName);
+                //System.out.println(svcName);
                 serviceOrderPresentation.setSvcName(svcName);
                 count++;
 
@@ -92,7 +117,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
                         contractors += ", ";
                     }
                     contractors += assignment.getContractor().getContractorFname() + " " + assignment.getContractor().getContractorLname();
-                    System.out.println(contractors);
+                    //System.out.println(contractors);
                     serviceOrderPresentation.setContractors(contractors);
                     count2++;
                 }
@@ -103,5 +128,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         }
         return serviceOrderPresentations;
     }
+
+
 
 }

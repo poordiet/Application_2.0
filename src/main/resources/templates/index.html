@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:overflow="http://www.w3.org/1999/xhtml" xmlns:white-space="http://www.w3.org/1999/xhtml"
+	  xmlns:text-overflow="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>LARI</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+	<!-- Bootstrap core JavaScript -->
+	<script th:src="@{/vendor/jquery/jquery.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+	
+    <div class="bg-primary border-right pre-scrollable" id="sidebar-wrapper" style="background-color: #cacbce !important;">
+      <div class="sidebar-heading"></div>
+		<div class="sidebar-heading"></div>
+	  
+			<!-- Nav Bar Items -->
+			<div id="nav" class="list-group  list-group-flush">
+			
+				<!-- Home -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >Home</a>
+				
+				<!-- Service Order -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#so" id="plus">
+				Service Order <i class="fas fa-plus-circle" id="circle"></i>
+				</a>
+		
+					<div id="so" class="collapse">
+						<a th:href="@{/service_orders/search}" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Create</a>
+						<a href="#" class="list-group-item ">Incident</a>
+					</div>
+				
+			
+				<!-- Customer -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#customer">
+				Customer <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="customer" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+			
+		
+				<!-- Contractor -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#contractor">
+				Contractor <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="contractor" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+				
+				
+				<!-- Hardware -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#hardware">
+				Hardware <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="hardware" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+				
+		
+				<!-- Knowledge base -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
+					Knowledge Base <i class="fas fa-plus-circle"></i>
+					</a>
+		
+					<div id="kb" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+		
+				<!-- Reports -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+				
+				<!-- DB Management -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
+				
+				<!-- Logout -->
+				<a class="list-group-item nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+
+
+		
+		</div>
+		<!-- /Nav Bar Items -->
+
+
+      </div>
+	  <!-- /SideBar -->
+
+    </div>
+	
+			
+	
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+	
+		<!-- Not Really Sure TBH -->
+
+		
+		<!-- Grey bar at the top (the sticky one) -->
+		<nav class="navbar fixed-top navbar-expand-lg bg-primary" >
+
+			<div class="col-sm-1" id="toplogo">
+			<img class="img-fluid" id="logo" src="logo.emf"/>
+			</div>
+
+			<!-- Valerie Bar -->
+			<div class="col-sm-12" id="valeriebar1"></div>
+			
+				<!-- Hamburger Button -->
+				<button class="btn btn-primary" id="menu-toggle"><span class="dark-blue-text"><i
+				class="fa fa-bars fa-1x"></i></span></button></button>
+
+				<!-- Top Right Logout -->
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+					<a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+					</li>
+				</ul>
+			</div>
+      </nav>
+	  <!-- /Grey bar at the top (the sticky one) -->
+	  
+	  <!-- Valerie Bar -->
+      <div class="col-sm-12" id="valeriebar1"></div>
+	  
+
+	  <!-- /Valerie Bar -->
+
+		<!-- The Table Title -->
+	<div class="container-fluid" id="dashArea">
+		<div class="row">
+		<div class="col-sm-2">
+			<div class="card" style="background-color: #f9530c">
+				<div class="card-body">
+					<i class="fa fa-users fa-3x"  style="color: white"></i>
+					<div style="background-color: white; height: 5px; margin-top: 3px;"></div>
+					<h3 class="text-center" style="color: white"> ### </h3>
+					<p class="text-center" style="color: white">% of goal</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-2">
+			<div class="card"  style="background-color: seagreen">
+				<div class="card-body">
+					<i class="fa fa-desktop fa-3x" style="color: white"></i>
+					<div style="background-color: white; height: 5px; margin-top: 3px;"></div>
+					<h3 class="text-center" style="color: white">$9999.99 </h3>
+					<p class="text-center" style="color: white">% of goal</p>
+				</div>
+			</div>
+		</div>
+
+			<div class="col-sm-2">
+				<div class="card"  style="background-color: royalblue">
+					<div class="card-body">
+						<i class="fa fa-child fa-3x" style="color: white"></i>
+						<div style="background-color: white; height: 5px; margin-top: 3px;"></div>
+						<h3 class="text-center" style="color: white">### </h3>
+						<p class="text-center" style="color: white">% of goal</p>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-sm-2">
+				<div class="card"  style="background-color: red">
+					<div class="card-body">
+						<i class="fa fa-exclamation-circle fa-3x" style="color: white"></i>
+						<div style="background-color: white; height: 5px; margin-top: 3px;"></div>
+						<h3 class="text-center" style="color: white"># days ago </h3>
+						<p class="text-center" style="color: white">% of goal</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+		<!-- The Table -->
+        <div class="d-flex justify-content-center" style="margin-top: 15%; margin-right: 10%">
+		<div class="table table-hover" >
+			<h2 class="text-center">Service Orders In-Progress</h2>
+			<div class="row justify-content-center">
+				<div class="col-sm-13">
+					<table class="table">
+						<thead class="thead-light">
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Date Started</th>
+							<th scope="col">Service</th>
+							<th scope="col">Customer Number</th>
+							<th scope="col">Customer Name</th>
+							<th scope="col">Contractors</th>
+						</tr>
+						</thead>
+
+
+						<tbody>
+
+						<tr th:each="tempServiceOrder : ${serviceOrderPresentations}">
+
+							<td th:text="${tempServiceOrder.svoId}" />
+							<td th:text="${#dates.format(tempServiceOrder.dateStarted, 'MM/dd/yyyy HH:mm')}" />
+							<td th:text="${tempServiceOrder.svcName}" />
+							<td th:text="${tempServiceOrder.custSiteNumber}" />
+							<td th:text="${tempServiceOrder.custSiteName}" />
+							<!--<td th:text="${tempServiceOrder.custSiteLocation}" />
+							<td th:text="${tempServiceOrder.contactName}" />
+							<td th:text="${#dates.format(tempServiceOrder.dateFinished, 'MM/dd/YYY')}" />
+							<td th:text="${tempServiceOrder.svoStatus}" />-->
+							<td th:text="${tempServiceOrder.contractors}" />
+
+						</tr>
+
+
+
+
+						<!-- IDK, I was trying to make the overflow of the contractor names cut off, but not sure how to do this
+                            This code makes it to where the names do not wrap, but the ellipses does not work. I suspect it has
+                            something to do with the bootstrap autosizing the table columns?
+                        <style>
+                            #td_overflow{
+                                overflow:hidden;
+                                text-overflow:ellipsis;
+                                white-space:nowrap;
+                            }
+                        </style>
+                        -->
+						<style>
+							#td_overflow{
+								overflow:hidden;
+								text-overflow:ellipsis;
+								white-space:nowrap;
+							}
+						</style>
+
+
+						<!-- Crappy Placeholder Text for future connection with database etc
+                        <tr th:each="tempServiceOrder : ${serviceOrders}, tempCustomerSite : ${customerSites}">
+
+                            <td th:text="${tempServiceOrder.id}" />
+                            <td th:text="${tempServiceOrder.date_scheduled}" />
+                            <td th:text="${tempServiceOrder.service}" />
+                            <td th:text="${tempCustomerSite.customer_num}" />
+                            <td th:text="${tempCustomerSite.customer_name}" />
+                            <td th:text="${tempServiceOrder.date_completed}" />
+                            <td th:text="${tempServiceOrder.status}" />
+                            <td><button type="button">Edit</button> <button type="button">Delete</button></td>
+
+                        </tr>
+                        -->
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		</div>
+
+		<!-- /The Form-->
+
+
+  
+	  
+    </div>
+    <!-- /#page-content-wrapper -->
+
+
+  <!-- /#wrapper -->
+  
+  
+
+
+  <!-- Menu Toggle Script -->
+    <script>
+
+		$("#plus").click(function(e){
+			e.preventDefault();
+			$("i.fa-plus-circle").toggleClass("fas fa-minus-circle")});
+
+  </script>
+  
+  <!-- Attempting to get the icons to change -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+	
+
+	
+  </script>
+  
+
+
+</body>
+
+</html>
