@@ -1,7 +1,6 @@
 package com.example.demo.Presentation;
 
-import com.example.demo.Models.ServiceOrder;
-import com.example.demo.Models.ServiceOrderLine;
+import com.example.demo.Models.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -573,5 +572,58 @@ public class ServiceOrderPresentation {
     public void setContractorAvailability(String contractorAvailability) {
         this.contractorAvailability = contractorAvailability;
     }
+
+    //Country
+
+    private int countryId;
+    private String countryName;
+
+    @Id
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @Column(name = "country_id", nullable = false)
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
+
+    @Basic
+    @Column(name = "country_name", nullable = false, length = 200)
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    // State
+
+    private int stateId;
+    private String stateName;
+
+    @Id
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @Column(name = "state_id", nullable = false)
+    public int getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(int stateId) {
+        this.stateId = stateId;
+    }
+
+    @Basic
+    @Column(name = "state_name", nullable = false, length = 200)
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
 
 }

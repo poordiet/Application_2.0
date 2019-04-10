@@ -2,12 +2,26 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class ContactType {
     private int contactTypeId;
     private String contactType;
     private String contactTypeDesc;
+
+    // 1:M with Contact
+    private Set<Contact> contacts;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contactType")
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contact> contacts) {
+        contacts.forEach(contact -> contact.setContactType(this));
+        this.contacts = contacts;
+    }
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

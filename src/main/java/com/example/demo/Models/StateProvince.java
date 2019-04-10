@@ -9,7 +9,7 @@ public class StateProvince {
     private int stateId;
     private String stateName;
 
-    // 1:M with Assignment
+    // 1:M with customer site
     private Set<CustomerSite> customerSites;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "stateProvince")

@@ -3,6 +3,7 @@ package com.example.demo.Service;
 
 import com.example.demo.Models.ServiceOrder;
 import com.example.demo.Models.ServiceOrderStatus;
+import com.example.demo.Presentation.ServiceOrderPresentation;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface ServiceOrderService {
     public void saveServiceOrder(ServiceOrder serviceOrder);
 
     public ServiceOrderStatus findServiceOrderStatusBySvoStatusId(int svoStatusId);
+
+    public void saveServiceOrderFromForm(ServiceOrderPresentation serviceOrderPresentation);
 }

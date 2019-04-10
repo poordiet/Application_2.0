@@ -2,11 +2,25 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Country {
     private int countryId;
     private String countryName;
+
+    // 1:M with customer site
+    private Set<CustomerSite> customerSites;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "country")
+    public Set<CustomerSite> getCustomerSites() {
+        return customerSites;
+    }
+
+    public void setCustomerSites(Set<CustomerSite> customerSites) {
+        customerSites.forEach(customerSite -> customerSite.setCountry(this));
+        this.customerSites = customerSites;
+    }
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

@@ -31,6 +31,46 @@ public class CustomerSite {
         this.serviceOrders = serviceOrders;
     }*/
 
+    // M:1 with Customer Site Type
+    private CustomerSiteType customerSiteType;
+
+    @ManyToOne
+    @JoinColumn(name="cust_site_type_id")
+    public CustomerSiteType getCustomerSiteType() {
+        return customerSiteType;
+    }
+
+    public void setCustomerSiteType(CustomerSiteType customerSiteType) {
+        this.customerSiteType = customerSiteType;
+    }
+
+    // M:1 with Customer Site Status
+    private CustomerSiteStatus customerSiteStatus;
+
+    @ManyToOne
+    @JoinColumn(name="cust_site_status_id")
+    public CustomerSiteStatus getCustomerSiteStatus() {
+        return customerSiteStatus;
+    }
+
+    public void setCustomerSiteStatus(CustomerSiteStatus customerSiteStatus) {
+        this.customerSiteStatus = customerSiteStatus;
+    }
+
+    // M:1 with Country
+    private Country country;
+
+    @ManyToOne
+    @JoinColumn(name="country_id")
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+
     // M:1 with State
     private StateProvince stateProvince;
 

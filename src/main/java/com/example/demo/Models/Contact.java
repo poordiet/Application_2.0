@@ -11,6 +11,32 @@ public class Contact {
     private String contactPhone;
     private String contactEmail;
 
+    // M:1 with Contact Type
+    private ContactType contactType;
+
+    @ManyToOne
+    @JoinColumn(name="contact_type_id")
+    public ContactType getContactType() {
+        return contactType;
+    }
+
+    public void setContactType(ContactType contactType) {
+        this.contactType = contactType;
+    }
+
+    // M:1 with Contact Status
+    private ContactStatus contactStatus;
+
+    @ManyToOne
+    @JoinColumn(name="contact_status_id")
+    public ContactStatus getContactStatus() {
+        return contactStatus;
+    }
+
+    public void setContactStatus(ContactStatus contactStatus) {
+        this.contactStatus = contactStatus;
+    }
+
     // M:1 with Customer_Site
     private CustomerSite customerSite;
 

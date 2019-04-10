@@ -1,17 +1,15 @@
 package com.example.demo.Service;
 
-import com.example.demo.Models.Assignment;
-import com.example.demo.Models.ServiceOrder;
-import com.example.demo.Models.ServiceOrderLine;
-import com.example.demo.Models.ServiceOrderStatus;
+import com.example.demo.Models.*;
 import com.example.demo.Presentation.ServiceOrderPresentation;
-import com.example.demo.Repositories.ServiceOrderLineRepository;
-import com.example.demo.Repositories.ServiceOrderRepository;
-import com.example.demo.Repositories.ServiceOrderStatusRepository;
+import com.example.demo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.plaf.nimbus.State;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +24,30 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 
     @Autowired
     ServiceOrderStatusRepository serviceOrderStatusRepository;
+
+    @Autowired
+    CustomerSiteService customerSiteService;
+
+    @Autowired
+    CountryService countryService;
+
+    @Autowired
+    StateProvinceService stateProvinceService;
+
+    @Autowired
+    ContactService contactService;
+
+    @Autowired
+    CustomerSiteStatusRepository customerSiteStatusRepository;
+
+    @Autowired
+    CustomerSiteTypeRepository customerSiteTypeRepository;
+
+    @Autowired
+    ContactTypeRepository contactTypeRepository;
+
+    @Autowired
+    ContactStatusRepository contactStatusRepository;
 
     @Override
     public void addServiceOrder(ServiceOrder serviceOrder) { serviceOrderRepository.save(serviceOrder);}
@@ -52,9 +74,96 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
     }
 
     @Override
+    public void saveServiceOrderFromForm(ServiceOrderPresentation serviceOrderPresentation)
+    {
+        ServiceOrder serviceOrder = new ServiceOrder();
+        CustomerSite customerSite = new CustomerSite();
+        Contact contact = new Contact();
+
+        // Add Customer Site
+
+        customerSite.setCustSiteAddress(serviceOrderPresentation.getCustSiteAddress());
+        System.out.println(serviceOrderPresentation.getCustSiteAddress());
+
+        customerSite.setCustSiteCity(serviceOrderPresentation.getCustSiteCity());
+        System.out.println(serviceOrderPresentation.getCustSiteCity());
+
+        customerSite.setCustSiteEmail(serviceOrderPresentation.getCustSiteEmail());
+        customerSite.setCustSiteName(serviceOrderPresentation.getCustSiteName());
+        customerSite.setCustSiteNumber(serviceOrderPresentation.getCustSiteNumber());
+        customerSite.setCustSiteStart(serviceOrderPresentation.getCustSiteStart());
+        customerSite.setCustSiteZip(serviceOrderPresentation.getCustSiteZip());
+        customerSite.setCustSitePhone(serviceOrderPresentation.getCustSitePhone());
+        System.out.println(serviceOrderPresentation.getCustSitePhone());
+
+        // get current date
+        java.sql.Date currentSqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+        customerSite.setCustSiteStart(currentSqlDate);
+
+        CustomerSiteStatus customerSiteStatus = customerSiteStatusRepository.findByCustSiteStatusId(1);
+        customerSite.setCustomerSiteStatus(customerSiteStatus);
+
+        CustomerSiteType customerSiteType = customerSiteTypeRepository.findByCustSiteTypeId(1);
+        customerSite.setCustomerSiteType(customerSiteType);
+
+        customerSite.setStateProvince(stateProvinceService.findByStateId(serviceOrderPresentation.getStateId()));
+        System.out.println(serviceOrderPresentation.getStateId());
+        System.out.println(stateProvinceService.findByStateId(serviceOrderPresentation.getStateId()));
+        System.out.println(stateProvinceService.findByStateId(serviceOrderPresentation.getStateId()).getStateName());
+
+
+        customerSite.setCountry(countryService.findByCountryId(serviceOrderPresentation.getCountryId()));
+        System.out.println(serviceOrderPresentation.getCountryId());
+        System.out.println(countryService.findByCountryId(serviceOrderPresentation.getCountryId()));
+        System.out.println(countryService.findByCountryId(serviceOrderPresentation.getCountryId()).getCountryName());
+
+        customerSiteService.saveCustomerSite(customerSite);
+        serviceOrder.setCustomerSite(customerSite);
+
+        // Add Contact
+        contact.setCustomerSite(customerSite);
+        contact.setContactEmail(serviceOrderPresentation.getContactEmail());
+        System.out.println(serviceOrderPresentation.getContactEmail());
+
+
+        ContactStatus contactStatus = contactStatusRepository.findByContactStatusId(1);
+        contact.setContactStatus(contactStatus);
+
+        ContactType contactType = contactTypeRepository.findByContactTypeId(1);
+        contact.setContactType(contactType);
+
+        contact.setContactFname(serviceOrderPresentation.getContactFname());
+        contact.setContactLname(serviceOrderPresentation.getContactLname());
+        contact.setContactPhone(serviceOrderPresentation.getContactPhone());
+        contactService.saveContact(contact);
+        serviceOrder.setContact(contact);
+
+        // Add Service Order Status
+        ServiceOrderStatus serviceOrderStatus = serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(1);
+        serviceOrder.setServiceOrderStatus(serviceOrderStatus);
+        System.out.println(serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(1).getSvoStatus());
+
+        // Add Service order Information
+        serviceOrder.setDateRequested(currentSqlDate);
+        System.out.println(currentSqlDate);
+        //serviceOrder.setDateScheduled(serviceOrderPresentation.getDateScheduled());
+        // temp place holder
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        serviceOrder.setDateScheduled(timestamp);
+        serviceOrder.setWorkRequest(serviceOrderPresentation.getWorkRequest());
+        System.out.println(serviceOrderPresentation.getWorkRequest());
+
+        // Add Service Order Lines
+
+
+        serviceOrderRepository.save(serviceOrder);
+    }
+
+    @Override
     public ServiceOrderStatus findServiceOrderStatusBySvoStatusId(int svoStatusId){
         return serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(svoStatusId);
-    };
+    }
 
     public List<ServiceOrderPresentation> getServiceOrderPresentation(List<ServiceOrder> serviceOrders){
 
