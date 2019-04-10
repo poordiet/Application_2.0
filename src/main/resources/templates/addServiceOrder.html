@@ -245,7 +245,7 @@
 
 						<div class ="form-group">
 							<label>Select Service(s) to be Provided</label>
-							<select th:field="*{svcId}" class ="form-control" multiple size="17" id="selection">
+							<select th:field="*{svcs}" class ="form-control" multiple size="17" id="selection">
 								<option th:each="svc:${svcs}" th:value="${svc.svcId}" th:text = "${svc.svcName}"></option>
 							</select>
 						</div>

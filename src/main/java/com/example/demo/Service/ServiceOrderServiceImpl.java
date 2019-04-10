@@ -83,18 +83,15 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         // Add Customer Site
 
         customerSite.setCustSiteAddress(serviceOrderPresentation.getCustSiteAddress());
-        System.out.println(serviceOrderPresentation.getCustSiteAddress());
+
 
         customerSite.setCustSiteCity(serviceOrderPresentation.getCustSiteCity());
-        System.out.println(serviceOrderPresentation.getCustSiteCity());
-
         customerSite.setCustSiteEmail(serviceOrderPresentation.getCustSiteEmail());
         customerSite.setCustSiteName(serviceOrderPresentation.getCustSiteName());
         customerSite.setCustSiteNumber(serviceOrderPresentation.getCustSiteNumber());
         customerSite.setCustSiteStart(serviceOrderPresentation.getCustSiteStart());
         customerSite.setCustSiteZip(serviceOrderPresentation.getCustSiteZip());
         customerSite.setCustSitePhone(serviceOrderPresentation.getCustSitePhone());
-        System.out.println(serviceOrderPresentation.getCustSitePhone());
 
         // get current date
         java.sql.Date currentSqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
@@ -108,15 +105,8 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         customerSite.setCustomerSiteType(customerSiteType);
 
         customerSite.setStateProvince(stateProvinceService.findByStateId(serviceOrderPresentation.getStateId()));
-        System.out.println(serviceOrderPresentation.getStateId());
-        System.out.println(stateProvinceService.findByStateId(serviceOrderPresentation.getStateId()));
-        System.out.println(stateProvinceService.findByStateId(serviceOrderPresentation.getStateId()).getStateName());
-
 
         customerSite.setCountry(countryService.findByCountryId(serviceOrderPresentation.getCountryId()));
-        System.out.println(serviceOrderPresentation.getCountryId());
-        System.out.println(countryService.findByCountryId(serviceOrderPresentation.getCountryId()));
-        System.out.println(countryService.findByCountryId(serviceOrderPresentation.getCountryId()).getCountryName());
 
         customerSiteService.saveCustomerSite(customerSite);
         serviceOrder.setCustomerSite(customerSite);
@@ -124,9 +114,6 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         // Add Contact
         contact.setCustomerSite(customerSite);
         contact.setContactEmail(serviceOrderPresentation.getContactEmail());
-        System.out.println(serviceOrderPresentation.getContactEmail());
-
-
         ContactStatus contactStatus = contactStatusRepository.findByContactStatusId(1);
         contact.setContactStatus(contactStatus);
 
@@ -142,22 +129,28 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         // Add Service Order Status
         ServiceOrderStatus serviceOrderStatus = serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(1);
         serviceOrder.setServiceOrderStatus(serviceOrderStatus);
-        System.out.println(serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(1).getSvoStatus());
 
         // Add Service order Information
         serviceOrder.setDateRequested(currentSqlDate);
-        System.out.println(currentSqlDate);
+
         //serviceOrder.setDateScheduled(serviceOrderPresentation.getDateScheduled());
         // temp place holder
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         serviceOrder.setDateScheduled(timestamp);
         serviceOrder.setWorkRequest(serviceOrderPresentation.getWorkRequest());
-        System.out.println(serviceOrderPresentation.getWorkRequest());
+
+        // This must be before the service order lines because service order lines need the Service Order Id, and Svo_id is assigned once it is saved
+        serviceOrderRepository.save(serviceOrder);
 
         // Add Service Order Lines
+        for (Svc svc: serviceOrderPresentation.getSvcs()
+             ) {
+            ServiceOrderLine serviceOrderLine = new ServiceOrderLine();
+            serviceOrderLine.setServiceOrder(serviceOrder);
+            serviceOrderLine.setSvc(svc);
+            serviceOrderLineRepository.save(serviceOrderLine);
+        }
 
-
-        serviceOrderRepository.save(serviceOrder);
     }
 
     @Override

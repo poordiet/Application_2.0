@@ -62,18 +62,24 @@ public class ServiceOrderController {
     }
 
     @PostMapping("/add")
-    public String addServiceOrder(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation,
-                                  @ModelAttribute("stateProvince") StateProvince stateProvince, @ModelAttribute("country") Country country,
-                                  @ModelAttribute("svc") Svc svc)
+    public String addServiceOrder(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation)
     {
 
         System.out.println(serviceOrderPresentation.getContactEmail());
         System.out.println(serviceOrderPresentation.getWorkRequest());
-        System.out.println(stateProvince.getStateName());
-        System.out.println (country.getCountryName());
-        System.out.println(svc.getSvcName());
+        System.out.println(serviceOrderPresentation.getCountryId());
+        System.out.println(serviceOrderPresentation.getCountryName());
+        System.out.println(serviceOrderPresentation.getSvcName());
+        System.out.println(serviceOrderPresentation.getSvcId());
         // Save
         serviceOrderService.saveServiceOrderFromForm(serviceOrderPresentation);
+
+        List<Svc> svcs = serviceOrderPresentation.getSvcs();
+        for (Svc svc: svcs
+             ) {
+            System.out.println(svc.getSvcName());
+        }
+
 
         return("addServiceOrder");
 

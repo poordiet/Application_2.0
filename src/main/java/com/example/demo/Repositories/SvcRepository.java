@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface SvcRepository extends CrudRepository<Svc,Integer> {
     List<Svc> findAll();
+
+    Svc findBySvcId(int Id);
 }

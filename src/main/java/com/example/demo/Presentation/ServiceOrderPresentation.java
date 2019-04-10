@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -138,6 +139,21 @@ public class ServiceOrderPresentation {
     // Service
     private int svcId;
     private String svcName;
+
+    private List<Svc> svcs;
+
+
+    public List<Svc> getSvcs() {
+        return svcs;
+    }
+
+    public void setSvcs(List<Svc> svcs) {
+        this.svcs = svcs;
+    }
+
+    public void addSvc(Svc svc){
+        svcs.add(svc);
+    }
 
     @Id
     @Column(name = "svc_id", nullable = false)

@@ -1,6 +1,8 @@
 package com.example.demo.Models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -8,6 +10,27 @@ import java.util.Set;
 public class Svc {
     private int svcId;
     private String svcName;
+
+    /*
+    // M:M with Service Order
+    @ManyToMany(fetch = FetchType.LAZY,
+            mappedBy = "svcs")
+    public List<ServiceOrder> getServiceOrders() {
+        return serviceOrders;
+    }
+
+
+    private List<ServiceOrder> serviceOrders;
+
+    public void setServiceOrders(List<ServiceOrder> serviceOrders) {
+        this.serviceOrders = serviceOrders;
+    }
+
+    public void addServiceOrder(ServiceOrder serviceOrder){serviceOrders.add(serviceOrder);}
+*/
+
+
+    // One to Many with Service order Line
 
     private Set<ServiceOrderLine> serviceOrderLines;
 
@@ -20,6 +43,7 @@ public class Svc {
         serviceOrderLines.forEach(serviceOrderLine -> serviceOrderLine.setSvc(this));
         this.serviceOrderLines = serviceOrderLines;
     }
+
 
     @Id
     @Column(name = "svc_id", nullable = false)
@@ -54,4 +78,5 @@ public class Svc {
     public int hashCode() {
         return Objects.hash(svcId, svcName);
     }
+
 }

@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,9 +20,29 @@ public class ServiceOrder {
     private String workSummary;
     private BigDecimal total;
     private int serviceOrderStatusId;
+/*
+    // M:M with Service
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "SERVICE_ORDER_LINE",
+            joinColumns = { @JoinColumn(name = "svo_id") },
+            inverseJoinColumns = { @JoinColumn(name = "svc_id") })
+    public List<Svc> getSvcs() {
+        return svcs;
+    }
 
+    private List<Svc> svcs;
 
+    public void setSvcs(List<Svc> svcs) {
+        this.svcs = svcs;
+    }
+
+    public void addSvc(Svc svc){
+        svcs.add(svc);
+    }
+
+    */
     // 1:M with Service Order Lines
+
     private Set<ServiceOrderLine> serviceOrderLines;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "serviceOrder")
@@ -174,6 +196,4 @@ public class ServiceOrder {
     public int hashCode() {
         return Objects.hash(svoId, dateRequested, dateScheduled, dateStarted, dateFinished, workRequest, workSummary, total);
     }
-
-
 }
