@@ -2,10 +2,12 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class RequiredSkill {
     private int reqSkillId;
+
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

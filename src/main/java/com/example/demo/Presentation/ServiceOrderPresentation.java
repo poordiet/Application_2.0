@@ -446,6 +446,7 @@ public class ServiceOrderPresentation {
     private String contractorUsername;
     private String contractorPassword;
     private String contractorAvailability;
+    private String contractorName;
 
     private String contractors;
 
@@ -457,6 +458,14 @@ public class ServiceOrderPresentation {
         this.contractors = contractors;
     }
 
+
+    public String getContractorName() {
+        return contractorName;
+    }
+
+    public void setContractorName(String contractorName) {
+        this.contractorName = contractorName;
+    }
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
@@ -640,6 +649,5 @@ public class ServiceOrderPresentation {
     public void setStateName(String stateName) {
         this.stateName = stateName;
     }
-
 
 }

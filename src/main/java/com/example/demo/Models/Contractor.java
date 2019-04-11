@@ -190,4 +190,6 @@ public class Contractor {
     public int hashCode() {
         return Objects.hash(contractorId, contractorFname, contractorLname, contractorHireDate, contractorLeaveDate, contractorAddress, contractorCity, contractorZip, contractorPhone, contractorEmail, contractorUsername, contractorPassword, contractorAvailability);
     }
+
+
 }

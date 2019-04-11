@@ -49,7 +49,7 @@
 		
 					<div id="so" class="collapse">
 						<a th:href="@{/service_orders/search}" class="list-group-item ">Search</a>
-						<a th:href="@{/service_orders/add}" class="list-group-item ">Create</a>
+						<a th:href="@{/service_orders/showFormForAddNewCustomer}" class="list-group-item ">Create</a>
 						<a href="#" class="list-group-item ">Incident</a>
 					</div>
 				
@@ -169,11 +169,11 @@
 				<div class="col-md-6">
 
 					<button onclick="" type="button" class="btn btn-outline-primary btn-lg">New Customer</button>
-					<button onclick="" type="button" class="btn btn-outline-primary btn-lg">Current Customer</button>
+					<a th:href="@{/service_orders/showFormForAddCurrentCustomer}" type="button" class="btn btn-outline-primary btn-lg">Current Customer</a>
 					<p>
 
 					</p>
-					<form action="#" th:action="@{/service_orders/add}" th:object="${serviceOrderPresentation}" method = "POST" id="new customer">
+					<form action="#" th:action="@{/service_orders/addNewCustomer}" th:object="${serviceOrderPresentation}" method = "POST" id="new customer">
 						<div class="row">
 							<div class="col-md-6">
 								<div class ="form-group">
@@ -276,7 +276,7 @@
 							<input th:field="*{contactEmail}" type="email" class ="form-control" placeholder="Add Email" id="con_email">
 						</div>
 
-						<button type="submit" class="btn btn-info"> Next</button>
+                        <a th:href="@{/service_orders/showFormForAssigningContractors}"><button type="submit" class="btn btn-info"> Next</button></a>
 					</form>
 				</div>
 			</div>
