@@ -170,12 +170,16 @@
 					<p>
 
 					</p>
-					<form action="#" th:action="@{/service_orders/addNewCustomer}" th:object="${customer}" method = "POST" id="new customer">
+					<form action="#" th:action="@{/service_orders/addCurrentCustomer}" th:object="${customer}" method = "POST" id="new customer">
+
+									<input th:field="*{custSiteId}" th:value="${customer.custSiteId}"  type="text" class ="form-control" readonly>
+
+
 						<div class="row">
 							<div class="col-md-6">
 								<div class ="form-group">
 									<label>Customer Name</label>
-									<input th:value="${customer.custSiteName}" th:text="${customer.custSiteName}" type="text" class ="form-control" readonly>
+									<input th:field="*{custSiteName}" th:value="${customer.custSiteName}"  type="text" class ="form-control" readonly>
 								</div>
 							</div>
 
@@ -190,7 +194,7 @@
 
 						<div class ="form-group">
 							<label>Phone Number</label>
-							<input th:field="${customer.custSitePhone}" th:value="${customer.custSitePhone}"type="text" class ="form-control" placeholder="Phone Number" id="cust_phone" readonly>
+							<input th:field="${customer.custSitePhone}" th:value="${customer.custSitePhone}" type="text" class ="form-control" placeholder="Phone Number" id="cust_phone" readonly>
 						</div>
 
 						<div class ="form-group">
@@ -216,7 +220,7 @@
 
 						<div class ="form-group">
 							<label>Country</label>
-							<input th:field="*{countryName}" type="text" class ="form-control" placeholder="Country" readonly>
+							<input th:field="*{countryId}" th:value="*{countryId}" th:text="*{countryName}" type="text" class ="form-control" placeholder="Country" readonly>
 							<!--<select th:field="*{countryId}" class ="form-control" id="cust_country">
 								<option th:value="${country.countryId}" th:text="${country.countryName}" readonly></option>
 							</select>-->
@@ -224,7 +228,7 @@
 
 						<div class ="form-group">
 							<label>State</label>
-							<input th:field="*{stateName}" type="text" class ="form-control" placeholder="State" readonly>
+							<input th:field="*{stateId}" th:value="*{stateId}" th:text="*{stateName}" type="text" class ="form-control" placeholder="State" readonly>
 							<!--
 							<select th:field="*{stateId}"  class ="form-control" id="cust_state">
 								<option th:each="stateProvince:${states}" th:value="${stateProvince.stateId}" th:text="${stateProvince.stateName}" readonly></option>
@@ -254,7 +258,7 @@
 							<div class="col-sm-12">
 							<div class ="form-group">
 								<label>Select Existing Contact</label>
-								<select th:field="*{contacts}" class="form-control"  size="10" id="selection">
+								<select th:field="*{contactId}" class="form-control">
 									<option th:each="contact:${contacts}" th:value="${contact.contactId}" th:text="${contact.contactFname + ' ' + contact.contactLname}"></option>
 								</select>
 							</div>
@@ -291,7 +295,8 @@
 
 						<div class ="form-group">
 							<label>Contact Type</label>
-							<select th:field="*{contactType}" class="form-control"  size="10" id="selection">
+							<select th:field="*{contactType}" class="form-control">
+								<option value="" th:default="default" th:selected="selected">Select Contact Type....</option>
 								<option th:each="contactType:${contactTypes}" th:value="${contactType.contactTypeId}" th:text="${contactType.contactType}"></option>
 							</select>
 						</div>

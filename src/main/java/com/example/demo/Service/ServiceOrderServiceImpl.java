@@ -239,6 +239,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         ServiceOrderPresentation serviceOrderPresentation = new ServiceOrderPresentation();
 
         serviceOrderPresentation.setCustomerSite(customerSite);
+        serviceOrderPresentation.setCustSiteId(customerSite.getCustSiteId());
         serviceOrderPresentation.setCustSiteEmail(customerSite.getCustSiteEmail());
         serviceOrderPresentation.setCustSitePhone(customerSite.getCustSitePhone());
         serviceOrderPresentation.setCustSiteNumber(customerSite.getCustSiteNumber());
@@ -246,12 +247,81 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         serviceOrderPresentation.setCustSiteAddress(customerSite.getCustSiteAddress());
         serviceOrderPresentation.setCustSiteCity(customerSite.getCustSiteCity());
         serviceOrderPresentation.setCustSiteZip(customerSite.getCustSiteZip());
+        serviceOrderPresentation.setCountry(customerSite.getCountry());
         serviceOrderPresentation.setCountryName(customerSite.getCountry().getCountryName());
+        serviceOrderPresentation.setCountryId(customerSite.getCountry().getCountryId());
         serviceOrderPresentation.setStateName(customerSite.getStateProvince().getStateName());
+        serviceOrderPresentation.setStateId(customerSite.getStateProvince().getStateId());
 
         return serviceOrderPresentation;
     }
 
+
+    public void saveServiceOrderFromCurrentCustomerForm(ServiceOrderPresentation serviceOrderPresentation)
+    {
+        ServiceOrder serviceOrder = new ServiceOrder();
+
+        System.out.println(serviceOrderPresentation.getCustSiteId());
+        CustomerSite customerSite = customerSiteService.findCustomerSiteByCustSiteId(serviceOrderPresentation.getCustSiteId());
+        System.out.println(customerSite.getCustSiteId());
+        System.out.println(serviceOrderPresentation.getContactId());
+        Contact contact = contactService.findByContactId(serviceOrderPresentation.getContactId());
+
+        // set customer site to existing customer for service order
+        serviceOrder.setCustomerSite(customerSite);
+
+        // if the serviceOrderPresentation does not have a contactId -- the user did not select a contact, then do this
+        if(contact == null)
+        {
+            Contact contact1 = new Contact();
+            contact1.setContactPhone(serviceOrderPresentation.getContactPhone());
+            contact1.setContactLname(serviceOrderPresentation.getContactLname());
+            contact1.setContactFname(serviceOrderPresentation.getContactFname());
+            contact1.setContactEmail(serviceOrderPresentation.getContactEmail());
+            contact1.setCustomerSite(customerSite);
+            ContactType contactType = contactTypeRepository.findByContactTypeId(1);
+            contact1.setContactType(contactType);
+            ContactStatus contactStatus = contactStatusRepository.findByContactStatusId(1);
+            contact1.setContactStatus(contactStatus);
+            contactService.saveContact(contact1);
+            serviceOrder.setContact(contact1);
+        }
+        // if the user did select a contact, then set the service order as the contact selected
+        else
+        {
+            serviceOrder.setContact(contact);
+        }
+
+
+        // get current date
+        java.sql.Date currentSqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+        // Add Service Order Status
+        ServiceOrderStatus serviceOrderStatus = serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(1);
+        serviceOrder.setServiceOrderStatus(serviceOrderStatus);
+
+        // Add Service order Information
+        serviceOrder.setDateRequested(currentSqlDate);
+
+        //serviceOrder.setDateScheduled(serviceOrderPresentation.getDateScheduled());
+        // temp place holder
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        serviceOrder.setDateScheduled(timestamp);
+        serviceOrder.setWorkRequest(serviceOrderPresentation.getWorkRequest());
+
+        // This must be before the service order lines because service order lines need the Service Order Id, and Svo_id is assigned once it is saved
+        serviceOrderRepository.save(serviceOrder);
+
+        // Add Service Order Lines
+        for (Svc svc: serviceOrderPresentation.getSvcs()
+        ) {
+            ServiceOrderLine serviceOrderLine = new ServiceOrderLine();
+            serviceOrderLine.setServiceOrder(serviceOrder);
+            serviceOrderLine.setSvc(svc);
+            serviceOrderLineRepository.save(serviceOrderLine);
+        }
+
+    }
 
 
 

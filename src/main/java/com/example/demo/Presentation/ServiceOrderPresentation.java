@@ -319,6 +319,15 @@ public class ServiceOrderPresentation {
 
     private List<Contact> contacts;
 
+    private Contact contact;
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContacts(Contact contact) {
+        this.contact = contact;
+    }
 
     public List<Contact> getContacts() {
         return contacts;
@@ -622,6 +631,15 @@ public class ServiceOrderPresentation {
 
     private int countryId;
     private String countryName;
+    private Country country;
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
@@ -704,6 +722,43 @@ public class ServiceOrderPresentation {
 
     public void setContactTypeDesc(String contactTypeDesc) {
         this.contactTypeDesc = contactTypeDesc;
+    }
+
+
+    // Contact Status
+    private int contactStatusId;
+    private String contactStatus;
+    private String contactStatusDesc;
+
+    @Id
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @Column(name = "contact_status_id", nullable = false)
+    public int getContactStatusId() {
+        return contactStatusId;
+    }
+
+    public void setContactStatusId(int contactStatusId) {
+        this.contactStatusId = contactStatusId;
+    }
+
+    @Basic
+    @Column(name = "contact_status", nullable = false, length = 50)
+    public String getContactStatus() {
+        return contactStatus;
+    }
+
+    public void setContactStatus(String contactStatus) {
+        this.contactStatus = contactStatus;
+    }
+
+    @Basic
+    @Column(name = "contact_status_desc", nullable = false, length = 250)
+    public String getContactStatusDesc() {
+        return contactStatusDesc;
+    }
+
+    public void setContactStatusDesc(String contactStatusDesc) {
+        this.contactStatusDesc = contactStatusDesc;
     }
 
 

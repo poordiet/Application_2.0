@@ -70,12 +70,11 @@ public class ServiceOrderController {
         CustomerSite customerSite = customerSiteService.findCustomerSiteByCustSiteId(custSiteId);
 
         ServiceOrderPresentation serviceOrderPresentation = serviceOrderService.addCustomerSite(customerSite);
-        System.out.println(serviceOrderPresentation.getCustomerSite().getCustSiteName());
-        System.out.println(serviceOrderPresentation.getCustomerSite().getCountry().getCountryName());
-        System.out.println(serviceOrderPresentation.getCustomerSite().getCustSiteEmail());
+
+        System.out.println(serviceOrderPresentation.getCustSiteId());
         System.out.println(serviceOrderPresentation.getCustSiteEmail());
 
-        List<Contact> contacts = contactService.findByCustSiteId(customerSite);
+        List<Contact> contacts = contactService.findByCustSite(customerSite);
         List<Svc> svcs = svcService.findAll();
 
         List<ContactType> contactTypes = contactTypeRepository.findAll();
@@ -88,9 +87,39 @@ public class ServiceOrderController {
         return ("addServiceOrderCurrentCustomer");
     }
 
-    @PostMapping("/addNewCustomer")
-    public String addServiceOrder(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation, final RedirectAttributes redirectAttributes)
+    @PostMapping("/addCurrentCustomer")
+    public String addCurrentServiceOrder(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation, final RedirectAttributes redirectAttributes)
     {
+
+
+        System.out.println(serviceOrderPresentation.getCustSiteId());
+        System.out.println(serviceOrderPresentation.getCustSiteEmail());
+        System.out.println(serviceOrderPresentation.getCustSitePhone());
+        System.out.println(serviceOrderPresentation.getCustSiteName());
+        System.out.println(serviceOrderPresentation.getCustSiteNumber());
+        System.out.println(serviceOrderPresentation.getCountryId());
+        System.out.println(serviceOrderPresentation.getStateId());
+        System.out.println(serviceOrderPresentation.getCustSiteAddress());
+        System.out.println(serviceOrderPresentation.getCustSiteCity());
+        System.out.println(serviceOrderPresentation.getCustSiteZip());
+        System.out.println(serviceOrderPresentation.getContactId());
+        System.out.println(serviceOrderPresentation.getContactFname());
+        System.out.println(serviceOrderPresentation.getContactLname());
+        System.out.println(serviceOrderPresentation.getContactType());
+        // Save
+        serviceOrderService.saveServiceOrderFromCurrentCustomerForm(serviceOrderPresentation);
+
+
+        // Passes the model attribute to the showFormForAssigningContractors method to be used there
+        redirectAttributes.addFlashAttribute("serviceOrderPresentation", serviceOrderPresentation);
+
+        return "redirect:/service_orders/showFormForAssigningContractors";
+    }
+
+    @PostMapping("/addNewCustomer")
+    public String addNewServiceOrder(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation, final RedirectAttributes redirectAttributes)
+    {
+        System.out.println(serviceOrderPresentation.getCustSiteEmail());
 
         // Save
         serviceOrderService.saveServiceOrderFromForm(serviceOrderPresentation);
@@ -130,6 +159,7 @@ public class ServiceOrderController {
 
         theModel.addAttribute("customers",customers);
 
+        /*
         List<Svc> svcs = svcService.findAll();
         theModel.addAttribute("svcs", svcs);
 
@@ -137,7 +167,7 @@ public class ServiceOrderController {
         theModel.addAttribute("countries", countries);
 
         List<StateProvince> stateProvinces = stateProvinceService.findAll();
-        theModel.addAttribute("states", stateProvinces);
+        theModel.addAttribute("states", stateProvinces);*/
 
         return ("addServiceOrderSelection");
     }

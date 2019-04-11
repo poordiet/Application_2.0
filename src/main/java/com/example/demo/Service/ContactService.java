@@ -10,7 +10,9 @@ import java.util.List;
 public interface ContactService {
 
     public void saveContact(Contact contact);
-   List<Contact> findByCustSiteId(@Param("customerSite") CustomerSite customerSite);
+   List<Contact> findByCustSite(@Param("customerSite") CustomerSite customerSite);
+
+    Contact findByContactId(int contactId);
 
 
 }

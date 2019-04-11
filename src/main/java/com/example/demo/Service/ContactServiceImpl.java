@@ -22,7 +22,13 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> findByCustSiteId(@Param("customerSite") CustomerSite customerSite){
-        return contactRepository.findByCustSiteId(customerSite);
+    public List<Contact> findByCustSite(@Param("customerSite") CustomerSite customerSite){
+        return contactRepository.findByCustSite(customerSite);
     };
+
+    @Override
+    public Contact findByContactId(int contactId)
+    {
+       return contactRepository.findByContactId(contactId);
+    }
 }

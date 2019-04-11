@@ -12,5 +12,7 @@ import java.util.List;
 public interface ContactRepository extends CrudRepository<Contact, Integer> {
 
     @Query(value = "select * from CONTACT where cust_site_id = :#{#customerSite.custSiteId}", nativeQuery = true)
-    List<Contact> findByCustSiteId(@Param("customerSite") CustomerSite customerSite);
+    List<Contact> findByCustSite(@Param("customerSite") CustomerSite customerSite);
+
+    Contact findByContactId(int contactId);
 }
