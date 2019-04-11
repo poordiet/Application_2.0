@@ -167,15 +167,15 @@
 		<div class="container" id="form">
 			<div class="row justify-content-center">
 				<div class="col-xl-auto">
-					<form th:action="@{/service_orders/assignContractors}" method = "POST"  th:object="${serviceOrderPresentation}" id="new customer">
+					<form th:object="${serviceOrderPresentation}" id="new customer">
 
-						<div class="col-sm-12" >
-							<div class="row" th:each="svc:${svcs}"  th:value="${svc.svcId}">
+						<div class="contractor">
+							<div class="row">
 
-								<div class="col-sm-12">
+								<div class="col-md-4">
 									<div class ="form-group">
 										<label>Service</label>
-										<input  th:value=${svc.svcName} type="text" class ="form-control" id="1_service" readonly>
+										<input th:each="svc:${svcs}" th:value="${svc.svcId}" th:text = "${svc.svcName}" type="text" class ="form-control" id="1_service" readonly>
 
 										<!--<select th:field="*{svcs}" class="form-control">
 											<option th:each="svc:${svcs}" th:value="${svc.svcId}" th:text = "${svc.svcName}"></option>
@@ -183,10 +183,16 @@
 									</div>
 								</div>
 
-								<div class="col-sm-12">
+								<div class="col-md-4">
+									<label>Required Skill</label>
+									<input type="text" class="form-control" readonly>
+								</div>
+
+								<div class="col-md-4">
 									<div class ="form-group">
 										<label>Available Contractors</label>
-										<select th:field="*{contractorList}" class ="form-control" multiple size="8" id="contractor_selected0">
+										<select th:field="*{contractorName}" class ="form-control" id="contractor_selected0">
+											<option value = "" selected disabled>Assign Contractor</option>
 											<option th:each="contractor:${contractors}" th:value="${contractor.contractorId}" th:text = "${contractor.contractorFname + ' ' + contractor.contractorLname}"></option>
 										</select>
 									</div>
@@ -197,190 +203,190 @@
 
 						<div class="row">
 							<button class="btn btn-outline-primary" onclick="window.history.back(); return false;" id="return_button"> Return </button>
-							<a th:href="@{/service_orders/assignContractors}"><button type="submit" class="btn btn-outline-success" id="submit_button"> </button></a><!--data-toggle="modal" data-target="#myModal" onclick="getsubmission()"-->Submit</a>
+							<a href="" type="submit" class="btn btn-outline-success" id="submit_button" data-toggle="modal" data-target="#myModal" onclick="getsubmission()">Submit</a>
 						</div>
 
-						<!--<div class="modal fade" id="myModal">-->
-							<!--<div class="modal-dialog">-->
-								<!--<div class="modal-content">-->
+						<div class="modal fade" id="myModal">
+							<div class="modal-dialog">
+								<div class="modal-content">
 
-									<!--&lt;!&ndash; Modal Header &ndash;&gt;-->
-									<!--<div class="modal-header">-->
-										<!--<h4 class="modal-title">Confirm Service Order</h4>-->
-										<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-									<!--</div>-->
+									<!-- Modal Header -->
+									<div class="modal-header">
+										<h4 class="modal-title">Confirm Service Order</h4>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
 
-									<!--&lt;!&ndash; Modal body &ndash;&gt;-->
-									<!--<div class="modal-body">-->
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Customer Name</strong>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Customer Number</strong>-->
-											<!--</div>-->
-										<!--</div>-->
+									<!-- Modal body -->
+									<div class="modal-body">
+										<div class="row">
+											<div class="col-md-6">
+												<strong>Customer Name</strong>
+											</div>
+											<div class="col-md-6">
+												<strong>Customer Number</strong>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="text" id="cust_value1" readonly>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="email" id="cust_value2" readonly>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<input type="text" id="cust_value1" readonly>
+											</div>
+											<div class="col-md-6">
+												<input type="email" id="cust_value2" readonly>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Phone Number</strong>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Email</strong>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<strong>Phone Number</strong>
+											</div>
+											<div class="col-md-6">
+												<strong>Email</strong>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="text" id="cust_value3" readonly>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="email" id="cust_value4" readonly>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<input type="text" id="cust_value3" readonly>
+											</div>
+											<div class="col-md-6">
+												<input type="email" id="cust_value4" readonly>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Address</strong>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>City</strong>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<strong>Address</strong>
+											</div>
+											<div class="col-md-6">
+												<strong>City</strong>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="text" id="cust_value5" readonly>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="email" id="cust_value6" readonly>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<input type="text" id="cust_value5" readonly>
+											</div>
+											<div class="col-md-6">
+												<input type="email" id="cust_value6" readonly>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Zip</strong>-->
-											<!--</div>-->
-											<!--<div>-->
-												<!--<strong>Country</strong>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<strong>Zip</strong>
+											</div>
+											<div>
+												<strong>Country</strong>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="text" id="cust_value7" readonly>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="email" id="cust_value8" readonly>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<input type="text" id="cust_value7" readonly>
+											</div>
+											<div class="col-md-6">
+												<input type="email" id="cust_value8" readonly>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>State</strong>-->
-											<!--</div>-->
-											<!--<div>-->
-												<!--<strong>Schedule Date</strong>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<strong>State</strong>
+											</div>
+											<div>
+												<strong>Schedule Date</strong>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="text" id="cust_value9" readonly>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="date" id="cust_value11" readonly>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<input type="text" id="cust_value9" readonly>
+											</div>
+											<div class="col-md-6">
+												<input type="date" id="cust_value11" readonly>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Request Details</strong>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<strong>Request Details</strong>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-lg-12">-->
-												<!--<textarea type="text" id="cust_value10" readonly></textarea>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-lg-12">
+												<textarea type="text" id="cust_value10" readonly></textarea>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Contact First Name</strong>-->
-											<!--</div>-->
-											<!--<div>-->
-												<!--<strong>Contact Last Name</strong>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<strong>Contact First Name</strong>
+											</div>
+											<div>
+												<strong>Contact Last Name</strong>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="text" id="cust_value12" readonly>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="text" id="cust_value13" readonly>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<input type="text" id="cust_value12" readonly>
+											</div>
+											<div class="col-md-6">
+												<input type="text" id="cust_value13" readonly>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Contact Phone Number</strong>-->
-											<!--</div>-->
-											<!--<div>-->
-												<!--<strong>Contact Email</strong>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<strong>Contact Phone Number</strong>
+											</div>
+											<div>
+												<strong>Contact Email</strong>
+											</div>
+										</div>
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="text" id="cust_value14" readonly>-->
-											<!--</div>-->
-											<!--<div class="col-md-6">-->
-												<!--<input type="text" id="cust_value15" readonly>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<input type="text" id="cust_value14" readonly>
+											</div>
+											<div class="col-md-6">
+												<input type="text" id="cust_value15" readonly>
+											</div>
+										</div>
 
 
-										<!--<div class="row">-->
-											<!--<div class="col-md-6">-->
-												<!--<strong>Services to be provided</strong>-->
-											<!--</div>-->
-											<!--<div>-->
-												<!--<strong>Contractor(s) Assigned</strong>-->
-											<!--</div>-->
-										<!--</div>-->
+										<div class="row">
+											<div class="col-md-6">
+												<strong>Services to be provided</strong>
+											</div>
+											<div>
+												<strong>Contractor(s) Assigned</strong>
+											</div>
+										</div>
 
-										<!--<div class="assignments">-->
-											<!--<div class="row">-->
-												<!--<div class="col-md-6">-->
-													<!--<input type="text" id="services" readonly>-->
-												<!--</div>-->
-												<!--<div class="col-md-6">-->
-													<!--<input type="text" id="contractor_submit0" readonly>-->
-												<!--</div>-->
-											<!--</div>-->
-										<!--</div>-->
-									<!--</div>-->
+										<div class="assignments">
+											<div class="row">
+												<div class="col-md-6">
+													<input type="text" id="services" readonly>
+												</div>
+												<div class="col-md-6">
+													<input type="text" id="contractor_submit0" readonly>
+												</div>
+											</div>
+										</div>
+									</div>
 
-									<!--&lt;!&ndash; Modal footer &ndash;&gt;-->
-									<!--<div class="modal-footer">-->
-										<!--<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>-->
-										<!--<button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>-->
-									<!--</div>-->
+									<!-- Modal footer -->
+									<div class="modal-footer">
+										<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+										<button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
+									</div>
 
-								<!--</div>-->
-							<!--</div>-->
-						<!--</div>-->
+								</div>
+							</div>
+						</div>
 
 					</form>
 				</div>

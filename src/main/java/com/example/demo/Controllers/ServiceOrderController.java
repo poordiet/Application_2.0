@@ -188,6 +188,19 @@ public class ServiceOrderController {
         return ("addServiceOrderAssignContractors");
     }
 
+    @PostMapping("/assignContractors")
+    public String assignContractors(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation, final RedirectAttributes redirectAttributes)
+    {
+        System.out.println(serviceOrderPresentation.getCustSiteEmail());
+
+        serviceOrderService.addContractorAssignments(serviceOrderPresentation);
+
+        // Passes the model attribute to the showFormForAssigningContractors method to be used there
+        redirectAttributes.addFlashAttribute("serviceOrderPresentation", serviceOrderPresentation);
+
+        return "redirect:/service_orders/search";
+    }
+
 /*
     @GetMapping("/add")
     public String handleAddServiceOrder(Model theModel,@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation,

@@ -479,6 +479,17 @@ public class ServiceOrderPresentation {
 
     private String contractors;
 
+    private List<Contractor> contractorList;
+
+
+    public List<Contractor> getContractorList() {
+        return contractorList;
+    }
+
+    public void setContractorList(List<Contractor> contractorList) {
+        this.contractorList = contractorList;
+    }
+
     public String getContractors() {
         return contractors;
     }

@@ -49,6 +49,12 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
     @Autowired
     ContactStatusRepository contactStatusRepository;
 
+    @Autowired
+    ContractorRepository contractorRepository;
+
+    @Autowired
+    AssignmentRepository assignmentRepository;
+
     @Override
     public void addServiceOrder(ServiceOrder serviceOrder) { serviceOrderRepository.save(serviceOrder);}
 
@@ -320,6 +326,26 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             serviceOrderLine.setSvc(svc);
             serviceOrderLineRepository.save(serviceOrderLine);
         }
+
+    }
+
+    public void addContractorAssignments(ServiceOrderPresentation serviceOrderPresentation)
+    {
+
+        // get current date
+        java.sql.Date currentSqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+        for (ServiceOrderLine serviceOrderLine:serviceOrderPresentation.getServiceOrderLines()
+        ) {
+            for(Contractor contractor:serviceOrderPresentation.getContractorList()) {
+                Assignment assignment = new Assignment();
+                assignment.setServiceOrderLine(serviceOrderLine);
+                assignment.setAsgmtDate(currentSqlDate);
+                assignment.setContractor(contractor);
+                assignmentRepository.save(assignment);
+            }
+        }
+
 
     }
 

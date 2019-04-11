@@ -13,4 +13,6 @@ public interface ContractorRepository extends CrudRepository<Contractor,Integer>
 
     @Query(value = "select * from CONTRACTOR where contractor_status_id=1;", nativeQuery = true)
     List<Contractor> findActiveContractors();
+
+    Contractor findByContractorId(int contractorId);
 }
