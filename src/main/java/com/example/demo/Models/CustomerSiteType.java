@@ -10,6 +10,7 @@ public class CustomerSiteType {
     private String custSiteType;
     private String custSiteTypeDesc;
 
+    /*
     // 1:M with CustomerSite
     private Set<CustomerSite> customerSites;
 
@@ -21,7 +22,7 @@ public class CustomerSiteType {
     public void setCustomerSites(Set<CustomerSite> customerSites) {
         customerSites.forEach(customerSite -> customerSite.setCustomerSiteType(this));
         this.customerSites = customerSites;
-    }
+    }*/
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

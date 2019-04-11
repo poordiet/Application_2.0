@@ -9,6 +9,7 @@ public class Country {
     private int countryId;
     private String countryName;
 
+    /*
     // 1:M with customer site
     private Set<CustomerSite> customerSites;
 
@@ -20,7 +21,7 @@ public class Country {
     public void setCustomerSites(Set<CustomerSite> customerSites) {
         customerSites.forEach(customerSite -> customerSite.setCountry(this));
         this.customerSites = customerSites;
-    }
+    }*/
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

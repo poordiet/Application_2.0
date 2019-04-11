@@ -2,13 +2,11 @@ package com.example.demo.Controllers;
 
 import com.example.demo.Models.*;
 import com.example.demo.Presentation.ServiceOrderPresentation;
+import com.example.demo.Repositories.ContactTypeRepository;
 import com.example.demo.Repositories.ContractorRepository;
 import com.example.demo.Repositories.ServiceOrderRepository;
 import com.example.demo.Repositories.SvcRepository;
-import com.example.demo.Service.CountryService;
-import com.example.demo.Service.ServiceOrderServiceImpl;
-import com.example.demo.Service.StateProvinceService;
-import com.example.demo.Service.SvcService;
+import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +33,12 @@ public class ServiceOrderController {
     SvcService svcService;
     @Autowired
     ContractorRepository contractorRepository;
+    @Autowired
+    CustomerSiteService customerSiteService;
+    @Autowired
+    ContactService contactService;
+    @Autowired
+    ContactTypeRepository contactTypeRepository;
 
     @GetMapping("/search")
     public String searchServiceOrder(Model theModel)
@@ -58,6 +62,30 @@ public class ServiceOrderController {
        serviceOrderService.saveServiceOrder(serviceOrder);
 
         return "redirect:/service_orders/search";
+    }
+
+    @GetMapping(value="/showFormForAddCurrentCustomer")
+    public String showFormForAddCurrentCustomer(Model theModel,@RequestParam("custSiteId") int custSiteId)
+    {
+        CustomerSite customerSite = customerSiteService.findCustomerSiteByCustSiteId(custSiteId);
+
+        ServiceOrderPresentation serviceOrderPresentation = serviceOrderService.addCustomerSite(customerSite);
+        System.out.println(serviceOrderPresentation.getCustomerSite().getCustSiteName());
+        System.out.println(serviceOrderPresentation.getCustomerSite().getCountry().getCountryName());
+        System.out.println(serviceOrderPresentation.getCustomerSite().getCustSiteEmail());
+        System.out.println(serviceOrderPresentation.getCustSiteEmail());
+
+        List<Contact> contacts = contactService.findByCustSiteId(customerSite);
+        List<Svc> svcs = svcService.findAll();
+
+        List<ContactType> contactTypes = contactTypeRepository.findAll();
+
+        theModel.addAttribute("contactTypes", contactTypes);
+        theModel.addAttribute("svcs", svcs);
+        theModel.addAttribute("customer", serviceOrderPresentation);
+        theModel.addAttribute("contacts",contacts);
+
+        return ("addServiceOrderCurrentCustomer");
     }
 
     @PostMapping("/addNewCustomer")
@@ -94,12 +122,13 @@ public class ServiceOrderController {
 
 
 
-    @GetMapping("/showFormForAddCurrentCustomer")
-    public String showFormForAddCurrentCustomer(Model theModel)
+    @GetMapping("/serviceOrderSelection")
+    public String serviceOrderSelection(Model theModel)
     {
 
-        ServiceOrderPresentation serviceOrderPresentation = new ServiceOrderPresentation();
-        theModel.addAttribute("serviceOrderPresentation",serviceOrderPresentation);
+        List<ServiceOrderPresentation> customers = serviceOrderService.getServiceOrderPresentation(serviceOrderService.findAll());
+
+        theModel.addAttribute("customers",customers);
 
         List<Svc> svcs = svcService.findAll();
         theModel.addAttribute("svcs", svcs);
@@ -110,11 +139,9 @@ public class ServiceOrderController {
         List<StateProvince> stateProvinces = stateProvinceService.findAll();
         theModel.addAttribute("states", stateProvinces);
 
-        System.out.println(serviceOrderPresentation.getWorkRequest());
-        System.out.println(serviceOrderPresentation.getContactEmail());
-
-        return ("addServiceOrderCurrentCustomer");
+        return ("addServiceOrderSelection");
     }
+
 
     @GetMapping("/showFormForAssigningContractors")
     public String showFormForAssigningContractors(Model theModel, @ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation)
@@ -126,6 +153,7 @@ public class ServiceOrderController {
 
         List<Svc> svcs = serviceOrderPresentation.getSvcs();
         theModel.addAttribute("svcs", svcs);
+
 
         return ("addServiceOrderAssignContractors");
     }

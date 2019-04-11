@@ -9,6 +9,7 @@ public class StateProvince {
     private int stateId;
     private String stateName;
 
+    /*
     // 1:M with customer site
     private Set<CustomerSite> customerSites;
 
@@ -20,7 +21,7 @@ public class StateProvince {
     public void setCustomerSites(Set<CustomerSite> customerSites) {
         customerSites.forEach(customerSite -> customerSite.setStateProvince(this));
         this.customerSites = customerSites;
-    }
+    }*/
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

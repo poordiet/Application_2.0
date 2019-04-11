@@ -13,4 +13,9 @@ public class CustomerSiteServiceImpl implements CustomerSiteService {
     public void saveCustomerSite(CustomerSite customerSite){
         customerSiteRepository.save(customerSite);
     }
+
+    @Override
+    public CustomerSite findCustomerSiteByCustSiteId(int custSiteId){
+        return customerSiteRepository.findCustomerSiteByCustSiteId(custSiteId);
+    }
 }

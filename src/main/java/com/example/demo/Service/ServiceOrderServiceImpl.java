@@ -183,10 +183,12 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             serviceOrderPresentation.setCustSiteId(serviceOrder1.getCustomerSite().getCustSiteId());
             serviceOrderPresentation.setCustSiteNumber(serviceOrder1.getCustomerSite().getCustSiteNumber());
             serviceOrderPresentation.setCustSiteName(serviceOrder1.getCustomerSite().getCustSiteName());
+            serviceOrderPresentation.setCustSitePhone(serviceOrder1.getCustomerSite().getCustSitePhone());
+            serviceOrderPresentation.setCustSiteEmail(serviceOrder1.getCustomerSite().getCustSiteEmail());
             serviceOrderPresentation.setSvoStatus(serviceOrder1.getServiceOrderStatus().getSvoStatus());
-
             location = serviceOrder1.getCustomerSite().getCustSiteAddress()+ " " + serviceOrder1.getCustomerSite().getCustSiteCity() + ", "+
-                    serviceOrder1.getCustomerSite().getStateProvince().getStateName() + ", " + serviceOrder1.getCustomerSite().getCustSiteZip();
+                    serviceOrder1.getCustomerSite().getStateProvince().getStateName() + ", " + serviceOrder1.getCustomerSite().getCustSiteZip()
+                    +", " + serviceOrder1.getCustomerSite().getCountry().getCountryName();
 
             serviceOrderPresentation.setCustSiteLocation(location);
 
@@ -230,6 +232,26 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         }
         return serviceOrderPresentations;
     }
+
+
+    public ServiceOrderPresentation addCustomerSite(CustomerSite customerSite){
+
+        ServiceOrderPresentation serviceOrderPresentation = new ServiceOrderPresentation();
+
+        serviceOrderPresentation.setCustomerSite(customerSite);
+        serviceOrderPresentation.setCustSiteEmail(customerSite.getCustSiteEmail());
+        serviceOrderPresentation.setCustSitePhone(customerSite.getCustSitePhone());
+        serviceOrderPresentation.setCustSiteNumber(customerSite.getCustSiteNumber());
+        serviceOrderPresentation.setCustSiteName(customerSite.getCustSiteName());
+        serviceOrderPresentation.setCustSiteAddress(customerSite.getCustSiteAddress());
+        serviceOrderPresentation.setCustSiteCity(customerSite.getCustSiteCity());
+        serviceOrderPresentation.setCustSiteZip(customerSite.getCustSiteZip());
+        serviceOrderPresentation.setCountryName(customerSite.getCountry().getCountryName());
+        serviceOrderPresentation.setStateName(customerSite.getStateProvince().getStateName());
+
+        return serviceOrderPresentation;
+    }
+
 
 
 

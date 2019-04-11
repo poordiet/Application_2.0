@@ -186,6 +186,16 @@ public class ServiceOrderPresentation {
     private String custSiteEmail;
     private Date custSiteStart;
 
+    private CustomerSite customerSite;
+
+    public CustomerSite getCustomerSite() {
+        return customerSite;
+    }
+
+    public void setCustomerSite(CustomerSite customerSite) {
+        this.customerSite = customerSite;
+    }
+
     private String custSiteLocation;
 
     public String getCustSiteLocation() {
@@ -307,6 +317,16 @@ public class ServiceOrderPresentation {
     private String contactEmail;
     private String contactName;
 
+    private List<Contact> contacts;
+
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
 
     public void setContactName(String contactName){
         this.contactName = contactName;
@@ -649,5 +669,43 @@ public class ServiceOrderPresentation {
     public void setStateName(String stateName) {
         this.stateName = stateName;
     }
+
+    //Contact Type
+    private int contactTypeId;
+    private String contactType;
+    private String contactTypeDesc;
+
+    @Id
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @Column(name = "contact_type_id", nullable = false)
+    public int getContactTypeId() {
+        return contactTypeId;
+    }
+
+    public void setContactTypeId(int contactTypeId) {
+        this.contactTypeId = contactTypeId;
+    }
+
+    @Basic
+    @Column(name = "contact_type", nullable = false, length = 25)
+    public String getContactType() {
+        return contactType;
+    }
+
+    public void setContactType(String contactType) {
+        this.contactType = contactType;
+    }
+
+    @Basic
+    @Column(name = "contact_type_desc", nullable = false, length = 250)
+    public String getContactTypeDesc() {
+        return contactTypeDesc;
+    }
+
+    public void setContactTypeDesc(String contactTypeDesc) {
+        this.contactTypeDesc = contactTypeDesc;
+    }
+
+
 
 }

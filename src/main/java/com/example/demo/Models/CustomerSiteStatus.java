@@ -1,6 +1,7 @@
 package com.example.demo.Models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,19 +10,19 @@ public class CustomerSiteStatus {
     private int custSiteStatusId;
     private String custSiteStatus;
     private String custSiteStatusDesc;
-
+/*
     // 1:M with CustomerSite
-    private Set<CustomerSite> customerSites;
+    private List<CustomerSite> customerSites;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customerSiteStatus")
-    public Set<CustomerSite> getCustomerSites() {
+    public List<CustomerSite> getCustomerSites() {
         return customerSites;
     }
 
-    public void setCustomerSites(Set<CustomerSite> customerSites) {
+    public void setCustomerSites(List<CustomerSite> customerSites) {
         customerSites.forEach(customerSite -> customerSite.setCustomerSiteStatus(this));
         this.customerSites = customerSites;
-    }
+    }*/
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
