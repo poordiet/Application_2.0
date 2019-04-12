@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.Models.*;
+import com.example.demo.Presentation.ServiceOrderLinePresentation;
 import com.example.demo.Presentation.ServiceOrderPresentation;
 import com.example.demo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,13 +152,24 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         // This must be before the service order lines because service order lines need the Service Order Id, and Svo_id is assigned once it is saved
         serviceOrderRepository.save(serviceOrder);
 
+
+        Set<ServiceOrderLine> serviceOrderLines = new HashSet<>();
         // Add Service Order Lines
         for (Svc svc: serviceOrderPresentation.getSvcs()
-             ) {
+        ) {
             ServiceOrderLine serviceOrderLine = new ServiceOrderLine();
             serviceOrderLine.setServiceOrder(serviceOrder);
             serviceOrderLine.setSvc(svc);
+            serviceOrderLines.add(serviceOrderLine);
             serviceOrderLineRepository.save(serviceOrderLine);
+        }
+
+
+        serviceOrderPresentation.setServiceOrderLines(serviceOrderLines);
+        for(ServiceOrderLine serviceOrderLine: serviceOrderPresentation.getServiceOrderLines())
+        {
+            System.out.println(serviceOrderLine.getSvc());
+            System.out.println(serviceOrderLine.getSvoLineId());
         }
 
     }
@@ -241,6 +253,33 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         }
         return serviceOrderPresentations;
     }
+
+    // for displaying service order line and services in the same table
+    public List<ServiceOrderLinePresentation> getServiceOrderLinePresentation(Set<ServiceOrderLine> serviceOrderLines){
+
+        List<ServiceOrderLinePresentation> serviceOrderLinePresentations = new ArrayList<>();
+
+
+
+            for(ServiceOrderLine serviceOrderLine:serviceOrderLines)
+            {
+                ServiceOrderLinePresentation serviceOrderLinePresentation = new ServiceOrderLinePresentation();
+
+                System.out.println(serviceOrderLine.getSvoLineId());
+                serviceOrderLinePresentation.setSvcName(serviceOrderLine.getSvc().getSvcName());
+                serviceOrderLinePresentation.setSvcId(serviceOrderLine.getSvc().getSvcId());
+                serviceOrderLinePresentation.setSvoLineId(serviceOrderLine.getSvoLineId());
+
+            serviceOrderLinePresentations.add(serviceOrderLinePresentation);
+                for(ServiceOrderLinePresentation serviceOrderLinePresentation1:serviceOrderLinePresentations)
+                {
+                    System.out.println(serviceOrderLinePresentation.getSvcName());
+                    System.out.println(serviceOrderLinePresentation.getSvoLineId());
+                }
+        }
+        return serviceOrderLinePresentations;
+    }
+
 
 
     public ServiceOrderPresentation addCustomerSite(CustomerSite customerSite){
@@ -406,8 +445,25 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 
     // OLD METHODS FOR OLD VIEWS
 
-    /*
-    public void saveServiceOrderFromCurrentCustomerForm(ServiceOrderPresentation serviceOrderPresentation)
+    public void addAssignments(ServiceOrderPresentation serviceOrderPresentation)
+    {
+        // get current date
+        java.sql.Date currentSqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+        // Set Service Order Line
+        ServiceOrderLine serviceOrderLine = serviceOrderLineRepository.findById(serviceOrderPresentation.getSvoLineId());
+
+        for(Contractor contractor:serviceOrderPresentation.getContractorList()) {
+            Assignment assignment = new Assignment();
+            assignment.setServiceOrderLine(serviceOrderLine);
+            assignment.setAsgmtDate(currentSqlDate);
+            assignment.setContractor(contractor);
+            assignment.setAssignmentStatus(assignmentStatusRepository.findById(1));
+            assignmentRepository.save(assignment);
+        }
+    }
+
+    public void saveServiceOrderFromCurrentCustomerFormOld(ServiceOrderPresentation serviceOrderPresentation)
     {
         ServiceOrder serviceOrder = new ServiceOrder();
 
@@ -467,6 +523,8 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         //This must be before the service order lines because service order lines need the Service Order Id, and Svo_id is assigned once it is saved
         serviceOrderRepository.save(serviceOrder);
 
+        serviceOrderPresentation.setSvoId(serviceOrder.getSvoId());
+
         Set<ServiceOrderLine> serviceOrderLines = new HashSet<>();
         // Add Service Order Lines
         for (Svc svc: serviceOrderPresentation.getSvcs()
@@ -486,20 +544,6 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             System.out.println(serviceOrderLine.getSvoLineId());
         }
 
-        // Add Assignments ?????????????????
-
-        for (ServiceOrderLine serviceOrderLine:serviceOrderPresentation.getServiceOrderLines()
-        ) {
-            for(Contractor contractor:serviceOrderPresentation.getContractorList()) {
-                Assignment assignment = new Assignment();
-                assignment.setServiceOrderLine(serviceOrderLine);
-                assignment.setAsgmtDate(currentSqlDate);
-                assignment.setContractor(contractor);
-                assignment.setAssignmentStatus(assignmentStatusRepository.findById(1));
-                assignmentRepository.save(assignment);
-            }
-        }
-
-    }*/
+    }
 
 }

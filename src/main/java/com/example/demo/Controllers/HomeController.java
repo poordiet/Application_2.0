@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Presentation.ServiceOrderPresentation;
 import com.example.demo.Repositories.ServiceOrderRepository;
 import com.example.demo.Repositories.SvcRepository;
+import com.example.demo.Service.ServiceOrderService;
 import com.example.demo.Service.ServiceOrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,12 @@ public class HomeController {
     @Autowired
     SvcRepository svcRepository;
     @Autowired
-    ServiceOrderServiceImpl serviceOrderService;
+    ServiceOrderServiceImpl serviceOrderServiceImpl;
 
     @GetMapping("/home")
     public String searchServiceOrder(Model theModel)
     {
-        List<ServiceOrderPresentation> serviceOrderPresentations = serviceOrderService.getServiceOrderPresentation(serviceOrderService.findServiceOrderInProgress());
+        List<ServiceOrderPresentation> serviceOrderPresentations = serviceOrderServiceImpl.getServiceOrderPresentation(serviceOrderServiceImpl.findServiceOrderInProgress());
 
         theModel.addAttribute("serviceOrderPresentations",serviceOrderPresentations);
 

@@ -160,65 +160,40 @@
 
 		<!-- The Form Title -->
 		<div class="container-fluid" id="form">
-			<h1 class="mt-4 text-center">Assign Contractor(s)</h1>
+			<h1 class="mt-4 text-center">Assign Contractor(s) to Service</h1>
 		</div>
 
 		<!-- The Form -->
 		<div class="container" id="form">
 			<div class="row justify-content-center">
 				<div class="col-xl-auto">
-					<form th:action="@{/service_orders/assignContractors}" method = "POST"  th:object="${serviceOrderPresentation}" id="new customer">
+					<form th:action="@{/service_orders/assignContractors}" method = "POST"  th:object="${serviceOrderPresentation}">
 
-						<input th:field="*{custSiteId}"th:value="*{custSiteId}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{custSiteEmail}"th:value="*{custSiteEmail}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{custSitePhone}"th:value="*{custSitePhone}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{custSiteAddress}"th:value="*{custSiteAddress}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{custSiteCity}"th:value="*{custSiteCity}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{custSiteZip}"th:value="*{custSiteZip}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{countryId}"th:value="*{countryId}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{workRequest}"th:value="*{workRequest}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{contactId}"th:value="*{contactId}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{contactFname}"th:value="*{contactFname}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{contactLname}"th:value="*{contactLname}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{contactEmail}"th:value="*{contactEmail}" type="text" class="form-control" readonly hidden>
-						<input th:field="*{contactType}"th:value="*{contactType}" type="text" class="form-control" readonly hidden>
-						<select th:field="*{svcs}" class ="form-control" multiple  id="selection" hidden>
-							<option th:each="svc:${svcs}" th:value="${svc.svcId}" th:text = "${svc.svcName}"></option>
-						</select>
-						<!--<div class="form-group">
-							<input th:field="*{dateScheduledString}" type="datetime-local" readonly hidden>
-						</div>-->
+						<input th:field="*{svoId}" th:value="*{svoId}" type="text" class="form-control" readonly hidden>
+						<div class ="form-group">
+							<input th:field="*{svoLineId}" th:value="*{svoLineId}" type="text" class="form-control" readonly hidden>
+						</div>
+
 
 						<div class="col-sm-12" >
-							<div class="row" th:field="${svc.svcId}" th:each="svc:${svcs}"  th:value="${svc.svcId}">
+							<div class="row">
 
-								<div class="col-sm-12">
 									<div class ="form-group">
-										<label>Service</label>
-										<input  th:value=${svc.svcName} type="text" class ="form-control" id="1_service" readonly>
-
-										<!--<select th:field="*{svcs}" class="form-control">
-											<option th:each="svc:${svcs}" th:value="${svc.svcId}" th:text = "${svc.svcName}"></option>
-										</select>-->
-									</div>
-								</div>
-
-								<div class="col-sm-12">
-									<div class ="form-group">
-										<label>Available Contractors</label>
+										<label>Active Contractors</label>
 										<select th:field="*{contractorList}" class ="form-control" multiple size="8" id="contractor_selected0">
 											<option th:each="contractor:${contractors}" th:value="${contractor.contractorId}" th:text = "${contractor.contractorFname + ' ' + contractor.contractorLname}"></option>
 										</select>
 									</div>
-								</div>
+
 							</div>
 							<!-- CLOSE ROW-->
+
+							<div class="row">
+								<a th:href="@{/service_orders/addAnotherService}"><button type="submit "class="btn btn-outline-primary" id="return_button"> Submit Assignments </button></a>
+							</div>
 						</div>
 
-						<div class="row">
-							<button class="btn btn-outline-primary" onclick="window.history.back(); return false;" id="return_button"> Return </button>
-							<a th:href="@{/service_orders/assignContractors}"><button type="submit" class="btn btn-outline-success" id="submit_button"> </button></a><!--data-toggle="modal" data-target="#myModal" onclick="getsubmission()"-->Submit</a>
-						</div>
+
 
 						<!--<div class="modal fade" id="myModal">-->
 							<!--<div class="modal-dialog">-->
