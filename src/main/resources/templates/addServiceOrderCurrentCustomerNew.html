@@ -240,19 +240,23 @@
 							<textarea  th:field="*{workRequest}" class ="form-control" placeholder="Input Request Information" id="cust_request"></textarea>
 						</div>
 
+                        <!--
+                        <div class="form-group">
+                        <input th:field="*{dateScheduledString}" type="datetime-local">
+                        </div>-->
 						<!-- Need to add time <div>
 							Schedule Date:
 							<input th:field="*{dateScheduled}" type="date" class=form-control name="schedule_date" id="cust_date">
 						</div>
 						-->
 						<br>
-
+						<!--
 						<div class ="form-group">
 							<label>Select Service(s) to be Provided</label>
 							<select th:field="*{svcs}" class ="form-control" multiple size="17" id="selection">
 								<option th:each="svc:${svcs}" th:value="${svc.svcId}" th:text = "${svc.svcName}"></option>
 							</select>
-						</div>
+						</div>-->
 
 						<div class="row">
 							<div class="col-sm-12">
@@ -301,7 +305,7 @@
 							</select>
 						</div>
 
-						<a th:href="@{/service_orders/showFormForAssigningContractors}"><button type="submit" class="btn btn-info"> Next</button></a>
+						<a th:href="@{/service_orders/showFormForAssigningContractors}"><button type="submit" class="btn btn-info">Submit Service Order</button></a>
 					</form>
 				</div>
 			</div>

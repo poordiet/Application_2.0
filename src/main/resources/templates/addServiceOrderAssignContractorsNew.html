@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:overflow="http://www.w3.org/1999/xhtml" xmlns:white-space="http://www.w3.org/1999/xhtml"
+	  xmlns:text-overflow="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>LARI</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+	<!-- Bootstrap core JavaScript -->
+	<script th:src="@{/vendor/jquery/jquery.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+	
+    <div class="bg-primary border-right pre-scrollable" id="sidebar-wrapper" style="background-color: #cacbce !important;">
+      <div class="sidebar-heading"></div>
+		<div class="sidebar-heading"></div>
+	  
+			<!-- Nav Bar Items -->
+			<div id="nav" class="list-group  list-group-flush">
+			
+				<!-- Home -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >Home</a>
+				
+				<!-- Service Order -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#so" id="plus">
+				Service Order <i class="fas fa-plus-circle" id="circle"></i>
+				</a>
+		
+					<div id="so" class="collapse">
+						<a th:href="@{/service_orders/search}" class="list-group-item ">Search</a>
+						<a th:href="@{/service_orders/serviceOrderSelection}" class="list-group-item ">Create</a>
+						<a href="#" class="list-group-item ">Incident</a>
+					</div>
+				
+			
+				<!-- Customer -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#customer">
+				Customer <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="customer" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+			
+		
+				<!-- Contractor -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#contractor">
+				Contractor <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="contractor" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+				
+				
+				<!-- Hardware -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#hardware">
+				Hardware <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="hardware" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+				
+		
+				<!-- Knowledge base -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
+					Knowledge Base <i class="fas fa-plus-circle"></i>
+					</a>
+		
+					<div id="kb" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+		
+				<!-- Reports -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+				
+				<!-- DB Management -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
+				
+				<!-- Logout -->
+				<a class="list-group-item nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+
+
+		
+		</div>
+		<!-- /Nav Bar Items -->
+
+
+      </div>
+	  <!-- /SideBar -->
+
+    </div>
+	
+			
+	
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+	
+		<!-- Not Really Sure TBH -->
+
+		
+		<!-- Grey bar at the top (the sticky one) -->
+		<nav class="navbar fixed-top navbar-expand-lg bg-primary" >
+
+			<div class="col-sm-1" id="toplogo">
+			<img class="img-fluid" id="logo" src="logo.emf"/>
+			</div>
+
+			<!-- Valerie Bar -->
+			<div class="col-sm-12" id="valeriebar1"></div>
+			
+				<!-- Hamburger Button -->
+				<button class="btn btn-primary" id="menu-toggle"><span class="dark-blue-text"><i
+				class="fa fa-bars fa-1x"></i></span></button></button>
+
+				<!-- Top Right Logout -->
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+					<a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+					</li>
+				</ul>
+			</div>
+      </nav>
+	  <!-- /Grey bar at the top (the sticky one) -->
+	  
+	  <!-- Valerie Bar -->
+      <!-- <div class="col-sm-12" id="valeriebar1"></div> -->
+	  
+
+	  <!-- /Valerie Bar -->
+
+		<!-- The Form Title -->
+		<div class="container-fluid" id="form">
+			<h1 class="mt-4 text-center">Select Service and Assign Contractor(s)</h1>
+		</div>
+
+		<!-- The Form -->
+		<div class="container" id="form">
+			<div class="row justify-content-center">
+				<div class="col-xl-auto">
+					<form th:action="@{/service_orders/addAnotherService}" method = "POST"  th:object="${serviceOrderPresentation}" id="new customer">
+
+						<input th:field="*{svoId}" th:value="*{svoId}" type="text" class="form-control" readonly >
+
+
+						<div class="col-sm-12" >
+							<div class="row">
+
+								<div class="col-sm-12">
+									<div class ="form-group">
+										<label>Service</label>
+										<select th:field="*{svcId}" class="form-control">
+											<!--<option value="h" th:default="default" th:selected="selected">Select Service....</option>-->
+											<option th:each="svc:${svcs}" th:value="${svc.svcId}" th:text="${svc.svcName}"></option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class ="form-group">
+										<label>Available Contractors</label>
+										<select th:field="*{contractorList}" class ="form-control" multiple size="8" id="contractor_selected0">
+											<option th:each="contractor:${contractors}" th:value="${contractor.contractorId}" th:text = "${contractor.contractorFname + ' ' + contractor.contractorLname}"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!-- CLOSE ROW-->
+						</div>
+
+						<div class="row">
+							<a th:href="@{/service_orders/addAnotherService}"><button type="submit "class="btn btn-outline-primary" id="return_button"> Submit Service and Assignment </button></a>
+						</div>
+
+						<!--<div class="modal fade" id="myModal">-->
+							<!--<div class="modal-dialog">-->
+								<!--<div class="modal-content">-->
+
+									<!--&lt;!&ndash; Modal Header &ndash;&gt;-->
+									<!--<div class="modal-header">-->
+										<!--<h4 class="modal-title">Confirm Service Order</h4>-->
+										<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+									<!--</div>-->
+
+									<!--&lt;!&ndash; Modal body &ndash;&gt;-->
+									<!--<div class="modal-body">-->
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Customer Name</strong>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Customer Number</strong>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="text" id="cust_value1" readonly>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="email" id="cust_value2" readonly>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Phone Number</strong>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Email</strong>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="text" id="cust_value3" readonly>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="email" id="cust_value4" readonly>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Address</strong>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>City</strong>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="text" id="cust_value5" readonly>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="email" id="cust_value6" readonly>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Zip</strong>-->
+											<!--</div>-->
+											<!--<div>-->
+												<!--<strong>Country</strong>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="text" id="cust_value7" readonly>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="email" id="cust_value8" readonly>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>State</strong>-->
+											<!--</div>-->
+											<!--<div>-->
+												<!--<strong>Schedule Date</strong>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="text" id="cust_value9" readonly>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="date" id="cust_value11" readonly>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Request Details</strong>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-lg-12">-->
+												<!--<textarea type="text" id="cust_value10" readonly></textarea>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Contact First Name</strong>-->
+											<!--</div>-->
+											<!--<div>-->
+												<!--<strong>Contact Last Name</strong>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="text" id="cust_value12" readonly>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="text" id="cust_value13" readonly>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Contact Phone Number</strong>-->
+											<!--</div>-->
+											<!--<div>-->
+												<!--<strong>Contact Email</strong>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="text" id="cust_value14" readonly>-->
+											<!--</div>-->
+											<!--<div class="col-md-6">-->
+												<!--<input type="text" id="cust_value15" readonly>-->
+											<!--</div>-->
+										<!--</div>-->
+
+
+										<!--<div class="row">-->
+											<!--<div class="col-md-6">-->
+												<!--<strong>Services to be provided</strong>-->
+											<!--</div>-->
+											<!--<div>-->
+												<!--<strong>Contractor(s) Assigned</strong>-->
+											<!--</div>-->
+										<!--</div>-->
+
+										<!--<div class="assignments">-->
+											<!--<div class="row">-->
+												<!--<div class="col-md-6">-->
+													<!--<input type="text" id="services" readonly>-->
+												<!--</div>-->
+												<!--<div class="col-md-6">-->
+													<!--<input type="text" id="contractor_submit0" readonly>-->
+												<!--</div>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</div>-->
+
+									<!--&lt;!&ndash; Modal footer &ndash;&gt;-->
+									<!--<div class="modal-footer">-->
+										<!--<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>-->
+										<!--<button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>-->
+									<!--</div>-->
+
+								<!--</div>-->
+							<!--</div>-->
+						<!--</div>-->
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /The Form-->
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+  
+  
+
+
+  <!-- Menu Toggle Script -->
+    <script>
+
+		$("#plus").click(function(e){
+			e.preventDefault();
+			$("i.fa-plus-circle").toggleClass("fas fa-minus-circle")});
+
+  </script>
+  
+  <!-- Attempting to get the icons to change -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+	
+
+	
+  </script>
+
+
+  <!-- Allows for multiple selections without having to hold ctrl-->
+  <script>
+      $('option').mousedown(function(e) {
+          e.preventDefault();
+          $(this).prop('selected', !$(this).prop('selected'));
+          return false;
+      });
+  </script>
+
+
+  <script>
+      function getValue()
+      {
+          var x=document.getElementById("selection");
+          var j=0;
+          var selectionList=[]
+          for (var i = 0; i < x.options.length; i++) {
+              if(x.options[i].selected)
+              {
+                  j++;
+                  selectionList.push(x.options[i].value)
+              }
+          }
+          window.localStorage.setItem("selectionList", JSON.stringify(selectionList)); // Saving
+
+      }
+  </script>
+
+
+  <script>
+      var myarray = [];
+      $('#new_customer').find(':input').each(function(){
+          myarray.push($(this).val());
+      });
+  </script>
+
+
+</body>
+
+</html>

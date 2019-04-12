@@ -1,5 +1,6 @@
 package com.example.demo.Presentation;
 
+import com.example.demo.MiscClass.ServiceContractors;
 import com.example.demo.Models.*;
 
 import javax.persistence.*;
@@ -21,6 +22,16 @@ public class ServiceOrderPresentation {
     private String workRequest;
     private String workSummary;
     private BigDecimal total;
+
+    private String dateScheduledString;
+
+    public String getDateScheduledString() {
+        return dateScheduledString;
+    }
+
+    public void setDateScheduledString(String dateScheduledString) {
+        this.dateScheduledString = dateScheduledString;
+    }
 
     private Set<ServiceOrderLine> serviceOrderLines;
 

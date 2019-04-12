@@ -2,12 +2,26 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class AssignmentStatus {
     private int asgmtStatusId;
     private String asgmtStatus;
     private String asgmtStatusDesc;
+
+    // 1:M with Assignment
+    private Set<Assignment> assignments;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "assignmentStatus")
+    public Set<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(Set<Assignment> assignments) {
+        assignments.forEach(assignment -> assignment.setAssignmentStatus(this));
+        this.assignments = assignments;
+    }
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

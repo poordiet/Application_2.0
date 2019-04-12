@@ -9,6 +9,19 @@ public class Assignment {
     private int asgmtId;
     private Date asgmtDate;
 
+    // M:1 with AssignmentStatus
+    private AssignmentStatus assignmentStatus;
+
+    @ManyToOne
+    @JoinColumn(name="asgmt_status_id")
+    public AssignmentStatus getAssignmentStatus() {
+        return assignmentStatus;
+    }
+
+    public void setAssignmentStatus(AssignmentStatus assignmentStatus) {
+        this.assignmentStatus = assignmentStatus;
+    }
+
     // M:1 with Service Order Line
     private ServiceOrderLine serviceOrderLine;
 
