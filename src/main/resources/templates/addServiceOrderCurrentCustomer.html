@@ -240,10 +240,10 @@
 							<textarea  th:field="*{workRequest}" class ="form-control" placeholder="Input Request Information" id="cust_request"></textarea>
 						</div>
 
-                        <!--
+
                         <div class="form-group">
                         <input th:field="*{dateScheduledString}" type="datetime-local">
-                        </div>-->
+                        </div>
 						<!-- Need to add time <div>
 							Schedule Date:
 							<input th:field="*{dateScheduled}" type="date" class=form-control name="schedule_date" id="cust_date">
@@ -263,6 +263,7 @@
 							<div class ="form-group">
 								<label>Select Existing Contact</label>
 								<select th:field="*{contactId}" class="form-control">
+									<option value="0">Select Contact</option>
 									<option th:each="contact:${contacts}" th:value="${contact.contactId}" th:text="${contact.contactFname + ' ' + contact.contactLname}"></option>
 								</select>
 							</div>

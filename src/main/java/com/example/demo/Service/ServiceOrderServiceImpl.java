@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -82,6 +85,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
     {
         serviceOrderRepository.save(serviceOrder);
     }
+
 
     @Override
     public void saveServiceOrderFromForm(ServiceOrderPresentation serviceOrderPresentation)
@@ -207,6 +211,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             serviceOrderPresentation.setCustSitePhone(serviceOrder1.getCustomerSite().getCustSitePhone());
             serviceOrderPresentation.setCustSiteEmail(serviceOrder1.getCustomerSite().getCustSiteEmail());
             serviceOrderPresentation.setSvoStatus(serviceOrder1.getServiceOrderStatus().getSvoStatus());
+
             location = serviceOrder1.getCustomerSite().getCustSiteAddress()+ " " + serviceOrder1.getCustomerSite().getCustSiteCity() + ", "+
                     serviceOrder1.getCustomerSite().getStateProvince().getStateName() + ", " + serviceOrder1.getCustomerSite().getCustSiteZip()
                     +", " + serviceOrder1.getCustomerSite().getCountry().getCountryName();
@@ -252,6 +257,48 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 
         }
         return serviceOrderPresentations;
+    }
+
+    // Create a Service Order Presentation for a Service Order Profile
+    public ServiceOrderPresentation getServiceOrderPresentationForProfile(ServiceOrder serviceOrder){
+
+        ServiceOrderPresentation serviceOrderPresentation = new ServiceOrderPresentation();
+
+        System.out.println(serviceOrder.getSvoId());
+
+        serviceOrderPresentation.setSvoId(serviceOrder.getSvoId());
+
+        System.out.println(serviceOrderPresentation.getSvoId());
+        serviceOrderPresentation.setCustSiteId(serviceOrder.getCustomerSite().getCustSiteId());
+        serviceOrderPresentation.setCustSiteName(serviceOrder.getCustomerSite().getCustSiteName());
+        String location = serviceOrder.getCustomerSite().getCustSiteAddress()+ " " + serviceOrder.getCustomerSite().getCustSiteCity() + ", "+
+                serviceOrder.getCustomerSite().getStateProvince().getStateName() + ", " + serviceOrder.getCustomerSite().getCustSiteZip()
+                +", " + serviceOrder.getCustomerSite().getCountry().getCountryName();
+
+        serviceOrderPresentation.setCustSiteLocation(location);
+        serviceOrderPresentation.setCustSitePhone(serviceOrder.getCustomerSite().getCustSitePhone());
+        serviceOrderPresentation.setCustSiteEmail(serviceOrder.getCustomerSite().getCustSiteEmail());
+
+        serviceOrderPresentation.setDateRequested(serviceOrder.getDateRequested());
+        serviceOrderPresentation.setDateScheduled(serviceOrder.getDateScheduled());
+        serviceOrderPresentation.setDateFinished(serviceOrder.getDateFinished());
+        serviceOrderPresentation.setDateStarted(serviceOrder.getDateStarted());
+
+        serviceOrderPresentation.setContactId(serviceOrder.getContact().getContactId());
+        serviceOrderPresentation.setContactName(serviceOrder.getContact().getContactFname() + ' ' + serviceOrder.getContact().getContactLname());
+        serviceOrderPresentation.setContactPhone(serviceOrder.getContact().getContactPhone());
+        serviceOrderPresentation.setContactEmail(serviceOrder.getContact().getContactEmail());
+        serviceOrderPresentation.setContactType(serviceOrder.getContact().getContactType().getContactType());
+        serviceOrderPresentation.setContactStatus(serviceOrder.getContact().getContactStatus().getContactStatus());
+
+        serviceOrderPresentation.setWorkRequest(serviceOrder.getWorkRequest());
+        serviceOrderPresentation.setWorkSummary(serviceOrder.getWorkSummary());
+        serviceOrderPresentation.setSvoStatus(serviceOrder.getServiceOrderStatus().getSvoStatus());
+
+        serviceOrderPresentation.setServiceOrderLines(serviceOrder.getServiceOrderLines());
+
+
+        return serviceOrderPresentation;
     }
 
     // for displaying service order line and services in the same table
@@ -503,20 +550,22 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         java.sql.Date currentSqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
         // Add Service Order Status
-        ServiceOrderStatus serviceOrderStatus = serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(1);
+        ServiceOrderStatus serviceOrderStatus = serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(4);
         serviceOrder.setServiceOrderStatus(serviceOrderStatus);
 
         // Add Service order Information
         serviceOrder.setDateRequested(currentSqlDate);
 
-        //serviceOrder.setDateScheduled(serviceOrderPresentation.getDateScheduled());
-        // temp place holder
 
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        serviceOrder.setDateScheduled(timestamp);
-       // Timestamp timestamp = Timestamp.valueOf(serviceOrderPresentation.getDateScheduledString());
-        serviceOrderPresentation.setDateScheduled(timestamp);
-        serviceOrder.setDateScheduled(timestamp);
+        /*Datetime picker returns 2019-04-19T01:59 -- Have to replace T with a space and append seconds (:00) to make it correct format
+         for Timestamp (java.sql.timestamp) */
+        String formattedTime = serviceOrderPresentation.getDateScheduledString().replace("T"," ");
+        formattedTime+=":00";
+        Timestamp ts = Timestamp.valueOf(formattedTime);
+
+        // Set Date Scheduled
+        serviceOrderPresentation.setDateScheduled(ts);
+        serviceOrder.setDateScheduled(ts);
 
         serviceOrder.setWorkRequest(serviceOrderPresentation.getWorkRequest());
 
