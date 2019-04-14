@@ -1,13 +1,50 @@
 package com.example.demo.Models;
 
+import net.bytebuddy.implementation.ToStringMethod;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class CustomerSiteHw {
     private int custSiteHwId;
     private String custSiteSerialNumber;
     private String custSiteMacAddress;
+
+//   @Override
+//   public String toString(int custSiteHwId){
+//        CustomerSiteHw customerSiteHw = new CustomerSiteHw();
+//
+//       return
+//   }
+
+    // 1:M with Hw_Svo_Line
+    private Set<HwSvoLine> hwSvoLines;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customerSiteHw")
+    public Set<HwSvoLine> getHwSvoLines() {
+        return hwSvoLines;
+    }
+
+    public void setHwSvoLines(Set<HwSvoLine> hwSvoLines) {
+        this.hwSvoLines = hwSvoLines;
+    }
+
+    // M:1 with Hw Model
+    private HwModel hwModel;
+
+    @ManyToOne
+    @JoinColumn(name="hw_model_id")
+    public HwModel getHwModel() {
+        return hwModel;
+    }
+
+    public void setHwModel(HwModel hwModel) {
+        this.hwModel = hwModel;
+    }
+
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

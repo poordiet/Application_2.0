@@ -7,6 +7,32 @@ import java.util.Objects;
 public class HwSvoLine {
     private int hwSvoLineId;
 
+    // M:1 with Cust Site HW
+    private CustomerSiteHw customerSiteHw;
+
+    @ManyToOne
+    @JoinColumn(name="cust_site_hw_id")
+    public CustomerSiteHw getCustomerSiteHw() {
+        return customerSiteHw;
+    }
+
+    public void setCustomerSiteHw(CustomerSiteHw customerSiteHw) {
+        this.customerSiteHw = customerSiteHw;
+    }
+
+    // M:1 with Service Order Line
+    private ServiceOrderLine serviceOrderLine;
+
+    @ManyToOne
+    @JoinColumn(name="svo_line_id")
+    public ServiceOrderLine getServiceOrderLine() {
+        return serviceOrderLine;
+    }
+
+    public void setServiceOrderLine(ServiceOrderLine serviceOrderLine) {
+        this.serviceOrderLine = serviceOrderLine;
+    }
+
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     @Column(name = "hw_svo_line_id", nullable = false)

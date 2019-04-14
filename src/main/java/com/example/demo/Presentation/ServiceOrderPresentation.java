@@ -784,5 +784,64 @@ public class ServiceOrderPresentation {
     }
 
 
+    // Incident
+    private int incidentId;
+    private String incident;
+    private Date incidentDate;
+
+    @Id
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @Column(name = "incident_id", nullable = false)
+    public int getIncidentId() {
+        return incidentId;
+    }
+
+    public void setIncidentId(int incidentId) {
+        this.incidentId = incidentId;
+    }
+
+    @Basic
+    @Column(name = "incident", nullable = false, length = 5000)
+    public String getIncident() {
+        return incident;
+    }
+
+    public void setIncident(String incident) {
+        this.incident = incident;
+    }
+
+    @Basic
+    @Column(name = "incident_date", nullable = false)
+    public Date getIncidentDate() {
+        return incidentDate;
+    }
+
+    public void setIncidentDate(Date incidentDate) {
+        this.incidentDate = incidentDate;
+    }
+
+
+    private Set<Incident> incidents;
+
+    public Set<Incident> getIncidents() {
+        return incidents;
+    }
+
+    public void setIncidents(Set<Incident> incidents) {
+        this.incidents = incidents;
+    }
+
+    // Payment
+
+    private Set<Payment> payments;
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
+
 
 }

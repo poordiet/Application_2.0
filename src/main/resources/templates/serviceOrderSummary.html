@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:overflow="http://www.w3.org/1999/xhtml" xmlns:white-space="http://www.w3.org/1999/xhtml"
+	  xmlns:text-overflow="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>LARI</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+	<!-- Bootstrap core JavaScript -->
+	<script th:src="@{/vendor/jquery/jquery.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+	
+    <div class="bg-primary border-right pre-scrollable" id="sidebar-wrapper" style="background-color: #cacbce !important;">
+      <div class="sidebar-heading"></div>
+		<div class="sidebar-heading"></div>
+	  
+			<!-- Nav Bar Items -->
+			<div id="nav" class="list-group  list-group-flush">
+			
+				<!-- Home -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >Home</a>
+				
+				<!-- Service Order -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#so" id="plus">
+				Service Order <i class="fas fa-plus-circle" id="circle"></i>
+				</a>
+		
+					<div id="so" class="collapse">
+						<a th:href="@{/service_orders/search}" class="list-group-item ">Search</a>
+						<a th:href="@{/service_orders/showFormForAddCurrentCustomer}" class="list-group-item ">Create</a>
+						<a href="#" class="list-group-item ">Incident</a>
+					</div>
+				
+			
+				<!-- Customer -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#customer">
+				Customer <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="customer" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+			
+		
+				<!-- Contractor -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#contractor">
+				Contractor <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="contractor" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+				
+				
+				<!-- Hardware -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#hardware">
+				Hardware <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="hardware" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+				
+		
+				<!-- Knowledge base -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
+					Knowledge Base <i class="fas fa-plus-circle"></i>
+					</a>
+		
+					<div id="kb" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+		
+				<!-- Reports -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+				
+				<!-- DB Management -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
+				
+				<!-- Logout -->
+				<a class="list-group-item nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+
+
+		
+		</div>
+		<!-- /Nav Bar Items -->
+
+
+      </div>
+	  <!-- /SideBar -->
+
+    </div>
+	
+			
+	
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+	
+		<!-- Not Really Sure TBH -->
+
+		
+		<!-- Grey bar at the top (the sticky one) -->
+		<nav class="navbar fixed-top navbar-expand-lg bg-primary" >
+
+			<div class="col-sm-1" id="toplogo">
+			<img class="img-fluid" id="logo" src="logo.emf"/>
+			</div>
+
+			<!-- Valerie Bar -->
+			<div class="col-sm-12" id="valeriebar1"></div>
+			
+				<!-- Hamburger Button -->
+				<button class="btn btn-primary" id="menu-toggle"><span class="dark-blue-text"><i
+				class="fa fa-bars fa-1x"></i></span></button></button>
+
+				<!-- Top Right Logout -->
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+					<a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+					</li>
+				</ul>
+			</div>
+      </nav>
+	  <!-- /Grey bar at the top (the sticky one) -->
+	  
+	  <!-- Valerie Bar -->
+      <!-- <div class="col-sm-12" id="valeriebar1"></div> -->
+	  
+
+	  <!-- /Valerie Bar -->
+
+		<!-- The Form Title -->
+		<div class="container-fluid" id="form">
+			<h1 class="mt-4 text-center">Service Order Summary</h1>
+		</div>
+
+		<!-- The Form -->
+		<div class="container" id="form">
+			<div class="row justify-content-center">
+				<div class="col-md-10">
+					<form id="service_order_summary">
+
+						<!--<div class ="form-group">-->
+							<!--<label>Service Summary</label>-->
+							<!--<textarea th:field ="${serviceOrder.workSummary}" th:text="${serviceOrder.workSummary}" class ="form-control" placeholder="Input details of the work done" id="cust_value10"></textarea>-->
+						<!--</div>-->
+
+						<table name="customer_table" class="table" >
+							<thead class="thead-light" id="customer_table_header">
+
+
+							<tr>
+								<th scope="col">Service Name</th>
+								<th scope="col">Action</th>
+							</tr>
+							</thead>
+
+							<!-- Sample Data just to show data in GUI -->
+
+							<tbody id="customer_overall_values">
+							<!--<input th:field="*{svoId}" th:value="*{svoId}" type="text" class="form-control" readonly >-->
+
+							<tr  th:each="serviceOrderLinePresentation : ${serviceOrderLinePresentations}">
+
+								<td class="row-value" th:field="${serviceOrderLinePresentation.svoLineId}"  th:text="${serviceOrderLinePresentation.svoLineId}" hidden/>
+								<td class="row-value" th:field= "${serviceOrderLinePresentation.svcId}" th:text="${serviceOrderLinePresentation.svcId}" hidden/>
+								<td class="row-value" th:field="${serviceOrderLinePresentation.svcName}"th:text="${serviceOrderLinePresentation.svcName}" />
+								<td><a type="button" class="btn btn-primary" th:href="@{/service_orders/showAddHwWorkedOn(svoLineId=${serviceOrderLinePresentation.svoLineId})}">Add Hardware</a></td>
+
+							</tr>
+							<style>
+								#td_overflow{
+									overflow:hidden;
+									text-overflow:ellipsis;
+									white-space:nowrap;
+								}
+							</style>
+
+							</tbody>
+						</table>
+
+					</form>
+					<a th:href="@{/service_orders/showAddServiceSummary}"><button type="" class="btn btn-info">Next</button></a>
+				</div>
+			</div>
+		</div>
+		<!-- /The Form-->
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Make Headings Bold -->
+  <style>
+		.bold {font-weight: bold}
+  </style>
+
+
+  <!-- Menu Toggle Script -->
+    <script>
+
+		$("#plus").click(function(e){
+			e.preventDefault();
+			$("i.fa-plus-circle").toggleClass("fas fa-minus-circle")});
+
+  </script>
+  
+  <!-- Attempting to get the icons to change -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+	
+
+	
+  </script>
+
+
+  <!-- Allows for multiple selections without having to hold ctrl-->
+  <script>
+      $('option').mousedown(function(e) {
+          e.preventDefault();
+          $(this).prop('selected', !$(this).prop('selected'));
+          return false;
+      });
+  </script>
+
+
+  <script>
+      function getValue()
+      {
+          var x=document.getElementById("selection");
+          var j=0;
+          var selectionList=[]
+          for (var i = 0; i < x.options.length; i++) {
+              if(x.options[i].selected)
+              {
+                  j++;
+                  selectionList.push(x.options[i].value)
+              }
+          }
+          window.localStorage.setItem("selectionList", JSON.stringify(selectionList)); // Saving
+
+      }
+  </script>
+
+
+  <script>
+      var myarray = [];
+      $('#new_customer').find(':input').each(function(){
+          myarray.push($(this).val());
+      });
+  </script>
+
+
+</body>
+
+</html>

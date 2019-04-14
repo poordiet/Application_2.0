@@ -1,5 +1,8 @@
 package com.example.demo.Models;
 
+import com.example.demo.Repositories.HwInventoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -13,6 +16,43 @@ public class HwInventory {
     private String hwMacAddress;
     private Date hwPurchaseDate;
     private BigDecimal hwSalePrice;
+
+    @Autowired
+    HwInventoryRepository hwInventoryRepository;
+
+    //To String
+    public String toString(int hwInvId){
+        String manu;
+        String series;
+        String model;
+        String type;
+        String serial;
+
+        HwInventory hwInventory = new HwInventory();
+        hwInventory = hwInventoryRepository.findByHwInvId(hwInvId);
+
+        manu = hwInventory.getHwModel().getHwSeries().getHwManufacturer().getHwManuName();
+        series=hwInventory.getHwModel().getHwSeries().getHwSeriesName();
+        model=hwInventory.getHwModel().getHwModel();
+        type = hwInventory.getHwModel().getHwSeries().getHwType().getHwType();
+        serial = hwInventory.getHwSerialNumber();
+
+        return manu + " " + series + " " + model + " " + type + " " + serial;
+    }
+
+    // M:1 with Hw Model
+    private HwModel hwModel;
+
+    @ManyToOne
+    @JoinColumn(name="hw_model_id")
+    public HwModel getHwModel() {
+        return hwModel;
+    }
+
+    public void setHwModel(HwModel hwModel) {
+        this.hwModel = hwModel;
+    }
+
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

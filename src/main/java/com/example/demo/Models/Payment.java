@@ -11,6 +11,19 @@ public class Payment {
     private BigDecimal amt;
     private Date datePaid;
 
+    // M:1 with Service Order
+    private ServiceOrder serviceOrder;
+
+    @ManyToOne
+    @JoinColumn(name="svo_id")
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
+    }
+
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
+    }
+
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     @Column(name = "pmt_id", nullable = false)

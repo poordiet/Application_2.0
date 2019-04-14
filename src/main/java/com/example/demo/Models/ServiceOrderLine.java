@@ -1,6 +1,7 @@
 package com.example.demo.Models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -8,6 +9,21 @@ import java.util.Set;
 public class ServiceOrderLine {
 
     private int svoLineId;
+
+
+
+    // 1:M with Hw_Svo_Line
+    private Set<HwSvoLine> hwSvoLines;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customerSiteHw")
+    public Set<HwSvoLine> getHwSvoLines() {
+        return hwSvoLines;
+    }
+
+    public void setHwSvoLines(Set<HwSvoLine> hwSvoLines) {
+        this.hwSvoLines = hwSvoLines;
+    }
+
 
     // 1:M with Assignment
     private Set<Assignment> assignments;
@@ -18,7 +34,7 @@ public class ServiceOrderLine {
     }
 
     public void setAssignments(Set<Assignment> assignments) {
-        assignments.forEach(assignment -> assignment.setServiceOrderLine(this));
+//        assignments.forEach(assignment -> assignment.setServiceOrderLine(this));
         this.assignments = assignments;
     }
 

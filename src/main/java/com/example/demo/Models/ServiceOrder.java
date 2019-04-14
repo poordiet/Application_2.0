@@ -41,6 +41,36 @@ public class ServiceOrder {
     }
 
     */
+
+    // 1:M with Payments
+
+    private Set<Payment> payments;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "serviceOrder")
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+//        payments.forEach(payment -> payment.setServiceOrder(this));
+        this.payments = payments;
+    }
+
+
+    // 1:M with Incidents
+
+    private Set<Incident> incidents;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "serviceOrder")
+    public Set<Incident> getIncidents() {
+        return incidents;
+    }
+
+    public void setIncidents(Set<Incident> incidents) {
+//        incidents.forEach(incident -> incident.setServiceOrder(this));
+        this.incidents = incidents;
+    }
+
     // 1:M with Service Order Lines
 
     private Set<ServiceOrderLine> serviceOrderLines;
@@ -51,9 +81,11 @@ public class ServiceOrder {
     }
 
     public void setServiceOrderLines(Set<ServiceOrderLine> serviceOrderLines) {
-        serviceOrderLines.forEach(serviceOrderLine -> serviceOrderLine.setServiceOrder(this));
+//        serviceOrderLines.forEach(serviceOrderLine -> serviceOrderLine.setServiceOrder(this));
         this.serviceOrderLines = serviceOrderLines;
     }
+
+
 
     // M:1 with Contact
     private Contact contact;

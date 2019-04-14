@@ -11,6 +11,20 @@ public class Incident {
     private Date incidentDate;
     private int svoId;
 
+    // M:1 with Service Order
+    private ServiceOrder serviceOrder;
+
+    @ManyToOne
+    @JoinColumn(name="svo_id")
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
+    }
+
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
+    }
+
+
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     @Column(name = "incident_id", nullable = false)
@@ -42,6 +56,7 @@ public class Incident {
         this.incidentDate = incidentDate;
     }
 
+    /* -- Should this be here?
     @Basic
     @Column(name = "svo_id", nullable = false)
     public int getSvoId() {
@@ -50,7 +65,7 @@ public class Incident {
 
     public void setSvoId(int svoId) {
         this.svoId = svoId;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {

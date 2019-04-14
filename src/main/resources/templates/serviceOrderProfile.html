@@ -165,7 +165,7 @@
         <div class="row justify-content-center">
             <div class="container-fluid" id="form">
                 <div class="row justify-content-end">
-                        <a href="http://localhost:63342/Front-End%20Template/service_order_summary.html?_ijt=esthtu44hk7mmgm6nq5h3ou777"><button class="btn btn-primary">Start Service</button></a>
+                        <a th:href="@{/service_orders/showServiceSummary(svoId=${serviceOrderPresentation.svoId})}"><button class="btn btn-primary">Start Service</button></a>
                         <button class="btn btn-success">Sell Hardware</button>
                 </div>
             </div>
@@ -197,31 +197,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <p class="h5 inlineText">Contact</p>
-                <table class="table">
-                    <thead>
-                    <th>Contact ID</th>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Email</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>46</td>
-                        <td>Hassan Molina</td>
-                        <td>2817996523</td>
-                        <td>pbhatwal1111@gmail.com</td>
-                        <td>Asst Manager</td>
-                        <td>Not Employed</td>
-                    <tr th:each="tempCustomer : ${customers}">
-                        <td th:text="${tempCustomer.startDate}" />
-                        <td th:text="${tempCustomer.status}" />
-                        <td th:text="${tempCustomer.type}"/>
-                    </tr>
-                    </tbody>
-                </table>
+
                 <p class="h5 inlineText">Service Order Detail</p>
                 <table class="table">
                     <thead>
@@ -230,113 +206,109 @@
                     <th>Service Order Status</th>
                     </thead>
                     <tbody>
+
                     <tr>
-                        <td>Request for maintenance on client's card/chip reader</td>
-                        <td>Contractor performed the appropriate maintenance</td>
-                        <td>Completed</td>
-                    <tr th:each="tempCustomer : ${customers}">
-                        <td th:text="${tempCustomer.startDate}" />
-                        <td th:text="${tempCustomer.status}" />
-                        <td th:text="${tempCustomer.type}"/>
+                        <td th:text="${serviceOrderPresentation.workRequest}" />
+                        <td th:text="${serviceOrderPresentation.workSummary}" />
+                        <td th:text="${serviceOrderPresentation.svoStatus}"/>
                     </tr>
                     </tbody>
                 </table>
-                <!--<p class="h5 inlineText">Services</p>
+                <p class="h5 inlineText">Services</p>
                 <table class="table">
                     <thead>
                     <th>Service(s) Provided</th>
-                    <th>Conducted By</th>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>POS_Maintenance</td>
-                        <td>Benjamin Yuri</td>
-                    <tr th:each="tempCustomer : ${customers}">
-                        <td th:text="${tempCustomer.startDate}" />
-                        <td th:text="${tempCustomer.status}" />
-                        <td th:text="${tempCustomer.type}"/>
-                    </tr>
-                    <tr>
-                        <td>POS_Maintenance</td>
-                        <td>Larry Dillinger</td>
-                    <tr th:each="tempCustomer : ${customers}">
-                        <td th:text="${tempCustomer.startDate}" />
-                        <td th:text="${tempCustomer.status}" />
-                        <td th:text="${tempCustomer.type}"/>
-                    </tr>
-                    </tbody>
-                </table>-->
-              <!--  <p class="h5 inlineText">Incident(s)</p>
-                <table class="table">
-                    <thead>
-                    <th>Incident ID</th>
-                    <th>Incident</th>
-                    <th>Incident Type</th>
-                    <th>Incident Date</th>
-                    <th>Incident Status</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                    <tr th:each="tempCustomer : ${customers}">
-                        <td th:text="${tempCustomer.startDate}" />
-                        <td th:text="${tempCustomer.status}" />
-                        <td th:text="${tempCustomer.type}"/>
+                    <tr th:each="svc : ${svcs}">
+                        <td th:text="${svc.svcName}" />
                     </tr>
                     </tbody>
                 </table>
-                <p class="h5 inlineText">Amount Due</p>
-                <table class="table">
-                    <thead>
-                    <th>Total</th>
-                    <th>Payment Status</th>
-                    <th>Date Paid</th>
-                    <th>Payment Type</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>910.00</td>
-                        <td>Pending</td>
-                        <td>6/7/2016</td>
-                        <td>Check</td>
-                    <tr th:each="tempCustomer : ${customers}">
-                        <td th:text="${tempCustomer.startDate}" />
-                        <td th:text="${tempCustomer.status}" />
-                        <td th:text="${tempCustomer.type}"/>
-                    </tr>
-                    </tbody>
-                </table>
+
                 <p class="h5 inlineText">Hardware Serviced</p>
                 <table class="table">
                     <thead>
                     <th>Customer Hardware ID</th>
+                    <th>Hardware Manufacturer</th>
                     <th>Hardware Series</th>
                     <th>Hardware Model</th>
                     <th>Serial Number</th>
                     <th>MAC Address</th>
                     <th>Hardware Type</th>
-                    <th>Hardware Status</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="hwPresentation : ${hwPresentations}">
+                        <td th:text="${hwPresentation.custSiteHwId}" />
+                        <td th:text="${hwPresentation.hwManuName}" />
+                        <td th:text="${hwPresentation.hwSeriesName}"/>
+                        <td th:text="${hwPresentation.hwModel}"/>
+                        <td th:text="${hwPresentation.custSiteSerialNumber}"/>
+                        <td th:text="${hwPresentation.custSiteMacAddress}"/>
+                        <td th:text="${hwPresentation.hwType}"/>
+                    </tr>
+                    </tbody>
+                </table>
+
+              <p class="h5 inlineText">Incident(s)</p>
+                <table class="table">
+                    <thead>
+                    <th>Incident ID</th>
+                    <th>Incident Description</th>
+                    <th>Incident Date</th>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                    <tr th:each="tempCustomer : ${customers}">
-                        <td th:text="${tempCustomer.startDate}" />
-                        <td th:text="${tempCustomer.status}" />
-                        <td th:text="${tempCustomer.type}"/>
+                    <tr th:each="incident : ${incidents}">
+                        <td th:text="${incident.incidentId}" />
+                        <td th:text="${incident.incident}" />
+                        <td th:text="${incident.incidentDate}"/>
                     </tr>
                     </tbody>
-                </table>-->
+                </table>
+
+                <p class="h5 inlineText">Contact</p>
+                <table class="table">
+                    <thead>
+                    <th>Contact ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td th:text="${serviceOrderPresentation.contactId}" />
+                        <td th:text="${serviceOrderPresentation.contactFname}" />
+                        <td th:text="${serviceOrderPresentation.contactLname}" />
+                        <td th:text="${serviceOrderPresentation.contactPhone}"/>
+                        <td th:text="${serviceOrderPresentation.contactEmail}"/>
+                        <td th:text="${serviceOrderPresentation.contactType}"/>
+                        <td th:text="${serviceOrderPresentation.contactStatus}"/>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p class="h5 inlineText">Payments</p>
+                <table class="table">
+                    <thead>
+                    <th>Payment Id</th>
+                    <th>Payment Amount</th>
+                    <th>Date Paid</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="payment: ${payments}">
+                        <td th:text="${payment.pmtId}" />
+                        <td th:text="${payment.amt}" />
+                        <td th:text="${payment.datePaid}"/>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class = row align=""><div class="col-sm-10"></div><div class = "col-sm-1"><p class="h5 inlineText"><u>Total:</u> </p></div>
+                    <div class="col-sm-1"><p th:text="${serviceOrderPresentation.total}"></p></div></div>
             </div>
         </div>
 

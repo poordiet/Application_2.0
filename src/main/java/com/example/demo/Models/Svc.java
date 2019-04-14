@@ -40,7 +40,7 @@ public class Svc {
     }
 
     public void setServiceOrderLines(Set<ServiceOrderLine> serviceOrderLines) {
-        serviceOrderLines.forEach(serviceOrderLine -> serviceOrderLine.setSvc(this));
+//        serviceOrderLines.forEach(serviceOrderLine -> serviceOrderLine.setSvc(this));
         this.serviceOrderLines = serviceOrderLines;
     }
 

@@ -2,11 +2,53 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class HwSeries {
     private int hwSeriesId;
     private String hwSeriesName;
+
+    // 1:M with Hardware Model
+    private Set<HwModel> hwModels;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hwSeries")
+    public Set<HwModel> getHwModels() {
+        return hwModels;
+    }
+
+    public void setHwModels(Set<HwModel> hwModels) {
+        hwModels.forEach(hwModel -> hwModel.setHwSeries(this));
+        this.hwModels = hwModels;
+    }
+
+    // M:1 with Hw Type
+    private HwType hwType;
+
+    @ManyToOne
+    @JoinColumn(name="hw_type_id")
+    public HwType getHwType() {
+        return hwType;
+    }
+
+    public void setHwType(HwType hwType) {
+        this.hwType = hwType;
+    }
+
+
+    // M:1 with Hw Manu
+    private HwManufacturer hwManufacturer;
+
+    @ManyToOne
+    @JoinColumn(name="hw_manu_id")
+    public HwManufacturer getHwManufacturer() {
+        return hwManufacturer;
+    }
+
+    public void setHwManufacturer(HwManufacturer hwManufacturer) {
+        this.hwManufacturer = hwManufacturer;
+    }
+
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

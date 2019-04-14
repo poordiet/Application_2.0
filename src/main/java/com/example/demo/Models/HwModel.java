@@ -2,11 +2,53 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class HwModel {
     private int hwModelId;
     private String hwModel;
+
+//    // 1:M with Hw Inventory
+//    private Set<HwInventory> hwInventories;
+//
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hwModel")
+//    public Set<HwInventory> getHwInventories() {
+//        return hwInventories;
+//    }
+//
+//    public void setHwInventories(Set<HwInventory>hwInventories) {
+//        hwInventories.forEach(hwInventory -> hwInventory.setHwModel(this));
+//        this.hwInventories = hwInventories;
+//    }
+
+
+    // 1:M with Customer Site HW
+    private Set<CustomerSiteHw> customerSiteHws;
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hwModel")
+    public Set<CustomerSiteHw> getCustomerSiteHws() {
+        return customerSiteHws;
+    }
+
+    public void setCustomerSiteHws(Set<CustomerSiteHw> customerSiteHws) {
+       //customerSiteHws.forEach(customerSiteHw -> customerSiteHw.setHwModel(this));
+        this.customerSiteHws = customerSiteHws;
+    }
+
+    // M:1 with Hw Series
+    private HwSeries hwSeries;
+
+    @ManyToOne
+    @JoinColumn(name="hw_series_id")
+    public HwSeries getHwSeries() {
+        return hwSeries;
+    }
+
+    public void setHwSeries(HwSeries hwSeries) {
+        this.hwSeries = hwSeries;
+    }
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

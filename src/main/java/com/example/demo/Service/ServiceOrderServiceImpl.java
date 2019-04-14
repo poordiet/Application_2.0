@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.Models.*;
+import com.example.demo.Presentation.HwPresentation;
 import com.example.demo.Presentation.ServiceOrderLinePresentation;
 import com.example.demo.Presentation.ServiceOrderPresentation;
 import com.example.demo.Repositories.*;
@@ -61,6 +62,12 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 
     @Autowired
     SvcService svcService;
+
+    @Autowired
+    CustomerSiteHwRepository customerSiteHwRepository;
+
+    @Autowired
+    HwSvoLineRepository hwSvoLineRepository;
 
     @Override
     public void addServiceOrder(ServiceOrder serviceOrder) { serviceOrderRepository.save(serviceOrder);}
@@ -259,6 +266,82 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         return serviceOrderPresentations;
     }
 
+    // saves hardware worked on for service order -- HW Svo Lines
+    public void saveHwWorkedOn(List<HwPresentation> hwPresentations, ServiceOrderLinePresentation serviceOrderLinePresentation){
+
+
+        for(HwPresentation hwPresentation: hwPresentations) {
+
+            CustomerSiteHw customerSiteHw = new CustomerSiteHw();
+            customerSiteHw = customerSiteHwRepository.findById(hwPresentation.getCustSiteHwId());
+            HwSvoLine hwSvoLine = new HwSvoLine();
+            hwSvoLine.setCustomerSiteHw(customerSiteHw);
+            hwSvoLine.setServiceOrderLine(serviceOrderLineRepository.findById(serviceOrderLinePresentation.getSvoLineId()));
+
+            hwSvoLineRepository.save(hwSvoLine);
+
+        }
+
+    }
+
+    // Returns list of hardware at a customer site, saves it as a list of HwPresentation objects for presenting in the template
+    public List<HwPresentation> getCustSiteHwList(int svoLineId){
+        ServiceOrderLine serviceOrderLine = serviceOrderLineRepository.findById(svoLineId);
+        CustomerSite customerSite = customerSiteService.findCustomerSiteByCustSiteId(serviceOrderLine.getServiceOrder().getCustomerSite().getCustSiteId());
+        List<CustomerSiteHw> customerSiteHws = customerSiteHwRepository.findCustomerSiteHwsByCustomerSite(customerSite);
+        List<HwPresentation> hwPresentations = new ArrayList<>();
+
+        // Transfer Customer Site Hw to a HwPresentation object
+        for(CustomerSiteHw customerSiteHw: customerSiteHws)
+        {
+            HwPresentation hwPresentation = new HwPresentation();
+            hwPresentation.setCustSiteHwId(customerSiteHw.getCustSiteHwId());
+            hwPresentation.setCustSiteSerialNumber(customerSiteHw.getCustSiteSerialNumber());
+            hwPresentation.setHwManuName(customerSiteHw.getHwModel().getHwSeries().getHwManufacturer().getHwManuName());
+            hwPresentation.setHwSeriesName(customerSiteHw.getHwModel().getHwSeries().getHwSeriesName());
+            hwPresentation.setHwModel(customerSiteHw.getHwModel().getHwModel());
+            hwPresentation.setHwType(customerSiteHw.getHwModel().getHwSeries().getHwType().getHwType());
+
+            hwPresentations.add(hwPresentation);
+        }
+
+            return hwPresentations;
+
+    }
+
+    // Returns all the Hw worked on and sold for a specific service order
+    public List<HwPresentation> getHwWorkedOn(int svoId){
+
+        ServiceOrder serviceOrder = findServiceOrderBySvoId(svoId);
+        CustomerSite customerSite = customerSiteService.findCustomerSiteByCustSiteId(serviceOrder.getCustomerSite().getCustSiteId());
+        List<HwSvoLine> hwSvoLines = hwSvoLineRepository.findByServiceOrder(serviceOrder);
+        List<HwPresentation> hwPresentations = new ArrayList<>();
+
+        for(HwSvoLine hwSvoLine: hwSvoLines)
+        {
+            HwPresentation hwPresentation = new HwPresentation();
+            CustomerSiteHw customerSiteHw = new CustomerSiteHw();
+            customerSiteHw = hwSvoLine.getCustomerSiteHw();
+
+            hwPresentation.setCustSiteHwId(customerSiteHw.getCustSiteHwId());
+            hwPresentation.setHwSeriesName(customerSiteHw.getHwModel().getHwSeries().getHwSeriesName());
+            hwPresentation.setHwModel(customerSiteHw.getHwModel().getHwModel());
+            hwPresentation.setCustSiteSerialNumber(customerSiteHw.getCustSiteSerialNumber());
+            hwPresentation.setCustSiteMacAddress(customerSiteHw.getCustSiteMacAddress());
+            hwPresentation.setHwType(customerSiteHw.getHwModel().getHwSeries().getHwType().getHwType());
+            hwPresentation.setHwManuName(customerSiteHw.getHwModel().getHwSeries().getHwManufacturer().getHwManuName());
+
+            hwPresentations.add(hwPresentation);
+
+        }
+
+        return hwPresentations;
+
+
+    }
+
+
+
     // Create a Service Order Presentation for a Service Order Profile
     public ServiceOrderPresentation getServiceOrderPresentationForProfile(ServiceOrder serviceOrder){
 
@@ -269,6 +352,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         serviceOrderPresentation.setSvoId(serviceOrder.getSvoId());
 
         System.out.println(serviceOrderPresentation.getSvoId());
+
         serviceOrderPresentation.setCustSiteId(serviceOrder.getCustomerSite().getCustSiteId());
         serviceOrderPresentation.setCustSiteName(serviceOrder.getCustomerSite().getCustSiteName());
         String location = serviceOrder.getCustomerSite().getCustSiteAddress()+ " " + serviceOrder.getCustomerSite().getCustSiteCity() + ", "+
@@ -297,6 +381,22 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 
         serviceOrderPresentation.setServiceOrderLines(serviceOrder.getServiceOrderLines());
 
+       Set<ServiceOrderLine> serviceOrderLines =  serviceOrder.getServiceOrderLines();
+
+       // Add services to the presentation object based on the services assigned to the service order lines
+       List<Svc> svcs = new ArrayList<>();
+       for(ServiceOrderLine serviceOrderLine: serviceOrderLines)
+       {
+            svcs.add(serviceOrderLine.getSvc());
+       }
+        serviceOrderPresentation.setSvcs(svcs);
+
+       serviceOrderPresentation.setIncidents(serviceOrder.getIncidents());
+
+       serviceOrderPresentation.setPayments(serviceOrder.getPayments());
+
+       serviceOrderPresentation.setTotal(serviceOrder.getTotal());
+
 
         return serviceOrderPresentation;
     }
@@ -312,17 +412,12 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             {
                 ServiceOrderLinePresentation serviceOrderLinePresentation = new ServiceOrderLinePresentation();
 
-                System.out.println(serviceOrderLine.getSvoLineId());
                 serviceOrderLinePresentation.setSvcName(serviceOrderLine.getSvc().getSvcName());
                 serviceOrderLinePresentation.setSvcId(serviceOrderLine.getSvc().getSvcId());
                 serviceOrderLinePresentation.setSvoLineId(serviceOrderLine.getSvoLineId());
 
             serviceOrderLinePresentations.add(serviceOrderLinePresentation);
-                for(ServiceOrderLinePresentation serviceOrderLinePresentation1:serviceOrderLinePresentations)
-                {
-                    System.out.println(serviceOrderLinePresentation.getSvcName());
-                    System.out.println(serviceOrderLinePresentation.getSvoLineId());
-                }
+
         }
         return serviceOrderLinePresentations;
     }

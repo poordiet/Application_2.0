@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Models.*;
+import com.example.demo.Presentation.HwPresentation;
 import com.example.demo.Presentation.ServiceOrderLinePresentation;
 import com.example.demo.Presentation.ServiceOrderPresentation;
 import com.example.demo.Repositories.*;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 import java.util.Set;
 
-@SessionAttributes({"serviceOrderPresentation","serviceOrderPresentationLine"})
+@SessionAttributes({"serviceOrderPresentation","serviceOrderLinePresentation"})
 @RequestMapping("/service_orders")
 @Controller
 public class ServiceOrderController {
@@ -23,6 +24,12 @@ public class ServiceOrderController {
     @ModelAttribute("serviceOrderPresentation")
     public ServiceOrderPresentation getServiceOrderPresentation(){
         return new ServiceOrderPresentation();
+    }
+
+    // This makes the model attribute of serviceOrderPresentation persist throughout this whole controller
+    @ModelAttribute("serviceOrderLinePresentation")
+    public ServiceOrderLinePresentation getServiceOrderLinePresentation(){
+        return new ServiceOrderLinePresentation();
     }
 
     @Autowired
@@ -47,6 +54,7 @@ public class ServiceOrderController {
     ContactTypeRepository contactTypeRepository;
     @Autowired
     ServiceOrderLineRepository serviceOrderLineRepository;
+
 
     // Search Page Handling
     @GetMapping("/search")
@@ -77,20 +85,129 @@ public class ServiceOrderController {
     @GetMapping("/serviceOrderProfile")
      public String showServiceOrderProfile(@RequestParam("svoId") int svoId,Model theModel)
     {
-        System.out.println(svoId);
         ServiceOrderPresentation serviceOrderPresentation = serviceOrderService.getServiceOrderPresentationForProfile(serviceOrderService.findServiceOrderBySvoId(svoId));
 
-        System.out.println(serviceOrderPresentation.getSvoId());
         theModel.addAttribute("serviceOrderPresentation", serviceOrderPresentation);
 
-        List<Contact> contacts = serviceOrderPresentation.getContacts();
-        theModel.addAttribute("contacts",contacts);
+        List<Svc> svcs = serviceOrderPresentation.getSvcs();
+        theModel.addAttribute("svcs", svcs);
+
+        Set<Payment> payments = serviceOrderPresentation.getPayments();
+        theModel.addAttribute("payments", payments);
+
+        Set<Incident> incidents = serviceOrderPresentation.getIncidents();
+        theModel.addAttribute("incidents", incidents);
 
         ServiceOrder serviceOrder = serviceOrderService.findServiceOrderBySvoId(svoId);
         theModel.addAttribute("serviceOrder", serviceOrder);
 
+        List<HwPresentation> hwPresentations = serviceOrderService.getHwWorkedOn(svoId);
+        theModel.addAttribute("hwPresentations", hwPresentations);
+
         return("serviceOrderProfile");
     }
+
+    @GetMapping("/showServiceSummary")
+    public String showServiceSummary(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation,Model theModel)
+    {
+//        List<HwPresentation> hwPresentations = serviceOrderService.getCustSiteHwList(svoId);
+//        theModel.addAttribute("hwPresentations", hwPresentations);
+
+        int svoId = serviceOrderPresentation.getSvoId();
+        System.out.println(svoId);
+        List<ServiceOrderLinePresentation> serviceOrderLinePresentations =
+                serviceOrderService.getServiceOrderLinePresentation(serviceOrderService.findServiceOrderBySvoId(svoId).getServiceOrderLines());
+
+        theModel.addAttribute("serviceOrderLinePresentations",serviceOrderLinePresentations);
+
+        ServiceOrder serviceOrder = serviceOrderService.findServiceOrderBySvoId(svoId);
+        theModel.addAttribute("serviceOrder", serviceOrder);
+
+        return("serviceOrderSummary");
+    }
+
+    @GetMapping("/showAddHwWorkedOn")
+    public String showAddHwWorkedOn(@ModelAttribute("serviceOrderLinePresentation") ServiceOrderLinePresentation serviceOrderLinePresentation, Model theModel)
+    {
+
+        List<HwPresentation> hwPresentations = serviceOrderService.getCustSiteHwList(serviceOrderLinePresentation.getSvoLineId());
+        theModel.addAttribute("hwPresentations", hwPresentations);
+
+        serviceOrderLinePresentation.setHwPresentations(hwPresentations);
+
+        theModel.addAttribute("serviceOrderLinePresentation", serviceOrderLinePresentation);
+
+        return("serviceSummaryAddHwWorkedOn");
+    }
+
+    @PostMapping("/addHwWorkedOn")
+    public String addHwWorkedOn(@ModelAttribute("serviceOrderLinePresentation") ServiceOrderLinePresentation serviceOrderLinePresentation, Model theModel)
+    {
+          List<HwPresentation> hwPresentations = serviceOrderLinePresentation.getHwPresentations();
+          serviceOrderService.saveHwWorkedOn(hwPresentations, serviceOrderLinePresentation);
+
+        return "redirect:/service_orders/showServiceSummary";
+    }
+
+    @GetMapping("/showAddServiceSummary")
+    public String showAddServiceSummary(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation, Model theModel)
+    {
+        theModel.addAttribute(serviceOrderPresentation);
+        System.out.println(serviceOrderPresentation.getSvoId());
+        System.out.println(serviceOrderPresentation.getWorkSummary());
+        return("serviceSummaryAddSummary");
+    }
+    @PostMapping("/addServiceSummary")
+    public String addServiceSummary(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation)
+    {
+        ServiceOrder serviceOrder = serviceOrderService.findServiceOrderBySvoId(serviceOrderPresentation.getSvoId());
+        serviceOrder.setWorkSummary(serviceOrderPresentation.getWorkSummary());
+        // saves the work summary details
+       serviceOrderService.saveServiceOrder(serviceOrder);
+       // save hw_svo_line
+
+        return "redirect:/service_orders/search";
+    }
+
+//    @GetMapping("/showSellHardware")
+//    public String showSellHardware(@RequestParam("svoId") int svoId,Model theModel)
+//    {
+//        ServiceOrderPresentation serviceOrderPresentation = serviceOrderService.getServiceOrderPresentationForProfile(serviceOrderService.findServiceOrderBySvoId(svoId));
+//
+//        theModel.addAttribute("serviceOrderPresentation", serviceOrderPresentation);
+//
+//        Set<HwInventory> hwInventories =
+//
+//                Set<Incident> incidents = serviceOrderPresentation.getIncidents();
+//        theModel.addAttribute("incidents", incidents);
+//
+//        ServiceOrder serviceOrder = serviceOrderService.findServiceOrderBySvoId(svoId);
+//        theModel.addAttribute("serviceOrder", serviceOrder);
+//
+//        return("serviceOrderProfile");
+//    }
+
+//    @PostMapping("/sellHardware")
+//    public String showServiceOrderProfile(@RequestParam("svoId") int svoId,Model theModel)
+//    {
+//        ServiceOrderPresentation serviceOrderPresentation = serviceOrderService.getServiceOrderPresentationForProfile(serviceOrderService.findServiceOrderBySvoId(svoId));
+//
+//        theModel.addAttribute("serviceOrderPresentation", serviceOrderPresentation);
+//
+//        List<Svc> svcs = serviceOrderPresentation.getSvcs();
+//        theModel.addAttribute("svcs", svcs);
+//
+//        Set<Payment> payments = serviceOrderPresentation.getPayments();
+//        theModel.addAttribute("payments", payments);
+//
+//        Set<Incident> incidents = serviceOrderPresentation.getIncidents();
+//        theModel.addAttribute("incidents", incidents);
+//
+//        ServiceOrder serviceOrder = serviceOrderService.findServiceOrderBySvoId(svoId);
+//        theModel.addAttribute("serviceOrder", serviceOrder);
+//
+//        return("serviceOrderProfile");
+//    }
 
     // select current or new customer to create service order for
     @GetMapping("/serviceOrderSelection")
@@ -184,11 +301,6 @@ public class ServiceOrderController {
     {
 
         theModel.addAttribute("serviceOrderPresentation",serviceOrderPresentation);
-
-        for(ServiceOrderLine serviceOrderLine:serviceOrderPresentation.getServiceOrderLines())
-        {
-            System.out.println(serviceOrderLine.getSvoLineId());
-        }
 
         List<ServiceOrderLinePresentation> serviceOrderLinePresentations = serviceOrderService.getServiceOrderLinePresentation(serviceOrderPresentation.getServiceOrderLines());
         theModel.addAttribute("serviceOrderLinePresentations",serviceOrderLinePresentations);
