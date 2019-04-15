@@ -22,4 +22,6 @@ public interface ServiceOrderService {
     public ServiceOrderStatus findServiceOrderStatusBySvoStatusId(int svoStatusId);
 
     public void saveServiceOrderFromForm(ServiceOrderPresentation serviceOrderPresentation);
+
+    public List<ServiceOrder> findAllByOrOrderBySvoIdDesc();
 }

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -54,6 +55,8 @@ public class ServiceOrderController {
     ContactTypeRepository contactTypeRepository;
     @Autowired
     ServiceOrderLineRepository serviceOrderLineRepository;
+    @Autowired
+    ServiceOrderStatusRepository serviceOrderStatusRepository;
 
 
     // Search Page Handling
@@ -61,7 +64,7 @@ public class ServiceOrderController {
     public String searchServiceOrder(Model theModel)
     {
 
-        List<ServiceOrderPresentation> serviceOrderPresentations = serviceOrderService.getServiceOrderPresentation(serviceOrderService.findAll());
+        List<ServiceOrderPresentation> serviceOrderPresentations = serviceOrderService.getServiceOrderPresentation(serviceOrderService.findAllByOrOrderBySvoIdDesc());
 
         theModel.addAttribute("serviceOrderPresentations",serviceOrderPresentations);
 
@@ -72,7 +75,7 @@ public class ServiceOrderController {
     public String deleteServiceOrder(@RequestParam("svoId") int svoId)
     {
 
-        ServiceOrderStatus serviceOrderStatus = serviceOrderService.findServiceOrderStatusBySvoStatusId(3);
+        ServiceOrderStatus serviceOrderStatus = serviceOrderService.findServiceOrderStatusBySvoStatusId(5);
 
        ServiceOrder serviceOrder = serviceOrderService.findServiceOrderBySvoId(svoId);
        serviceOrder.setServiceOrderStatus(serviceOrderStatus);
@@ -162,6 +165,10 @@ public class ServiceOrderController {
     {
         ServiceOrder serviceOrder = serviceOrderService.findServiceOrderBySvoId(serviceOrderPresentation.getSvoId());
         serviceOrder.setWorkSummary(serviceOrderPresentation.getWorkSummary());
+        serviceOrder.setTotal(serviceOrderPresentation.getTotal());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        serviceOrder.setDateFinished(timestamp);
+        serviceOrder.setServiceOrderStatus(serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(1));
         // saves the work summary details
        serviceOrderService.saveServiceOrder(serviceOrder);
        // save hw_svo_line

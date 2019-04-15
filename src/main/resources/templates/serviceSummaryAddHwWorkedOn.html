@@ -180,7 +180,7 @@
 								<div class="form-group">
 									<label>Select Hardware Worked On:</label>
 									<div class ="form-group">
-										<select th:field="*{hwPresentations}" class ="form-control" multiple size="17" id="selection">
+										<select th:field="${serviceOrderLinePresentation.hwPresentations}" class ="form-control" multiple size="17" id="selection">
 											<option th:each="hwPresentation:${hwPresentations}" th:value="${hwPresentation.custSiteHwId}"
 													th:text = "${hwPresentation.hwManuName} + ' ' + ${hwPresentation.hwSeriesName} + ' '
 											+ ${hwPresentation.hwModel} + ' '

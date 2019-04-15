@@ -164,6 +164,7 @@
     <div class="container" id="form">
         <div class="row justify-content-center">
             <div class="container-fluid" id="form">
+                <div class="mb-4"><a th:href="@{/service_orders/search}"><button class="btn btn-info" >Back to Search</button></a></div>
                 <div class="row justify-content-end">
                         <a th:href="@{/service_orders/showServiceSummary(svoId=${serviceOrderPresentation.svoId})}"><button class="btn btn-primary">Start Service</button></a>
                         <button class="btn btn-success">Sell Hardware</button>
@@ -172,15 +173,17 @@
             <div><h1>Service Order Id:</h1><h1 class="mt-4 text-center" th:field="${serviceOrderPresentation.svoId}" th:text="${serviceOrderPresentation.svoId}"></h1></div>
             <div class="col-lg-12">
                 <br>
-                <br>
                 <div>
                     <p id="customer_info" class="h3 inlineText" th:text="${serviceOrderPresentation.custSiteName}"></p>
                     <p id="customer_info" class="h3 inlineText" th:text="${serviceOrderPresentation.custSiteNumber}"></p>
                     <p id=customer_info class="h5 inlineText" th:text=${serviceOrderPresentation.custSiteLocation}></p>
+                    <p id=customer_info class="h5 inlineText" th:text=${serviceOrderPresentation.countryName}></p>
                     <!--<p id=customer_info class="h5 inlineText" th:text=${customer.country ??? country.countryName ???}>United States of America</p>-->
                     <p id=customer_info class="h5 inlineText" th:text=${serviceOrderPresentation.custSitePhone}></p>
                     <p id=customer_info class="h5 inlineText" th:text=${serviceOrderPresentation.custSiteEmail}></p>
                 </div>
+                <br>
+                <br>
                 <table class="table">
                     <thead>
                     <th>Service Order Requested</th>
@@ -197,7 +200,7 @@
                     </tr>
                     </tbody>
                 </table>
-
+                <br>
                 <p class="h5 inlineText">Service Order Detail</p>
                 <table class="table">
                     <thead>
@@ -214,6 +217,8 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <br>
                 <p class="h5 inlineText">Services</p>
                 <table class="table">
                     <thead>
@@ -226,9 +231,11 @@
                     </tbody>
                 </table>
 
+                <br>
                 <p class="h5 inlineText">Hardware Serviced</p>
                 <table class="table">
                     <thead>
+                    <th>Service</th>
                     <th>Customer Hardware ID</th>
                     <th>Hardware Manufacturer</th>
                     <th>Hardware Series</th>
@@ -239,6 +246,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="hwPresentation : ${hwPresentations}">
+                        <td th:text="${hwPresentation.svcName}" />
                         <td th:text="${hwPresentation.custSiteHwId}" />
                         <td th:text="${hwPresentation.hwManuName}" />
                         <td th:text="${hwPresentation.hwSeriesName}"/>
@@ -250,6 +258,7 @@
                     </tbody>
                 </table>
 
+                <br>
               <p class="h5 inlineText">Incident(s)</p>
                 <table class="table">
                     <thead>
@@ -267,12 +276,12 @@
                     </tbody>
                 </table>
 
+                <br>
                 <p class="h5 inlineText">Contact</p>
                 <table class="table">
                     <thead>
                     <th>Contact ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Contact Name</th>
                     <th>Phone Number</th>
                     <th>Email</th>
                     <th>Type</th>
@@ -282,8 +291,7 @@
 
                     <tr>
                         <td th:text="${serviceOrderPresentation.contactId}" />
-                        <td th:text="${serviceOrderPresentation.contactFname}" />
-                        <td th:text="${serviceOrderPresentation.contactLname}" />
+                        <td th:text="${serviceOrderPresentation.contactName}" />
                         <td th:text="${serviceOrderPresentation.contactPhone}"/>
                         <td th:text="${serviceOrderPresentation.contactEmail}"/>
                         <td th:text="${serviceOrderPresentation.contactType}"/>
@@ -292,6 +300,7 @@
                     </tbody>
                 </table>
 
+                <br>
                 <p class="h5 inlineText">Payments</p>
                 <table class="table">
                     <thead>

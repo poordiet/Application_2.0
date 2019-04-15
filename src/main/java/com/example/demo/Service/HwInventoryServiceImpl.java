@@ -31,7 +31,6 @@ public class HwInventoryServiceImpl implements HwInventoryService {
 
         for(HwInventory hwInventory: hwInventories)
         {
-            System.out.println(hwInventory.getHwModel().getHwSeries().getHwManufacturer().getHwManuName());
             HwPresentation hwPresentation = new HwPresentation();
             hwPresentation.setHwInvId(hwInventory.getHwInvId());
             hwPresentation.setHwManuName(hwInventory.getHwModel().getHwSeries().getHwManufacturer().getHwManuName());

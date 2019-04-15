@@ -333,5 +333,27 @@ public class HwPresentation {
         this.hwInventoryStatus = hwInventoryStatus;
     }
 
+    // SVC
+
+    private int svcId;
+    private String svcName;
+
+    public int getSvcId() {
+        return svcId;
+    }
+
+    public void setSvcId(int svcId) {
+        this.svcId = svcId;
+    }
+
+
+    public String getSvcName() {
+        return svcName;
+    }
+
+    public void setSvcName(String svcName) {
+        this.svcName = svcName;
+    }
+
 
 }

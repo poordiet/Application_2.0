@@ -74,7 +74,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 
     @Override
     public List<ServiceOrder> findAll() {
-        return serviceOrderRepository.findAllByOrderByDateScheduledDesc();
+        return serviceOrderRepository.findAllByOrOrderBySvoIdDesc();
     }
 
     @Override
@@ -93,6 +93,11 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         serviceOrderRepository.save(serviceOrder);
     }
 
+    @Override
+    public List<ServiceOrder> findAllByOrOrderBySvoIdDesc()
+    {
+        return serviceOrderRepository.findAllByOrOrderBySvoIdDesc();
+    }
 
     @Override
     public void saveServiceOrderFromForm(ServiceOrderPresentation serviceOrderPresentation)
@@ -277,7 +282,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             HwSvoLine hwSvoLine = new HwSvoLine();
             hwSvoLine.setCustomerSiteHw(customerSiteHw);
             hwSvoLine.setServiceOrderLine(serviceOrderLineRepository.findById(serviceOrderLinePresentation.getSvoLineId()));
-
+            System.out.println(hwSvoLine.getCustomerSiteHw().getCustSiteHwId());
             hwSvoLineRepository.save(hwSvoLine);
 
         }
@@ -301,6 +306,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             hwPresentation.setHwSeriesName(customerSiteHw.getHwModel().getHwSeries().getHwSeriesName());
             hwPresentation.setHwModel(customerSiteHw.getHwModel().getHwModel());
             hwPresentation.setHwType(customerSiteHw.getHwModel().getHwSeries().getHwType().getHwType());
+            hwPresentation.setSvcName(serviceOrderLine.getSvc().getSvcName());
 
             hwPresentations.add(hwPresentation);
         }
@@ -312,13 +318,20 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
     // Returns all the Hw worked on and sold for a specific service order
     public List<HwPresentation> getHwWorkedOn(int svoId){
 
+        System.out.println(svoId);
         ServiceOrder serviceOrder = findServiceOrderBySvoId(svoId);
         CustomerSite customerSite = customerSiteService.findCustomerSiteByCustSiteId(serviceOrder.getCustomerSite().getCustSiteId());
-        List<HwSvoLine> hwSvoLines = hwSvoLineRepository.findByServiceOrder(serviceOrder);
+        List<HwSvoLine> hwSvoLines = hwSvoLineRepository.findByServiceOrderId(svoId);
         List<HwPresentation> hwPresentations = new ArrayList<>();
+
 
         for(HwSvoLine hwSvoLine: hwSvoLines)
         {
+
+            System.out.println(hwSvoLine.getCustomerSiteHw().getCustSiteHwId());
+            System.out.println(hwSvoLine.getServiceOrderLine().getSvoLineId());
+            System.out.println(hwSvoLine.getServiceOrderLine().getServiceOrder().getSvoId());
+
             HwPresentation hwPresentation = new HwPresentation();
             CustomerSiteHw customerSiteHw = new CustomerSiteHw();
             customerSiteHw = hwSvoLine.getCustomerSiteHw();
@@ -330,6 +343,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             hwPresentation.setCustSiteMacAddress(customerSiteHw.getCustSiteMacAddress());
             hwPresentation.setHwType(customerSiteHw.getHwModel().getHwSeries().getHwType().getHwType());
             hwPresentation.setHwManuName(customerSiteHw.getHwModel().getHwSeries().getHwManufacturer().getHwManuName());
+            hwPresentation.setSvcName(hwSvoLine.getServiceOrderLine().getSvc().getSvcName());
 
             hwPresentations.add(hwPresentation);
 
@@ -356,8 +370,9 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         serviceOrderPresentation.setCustSiteId(serviceOrder.getCustomerSite().getCustSiteId());
         serviceOrderPresentation.setCustSiteName(serviceOrder.getCustomerSite().getCustSiteName());
         String location = serviceOrder.getCustomerSite().getCustSiteAddress()+ " " + serviceOrder.getCustomerSite().getCustSiteCity() + ", "+
-                serviceOrder.getCustomerSite().getStateProvince().getStateName() + ", " + serviceOrder.getCustomerSite().getCustSiteZip()
-                +", " + serviceOrder.getCustomerSite().getCountry().getCountryName();
+                serviceOrder.getCustomerSite().getStateProvince().getStateName() + ", " + serviceOrder.getCustomerSite().getCustSiteZip();
+        serviceOrderPresentation.setCountryName(serviceOrder.getCustomerSite().getCountry().getCountryName());
+
 
         serviceOrderPresentation.setCustSiteLocation(location);
         serviceOrderPresentation.setCustSitePhone(serviceOrder.getCustomerSite().getCustSitePhone());
@@ -377,6 +392,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
 
         serviceOrderPresentation.setWorkRequest(serviceOrder.getWorkRequest());
         serviceOrderPresentation.setWorkSummary(serviceOrder.getWorkSummary());
+        serviceOrderPresentation.setSvoStatus(serviceOrder.getServiceOrderStatus().getSvoStatus());
         serviceOrderPresentation.setSvoStatus(serviceOrder.getServiceOrderStatus().getSvoStatus());
 
         serviceOrderPresentation.setServiceOrderLines(serviceOrder.getServiceOrderLines());

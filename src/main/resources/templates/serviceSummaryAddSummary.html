@@ -169,19 +169,23 @@
 				<div class="col-xl-auto">
 					<form th:action="@{/service_orders/addServiceSummary}" method = "POST" th:object="${serviceOrderPresentation}">
 
-						<input th:field="*{svoId}" th:value="*{svoId}" type="text" class="form-control" readonly>
+						<input th:field="*{svoId}" th:value="*{svoId}" type="text" class="form-control" readonly hidden>
 
-						<div class="col-sm-12" >
+						<div>
 							<div class="row">
 
 								<div class ="form-group">
 								<label>Service Summary</label>
-								<textarea style="min-width: 100%" th:field ="${serviceOrderPresentation.workSummary}" th:text="${serviceOrderPresentation.workSummary}" class ="form-control" placeholder="Input details of the work done" id="cust_value10"></textarea>
+								<textarea style="width:40em" th:field ="${serviceOrderPresentation.workSummary}" th:text="${serviceOrderPresentation.workSummary}" class ="form-control " placeholder="Input details of the work done" id="cust_value10" ></textarea>
 								</div>
 
 							</div>
 							<!-- CLOSE ROW-->
-
+							<div class = "row col-sm-4">
+								<label>Total</label>
+							<input th:field="${serviceOrderPresentation.total}" th:value="${serviceOrderPresentation.total}"  type="text" class ="form-control">
+							</div>
+							<br>
 							<div class="row">
 								<a th:href="@{/service_orders/addAnotherService}"><button type="submit "class="btn btn-outline-primary" id="return_button"> Submit </button></a>
 							</div>
