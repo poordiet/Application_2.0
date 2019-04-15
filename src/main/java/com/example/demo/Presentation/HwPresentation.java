@@ -286,4 +286,52 @@ public class HwPresentation {
         this.custSiteMacAddress = custSiteMacAddress;
     }
 
+    // HW Inventory Status
+    private int hwInvStatusId;
+    private String hwInvStatus;
+    private String hwInvStatusDesc;
+
+
+    @Id
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @Column(name = "hw_inv_status_id", nullable = false)
+    public int getHwInvStatusId() {
+        return hwInvStatusId;
+    }
+
+    public void setHwInvStatusId(int hwInvStatusId) {
+        this.hwInvStatusId = hwInvStatusId;
+    }
+
+    @Basic
+    @Column(name = "hw_inv_status", nullable = false, length = 50)
+    public String getHwInvStatus() {
+        return hwInvStatus;
+    }
+
+    public void setHwInvStatus(String hwInvStatus) {
+        this.hwInvStatus = hwInvStatus;
+    }
+
+    @Basic
+    @Column(name = "hw_inv_status_desc", nullable = false, length = 250)
+    public String getHwInvStatusDesc() {
+        return hwInvStatusDesc;
+    }
+
+    public void setHwInvStatusDesc(String hwInvStatusDesc) {
+        this.hwInvStatusDesc = hwInvStatusDesc;
+    }
+
+    private HwInventoryStatus hwInventoryStatus;
+
+    public HwInventoryStatus getHwInventoryStatus() {
+        return hwInventoryStatus;
+    }
+
+    public void setHwInventoryStatus(HwInventoryStatus hwInventoryStatus) {
+        this.hwInventoryStatus = hwInventoryStatus;
+    }
+
+
 }

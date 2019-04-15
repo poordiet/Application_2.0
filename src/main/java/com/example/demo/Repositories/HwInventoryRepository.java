@@ -1,5 +1,6 @@
 package com.example.demo.Repositories;
 
+import com.example.demo.Models.CustomerSite;
 import com.example.demo.Models.CustomerSiteHw;
 import com.example.demo.Models.HwInventory;
 import org.springframework.data.jpa.repository.Query;
@@ -19,8 +20,16 @@ public interface HwInventoryRepository extends CrudRepository<HwInventory,Intege
             "WHERE HW_INVENTORY.hw_inv_status_id = 1\n" +
             "ORDER BY hw_manu_name, hw_series_name, hw_model\n" +
             ";" , nativeQuery = true)
-    List<HwInventory> findAllHWInventoryInStock();
+    List<HwInventory> findAllHwInventoryInStock();
+
+    @Query(value = "select * from HW_INVENTORY  WHERE HW_INVENTORY.hw_inv_status_id = 1" , nativeQuery = true)
+    List<HwInventory> findAllHwInventoryOrderByHwModel_HwSeries_HwManufacturer_HwManuName();
+
+
+    List<HwInventory> findAllByOrderByHwInventoryStatusAscHwInvId();
+
 
     HwInventory findByHwInvId(int id);
+
 
 }

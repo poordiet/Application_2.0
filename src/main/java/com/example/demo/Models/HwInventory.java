@@ -20,6 +20,19 @@ public class HwInventory {
     @Autowired
     HwInventoryRepository hwInventoryRepository;
 
+    // M:1 with Hw Inventory
+    private HwInventoryStatus hwInventoryStatus;
+
+    @ManyToOne
+    @JoinColumn(name="hw_inv_status_id")
+    public HwInventoryStatus getHwInventoryStatus() {
+        return hwInventoryStatus;
+    }
+
+    public void setHwInventoryStatus(HwInventoryStatus hwInventoryStatus) {
+        this.hwInventoryStatus = hwInventoryStatus;
+    }
+
     //To String
     public String toString(int hwInvId){
         String manu;
