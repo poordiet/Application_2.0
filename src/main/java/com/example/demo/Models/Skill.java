@@ -2,11 +2,24 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Skill {
     private int skillId;
     private String skill;
+
+    // 1:M with Required Skill
+    private Set<RequiredSkill> requiredSkills;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "skill")
+    public Set<RequiredSkill> getRequiredSkills() {
+        return requiredSkills;
+    }
+
+    public void setRequiredSkills(Set<RequiredSkill> requiredSkills) {
+        this.requiredSkills = requiredSkills;
+    }
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

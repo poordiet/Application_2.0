@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Reports</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="d-flex toggled" id="wrapper">
+
+    <!-- Sidebar -->
+
+    <div class="bg-primary border-right " id="sidebar-wrapper" style="background-color: #cacbce !important;">
+        <div class="sidebar-heading"></div>
+        <div class="sidebar-heading"></div>
+
+        <!-- Nav Bar Items -->
+        <div id="nav" class="list-group pre-scrollable list-group-flush">
+
+            <!-- Home -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" >Home</a>
+
+            <!-- Service Order -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#so">
+                Service Order <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="so" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Create</a>
+                <a href="#" class="list-group-item ">Incident</a>
+            </div>
+
+
+            <!-- Customer -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#customer">
+                Customer <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="customer" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+
+            <!-- Contractor -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#contractor">
+                Contractor <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="contractor" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+
+            <!-- Hardware -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#hardware">
+                Hardware <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="hardware" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+
+            <!-- Knowledge base -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
+                Knowledge Base <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="kb" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+            <!-- Reports -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+
+            <!-- DB Management -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
+
+            <!-- Logout -->
+            <a class="list-group-item nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+
+
+
+        </div>
+        <!-- /Nav Bar Items -->
+
+
+    </div>
+    <!-- /SideBar -->
+
+</div>
+
+
+
+<!-- /#sidebar-wrapper -->
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+
+    <!-- Not Really Sure TBH -->
+    <div class="col-sm-12">
+
+        <!-- Grey bar at the top (the sticky one) -->
+        <nav class="navbar fixed-top navbar-expand-lg bg-primary" >
+
+            <div class="col-sm-1" id="toplogo">
+                <img class="img-fluid" id="logo" src="logo.emf"/>
+            </div>
+
+            <!-- Valerie Bar -->
+            <div class="col-sm-12" id="valeriebar1"></div>
+
+            <!-- Hamburger Button -->
+            <button class="btn btn-primary" id="menu-toggle"><span class="dark-blue-text"><i
+                    class="fa fa-bars fa-1x"></i></span></button></button>
+
+            <!-- Top Right Logout -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /Grey bar at the top (the sticky one) -->
+
+
+        <!-- Valerie Bar -->
+        <div class="col-sm-12" id="valeriebar1"></div>
+
+    </div>
+    <!-- /Not Really Sure TBH -->
+    <!-- The Form Title -->
+    <div class="container-fluid" id="form">
+        <h1 class="mt-4 text-center">Reports</h1>
+    </div>
+
+    <!-- The Form -->
+    <div class="container" id="form">
+        <div class="row justify-content-center">
+            <div class="col-sm-12">
+                <form id="new customer" onsubmit="return false;">
+                    <div class="row justify-content-center">
+                        <div class="col-md-auto">
+                            <div class ="form-group">
+                                <p class="h5 inlineText">Contractor Reports</p>
+                                <table class="table">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Select_Contractor.html?_ijt=60065evmr8c0psvoji25bq3f5b" class="btn btn-outline-dark btn-lg">Contractor Profile</a></td>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Contractors_Hired_Report.html?_ijt=mvfimn3ee2h0l3ttq7a30ui27t" class="btn btn-outline-dark btn-lg">Contractors Hired</a></td>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Active_Contractor_Per_State_Report.html?_ijt=erp3hhqoi67e4u2lhs4rdlfr6o" class="btn btn-outline-dark btn-lg">Active Contractors per State</a></td>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Contractor_Incident_Report.html?_ijt=nfpufn8h9oa44cfu32b6hv1t86" class="btn btn-outline-dark btn-lg">Contractor Incident</a> </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <p class="h5 inlineText">Customer Site Reports</p>
+                                <table class="table">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Customers_Gained_Report.html?_ijt=5pk71tiel310b7lnelfrbc61pi" class="btn btn-outline-dark btn-lg">Customers Gained</a></td>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Active_Customer_Site_Report.html?_ijt=53hidvjg5l6halgti5trhhinef" class="btn btn-outline-dark btn-lg">Operating Customer Site</a></td>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Active_Contractor_Per_State_Report.html?_ijt=erp3hhqoi67e4u2lhs4rdlfr6o" class="btn btn-outline-dark btn-lg">Active Contractor per State</a></td>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Hardware_Sale_Report.html?_ijt=aiugtmko9v5vta701hitda743a" class="btn btn-outline-dark btn-lg">Hardware Sale</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <p class="h5 inlineText">Services & Service Order Reports</p>
+                                <table class="table">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Select_Service_Order.html?_ijt=60065evmr8c0psvoji25bq3f5b" class="btn btn-outline-dark btn-lg">Service Order Profile</a></td>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Services_Provided_Report.html?_ijt=ghhsro9mt092c4g876l72rvfdf" class="btn btn-outline-dark btn-lg">Services Provided</a></td>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Monthly_Service_Order_Report.html?_ijt=2ftaa4nk2pqbkr3bhceje256lu" class="btn btn-outline-dark btn-lg">Monthly Service Order</a></td>
+                                        <td><a href="http://localhost:63342/Front-End%20Template/Service_Order_Incident_Report.html?_ijt=4s98uaaugdmckomoho9qiiqbk6" class="btn btn-outline-dark btn-lg">Service Order Incident</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- CLOSE ROW-->
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /The Form-->
+
+    <hr>
+
+
+</div>
+<!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $(document).ready(function(){
+        $("a").click(function(){
+            $(".fas fa-plus-circle").toggleClass("fas fa-plus-circle fas fa-minus-circle")
+        })});
+</script>
+
+<!-- Attempting to get the icons to change -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+<!-- Allows for multiple selections without having to hold ctrl-->
+<script>
+    $('option').mousedown(function(e) {
+        e.preventDefault();
+        $(this).prop('selected', !$(this).prop('selected'));
+        return false;
+    });
+</script>
+
+</body>
+
+</html>

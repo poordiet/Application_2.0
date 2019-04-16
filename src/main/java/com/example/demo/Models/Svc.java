@@ -29,6 +29,31 @@ public class Svc {
     public void addServiceOrder(ServiceOrder serviceOrder){serviceOrders.add(serviceOrder);}
 */
 
+    // M:1 with svc Type
+    private ServiceType serviceType;
+
+    @ManyToOne
+    @JoinColumn(name="svc_type_id")
+    public ServiceType getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    // M:1 with svc Status
+    private ServiceStatus serviceStatus;
+
+    @ManyToOne
+    @JoinColumn(name="svc_status_id")
+    public ServiceStatus getServiceStatus() {
+        return serviceStatus;
+    }
+
+    public void setServiceStatus(ServiceStatus serviceStatus) {
+        this.serviceStatus = serviceStatus;
+    }
 
     // One to Many with Service order Line
 
@@ -42,6 +67,19 @@ public class Svc {
     public void setServiceOrderLines(Set<ServiceOrderLine> serviceOrderLines) {
 //        serviceOrderLines.forEach(serviceOrderLine -> serviceOrderLine.setSvc(this));
         this.serviceOrderLines = serviceOrderLines;
+    }
+
+
+    // 1:M with Required Skill
+    private Set<RequiredSkill> requiredSkills;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "svc")
+    public Set<RequiredSkill> getRequiredSkills() {
+        return requiredSkills;
+    }
+
+    public void setRequiredSkills(Set<RequiredSkill> requiredSkills) {
+        this.requiredSkills = requiredSkills;
     }
 
 

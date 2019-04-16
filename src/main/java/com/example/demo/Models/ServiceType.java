@@ -2,12 +2,26 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class ServiceType {
     private int svcTypeId;
     private String svcType;
     private String svcTypeDesc;
+
+    // One to Many with Svc
+
+    private Set<Svc> svcs;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "svcType")
+    public Set<Svc> svcs() {
+        return svcs;
+    }
+
+    public void setSvcs(Set<Svc> svcs) {
+        this.svcs= svcs;
+    }
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

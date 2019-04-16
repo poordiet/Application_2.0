@@ -45,7 +45,7 @@ public class ServiceOrderPresentation {
 
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "svo_id", nullable = false)
     public int getSvoId() {
         return svoId;
@@ -135,7 +135,7 @@ public class ServiceOrderPresentation {
     private int svoLineId;
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "svo_line_id", nullable = false)
     public int getSvoLineId() {
         return svoLineId;
@@ -144,7 +144,6 @@ public class ServiceOrderPresentation {
     public void setSvoLineId(int svoLineId) {
         this.svoLineId = svoLineId;
     }
-
 
 
     // Service
@@ -162,7 +161,7 @@ public class ServiceOrderPresentation {
         this.svcs = svcs;
     }
 
-    public void addSvc(Svc svc){
+    public void addSvc(Svc svc) {
         svcs.add(svc);
     }
 
@@ -228,7 +227,7 @@ public class ServiceOrderPresentation {
     }
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cust_site_id", nullable = false)
     public int getCustSiteId() {
         return custSiteId;
@@ -348,17 +347,17 @@ public class ServiceOrderPresentation {
         this.contacts = contacts;
     }
 
-    public void setContactName(String contactName){
+    public void setContactName(String contactName) {
         this.contactName = contactName;
     }
 
-    public String getContactName(){
+    public String getContactName() {
         return contactName;
     }
 
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_id", nullable = false)
     public int getContactId() {
         return contactId;
@@ -415,7 +414,7 @@ public class ServiceOrderPresentation {
     private String svoStatusDesc;
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "svo_status_id", nullable = false)
     public int getSvoStatusId() {
         return svoStatusId;
@@ -451,7 +450,7 @@ public class ServiceOrderPresentation {
     private Date asgmtDate;
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "asgmt_id", nullable = false)
     public int getAsgmtId() {
         return asgmtId;
@@ -519,7 +518,7 @@ public class ServiceOrderPresentation {
     }
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contractor_id", nullable = false)
     public int getContractorId() {
         return contractorId;
@@ -664,7 +663,7 @@ public class ServiceOrderPresentation {
     }
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "country_id", nullable = false)
     public int getCountryId() {
         return countryId;
@@ -690,7 +689,7 @@ public class ServiceOrderPresentation {
     private String stateName;
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "state_id", nullable = false)
     public int getStateId() {
         return stateId;
@@ -716,7 +715,7 @@ public class ServiceOrderPresentation {
     private String contactTypeDesc;
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_type_id", nullable = false)
     public int getContactTypeId() {
         return contactTypeId;
@@ -753,7 +752,7 @@ public class ServiceOrderPresentation {
     private String contactStatusDesc;
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_status_id", nullable = false)
     public int getContactStatusId() {
         return contactStatusId;
@@ -790,7 +789,7 @@ public class ServiceOrderPresentation {
     private Date incidentDate;
 
     @Id
-    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "incident_id", nullable = false)
     public int getIncidentId() {
         return incidentId;
@@ -843,5 +842,145 @@ public class ServiceOrderPresentation {
         this.payments = payments;
     }
 
+    // Svc status
+    private int svcStatusId;
+    private String svcStatus;
+    private String svcStatusDesc;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "svc_status_id", nullable = false)
+    public int getSvcStatusId() {
+        return svcStatusId;
+    }
+
+    public void setSvcStatusId(int svcStatusId) {
+        this.svcStatusId = svcStatusId;
+    }
+
+    @Basic
+    @Column(name = "svc_status", nullable = false, length = 75)
+    public String getSvcStatus() {
+        return svcStatus;
+    }
+
+    public void setSvcStatus(String svcStatus) {
+        this.svcStatus = svcStatus;
+    }
+
+    @Basic
+    @Column(name = "svc_status_desc", nullable = false, length = 250)
+    public String getSvcStatusDesc() {
+        return svcStatusDesc;
+    }
+
+    public void setSvcStatusDesc(String svcStatusDesc) {
+        this.svcStatusDesc = svcStatusDesc;
+    }
+
+    // Required Skill
+
+        private int reqSkillId;
+
+        // M:1 with Svc
+        private Svc svc;
+
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "req_skill_id", nullable = false)
+        public int getReqSkillId() {
+            return reqSkillId;
+        }
+
+        public void setReqSkillId(int reqSkillId) {
+            this.reqSkillId = reqSkillId;
+        }
+
+
+        // Skill
+        private int skillId;
+        private String skill;
+
+        // 1:M with Required Skill
+        private Set<com.example.demo.Models.RequiredSkill> requiredSkills;
+
+
+        public Set<com.example.demo.Models.RequiredSkill> getRequiredSkills() {
+            return requiredSkills;
+        }
+
+        public void setRequiredSkills(Set<com.example.demo.Models.RequiredSkill> requiredSkills) {
+            this.requiredSkills = requiredSkills;
+        }
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "skill_id", nullable = false)
+        public int getSkillId() {
+            return skillId;
+        }
+
+        public void setSkillId(int skillId) {
+            this.skillId = skillId;
+        }
+
+        @Basic
+        @Column(name = "skill", nullable = false, length = 150)
+        public String getSkill() {
+            return skill;
+        }
+
+        public void setSkill(String skill) {
+            this.skill = skill;
+        }
+
+        // Svc Type
+
+        private int svcTypeId;
+        private String svcType;
+        private String svcTypeDesc;
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "svc_type_id", nullable = false)
+        public int getSvcTypeId() {
+            return svcTypeId;
+        }
+
+        public void setSvcTypeId(int svcTypeId) {
+            this.svcTypeId = svcTypeId;
+        }
+
+        @Basic
+        @Column(name = "svc_type", nullable = false, length = 100)
+        public String getSvcType() {
+            return svcType;
+        }
+
+        public void setSvcType(String svcType) {
+            this.svcType = svcType;
+        }
+
+        @Basic
+        @Column(name = "svc_type_desc", nullable = false, length = 250)
+        public String getSvcTypeDesc() {
+            return svcTypeDesc;
+        }
+
+        public void setSvcTypeDesc(String svcTypeDesc) {
+            this.svcTypeDesc = svcTypeDesc;
+        }
+
+        private String SvcString;
+
+
+    public String getSvcString() {
+        return SvcString;
+    }
+
+    public void setSvcString(String svcString) {
+        SvcString = svcString;
+    }
+}
 }

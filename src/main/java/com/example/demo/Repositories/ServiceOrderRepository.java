@@ -16,6 +16,9 @@ public interface ServiceOrderRepository extends CrudRepository<ServiceOrder,Inte
     @Query(value = "select * from SERVICE_ORDER where svo_status_id != 5 ORDER BY svo_id DESC", nativeQuery = true)
     List<ServiceOrder> findAllByOrOrderBySvoIdDesc();
 
+    @Query(value = "select * from SERVICE_ORDER where svo_status_id != 5 AND DATEDIFF(day,date_finished,getdate()) between 0 AND 30 ORDER BY date_scheduled ASC", nativeQuery = true)
+    List<ServiceOrder> findMonthlyServiceOrders();
+
     ServiceOrder findServiceOrderBySvoId(int svoId);
 
 }

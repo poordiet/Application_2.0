@@ -220,7 +220,7 @@
 
 						<div class ="form-group">
 							<label>Country</label>
-							<input th:field="*{countryId}" th:value="*{countryId}" th:text="*{countryName}" type="text" class ="form-control" placeholder="Country" readonly>
+							<input th:field="*{countryName}" th:value="*{countryId}"  type="text" class ="form-control" placeholder="Country" readonly>
 							<!--<select th:field="*{countryId}" class ="form-control" id="cust_country">
 								<option th:value="${country.countryId}" th:text="${country.countryName}" readonly></option>
 							</select>-->
@@ -228,7 +228,7 @@
 
 						<div class ="form-group">
 							<label>State</label>
-							<input th:field="*{stateId}" th:value="*{stateId}" th:text="*{stateName}" type="text" class ="form-control" placeholder="State" readonly>
+							<input th:field="*{stateName}" th:value="*{stateId}" type="text" class ="form-control" placeholder="State" readonly>
 							<!--
 							<select th:field="*{stateId}"  class ="form-control" id="cust_state">
 								<option th:each="stateProvince:${states}" th:value="${stateProvince.stateId}" th:text="${stateProvince.stateName}" readonly></option>

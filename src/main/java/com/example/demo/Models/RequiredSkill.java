@@ -8,6 +8,32 @@ import java.util.Set;
 public class RequiredSkill {
     private int reqSkillId;
 
+    // M:1 with Svc
+    private Svc svc;
+
+    @ManyToOne
+    @JoinColumn(name="svc_id")
+    public Svc getSvc() {
+        return svc;
+    }
+
+    public void setSvc(Svc svc) {
+        this.svc = svc;
+    }
+
+    // M:1 with Skill
+    private Skill skill;
+
+    @ManyToOne
+    @JoinColumn(name="skill_id")
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

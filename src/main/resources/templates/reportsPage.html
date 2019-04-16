@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 	<!-- Custom styles for this template -->
-	<link rel="stylesheet" type="text/css" th:href="@{/css/customerSelectionSVOStyling.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}" />
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -49,7 +49,7 @@
 		
 					<div id="so" class="collapse">
 						<a th:href="@{/service_orders/search}" class="list-group-item ">Search</a>
-						<a th:href="@{/service_orders/serviceOrderSelection}" class="list-group-item ">Create</a>
+						<a th:href="@{/service_orders/showFormForAddCurrentCustomer}" class="list-group-item ">Create</a>
 						<a href="#" class="list-group-item ">Incident</a>
 					</div>
 				
@@ -154,132 +154,103 @@
 	  
 	  <!-- Valerie Bar -->
       <!-- <div class="col-sm-12" id="valeriebar1"></div> -->
-		<!-- The Form Title -->
-
-		<div class="container-fluid" id="form">
-			<h1 class="mt-4 text-center">Create Service Order</h1>
-		</div>
+	  
 
 	  <!-- /Valerie Bar -->
-
+		<!-- The Form Title -->
+		<div class="container-fluid" id="form">
+			<h1 class="mt-4 text-center">Reports</h1>
+		</div>
 
 		<!-- The Form -->
 		<div class="container" id="form">
 			<div class="row justify-content-center">
-				<div class="col-md-4">
-
-
-					<a class="btn btn-outline-primary btn-lg" id="new_customer" th:href="@{/service_orders/showFormForAddNewCustomer}">
-						New Customer
-					</a>
-					<button class="btn btn-outline-primary btn-lg" id="current_customer" data-toggle="modal" data-target="#myModal" >
-						Current Customer
-					</button>
-
-					<div class="modal fade" id="myModal">
-						<div class="modal-dialog modal-xl">
-							<div class="modal-content">
-
-								<!-- Modal Header -->
-								<div class="modal-header">
-									<h4 class="modal-title">Search Customer</h4>
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="col-sm-12">
+					<form id="new customer" onsubmit="return false;">
+						<div class="row justify-content-center">
+							<div class="col-md-auto">
+								<div class ="form-group">
+									<p class="h5 inlineText">Contractor Reports</p>
+									<table class="table">
+										<thead>
+										</thead>
+										<tbody>
+										<tr>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Profile</a></td>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Contractors Hired</a></td>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractors per State</a></td>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Incident</a> </td>
+										</tr>
+										</tbody>
+									</table>
+									<p class="h5 inlineText">Customer Site Reports</p>
+									<table class="table">
+										<thead>
+										</thead>
+										<tbody>
+										<tr>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Customers Gained</a></td>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Operating Customer Site</a></td>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractor per State</a></td>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Hardware Sale</a></td>
+										</tr>
+										</tbody>
+									</table>
+									<p class="h5 inlineText">Services & Service Order Reports</p>
+									<table class="table">
+										<thead>
+										</thead>
+										<tbody>
+										<tr>
+											<td><a th:href="@{/reports/serviceOrderSearch}" class="btn btn-outline-primary btn-lg">Service Order Profile</a></td>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Services Provided</a></td>
+											<td><a th:href="@{/reports/monthlyServiceOrders}" class="btn btn-outline-primary btn-lg">Monthly Service Orders</a></td>
+											<td><a href="" class="btn btn-outline-primary btn-lg">Service Order Incident</a></td>
+										</tr>
+										</tbody>
+									</table>
 								</div>
-
-								<!-- Modal body -->
-								<div class="container">
-									<div class="row justify-content-center">
-										<div class="col-sm-13">
-											<div class="table-responsive" style="overflow-x: auto">
-												<table name="customer_table" class="table" id="customer_table">
-													<thead class="thead-light" id="customer_table_header">
-
-
-													<tr>
-														<th scope="col">Id</th>
-														<th scope="col">Customer Name</th>
-														<th scope="col">Customer Number</th>
-														<th scope="col">Phone Number</th>
-														<th scope="col">Email</th>
-														<!--<th scope="col">Contact</th> I think we would want to put something about contact or owner or something here-->
-														<th scope="col">Address</th>
-                                                        <th scope="col">Action</th>
-													</tr>
-													</thead>
-
-													<!-- Sample Data just to show data in GUI -->
-
-
-													<tbody id="customer_overall_values">
-
-
-													<tr th:each="tempCustomer : ${customers}">
-
-														<td class="row-value" th:text="${tempCustomer.custSiteId}" />
-														<td class="row-value" th:text="${tempCustomer.custSiteName}" />
-														<td class="row-value" th:text="${tempCustomer.custSiteNumber}" />
-														<td class="row-value" th:text="${tempCustomer.custSitePhone}" />
-														<td class="row-value" th:text="${tempCustomer.custSiteEmail}" />
-														<td class="row-value" th:text="${tempCustomer.custSiteLocation}" />
-                                                        <td><a type="button" class="btn btn-primary" th:href="@{/service_orders/showFormForAddCurrentCustomer(custSiteId=${tempCustomer.custSiteId})}"
-                                                               onclick="if(!(confirm('Are you sure you would like to select this customer?')))return false">Select</a></td>
-
-
-													</tr>
-													<style>
-														#td_overflow{
-															overflow:hidden;
-															text-overflow:ellipsis;
-															white-space:nowrap;
-														}
-													</style>
-
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Modal footer -->
-								<div class="modal-footer">
-									<a type="button" class="btn btn-success" id="selected_button" href="http://localhost:63342/Front-End%20Template/service_order_current.html?_ijt=t31ccq8pod6dagced1a41isrmh">Select</a>
-									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-								</div>
-
 							</div>
 						</div>
-					</div>
 				</div>
+				<!-- CLOSE ROW-->
+				</form>
 			</div>
 		</div>
-		<!-- /The Form-->
-
 	</div>
+  <!-- /The Form-->
+    </div>
     <!-- /#page-content-wrapper -->
 
   </div>
   <!-- /#wrapper -->
 
-
-
+  <!-- Make Headings Bold -->
+  <style>
+		.bold {font-weight: bold}
+  </style>
 
 
   <!-- Menu Toggle Script -->
-  <script>
-      $(document).ready(function(){
-          $("a").click(function(){
-              $(".fas fa-plus-circle").toggleClass("fas fa-plus-circle fas fa-minus-circle")
-          })});
-  </script>
+    <script>
 
+		$("#plus").click(function(e){
+			e.preventDefault();
+			$("i.fa-plus-circle").toggleClass("fas fa-minus-circle")});
+
+  </script>
+  
   <!-- Attempting to get the icons to change -->
   <script>
-      $("#menu-toggle").click(function(e) {
-          e.preventDefault();
-          $("#wrapper").toggleClass("toggled");
-      });
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+	
+
+	
   </script>
+
 
   <!-- Allows for multiple selections without having to hold ctrl-->
   <script>
@@ -292,7 +263,6 @@
 
 
   <script>
-      //Saves the selected services and stores into an array for the array to be saved into localstorage to be sent to next page
       function getValue()
       {
           var x=document.getElementById("selection");
@@ -307,17 +277,6 @@
           }
           window.localStorage.setItem("selectionList", JSON.stringify(selectionList)); // Saving
 
-          var submitList=[];
-          for (var z= 1; z<14; z++)
-          {
-              submitList.push(document.getElementById("cust_value"+(z)).value);
-          }
-          submitList.push(document.getElementById("cust_request")).value;
-          submitList.push(document.getElementById("cust_date")).value;
-          window.localStorage.setItem("submitList",JSON.stringify(submitList));
-
-
-
       }
   </script>
 
@@ -329,20 +288,6 @@
       });
   </script>
 
-
-  <script>
-
-      $(document).ready(function ()
-      {
-          var data = JSON.parse(window.localStorage.getItem("data"));
-          var u = data.length;
-          for(q=1; q<u; q++)
-          {
-              valueatIndex1 = data[q];
-              document.getElementById("cust_value"+(q)).value=valueatIndex1;
-          }
-      });
-  </script>
 
 </body>
 
