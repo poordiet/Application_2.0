@@ -164,6 +164,7 @@
 
 		<!-- The Form -->
 		<div class="container" id="form">
+			<div class="mb-4 "><a th:href="@{/reports/reportsPage}"><button class="btn btn-info" >Back to Reports</button></a></div>
 			<div class="row justify-content-center">
 				<div class="col-md-auto">
 					<form id="new customer" onsubmit="return false;">
@@ -177,26 +178,12 @@
 							</thead>
 							<tbody>
 							<tr th:each="serviceOrderPresentation:${serviceOrderPresentations}">
-								<td th:text="${svc.svcId}"></td>
-								<td th:text="${svc.svcName}"></td>
-								<td th:text="${svc.svcType}"></td>
-								<td th:text="${svc.svcStatus}"></td>
-								<td th:text="${svc.requiredSkill}"></td>
+								<td th:text="${serviceOrderPresentation.svcId}"></td>
+								<td th:text="${serviceOrderPresentation.svcName}"></td>
+								<td th:text="${serviceOrderPresentation.svcType}"></td>
+								<td th:text="${serviceOrderPresentation.svcStatus}"></td>
+								<td th:text="${serviceOrderPresentation.skillString}"></td>
 								<td></td>
-							</tr>
-							<tr th:each="tempServiceOrder : ${serviceOrderPresentations}">
-
-								<td th:text="${tempServiceOrder.svoId}" />
-								<td th:text="${#dates.format(tempServiceOrder.dateScheduled, 'MM/dd/YYYY HH:mm' )}" />
-								<td th:text="${tempServiceOrder.svcName}" />
-								<td th:text="${tempServiceOrder.custSiteNumber}" />
-								<td th:text="${tempServiceOrder.custSiteName}" />
-								<td th:text="${tempServiceOrder.custSiteLocation}" />
-								<td th:text="${tempServiceOrder.contactName}" />
-								<td th:text="${#dates.format(tempServiceOrder.dateFinished, 'MM/dd/YYYY HH:mm')}" />
-								<td th:text="${tempServiceOrder.svoStatus}" />
-								<td th:text="${tempServiceOrder.contractors}" />
-
 							</tr>
 							</tbody>
 						</table>

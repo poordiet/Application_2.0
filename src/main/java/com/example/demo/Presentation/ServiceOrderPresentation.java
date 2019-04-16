@@ -972,15 +972,14 @@ public class ServiceOrderPresentation {
             this.svcTypeDesc = svcTypeDesc;
         }
 
-        private String SvcString;
+        private String skillString;
 
 
-    public String getSvcString() {
-        return SvcString;
+    public String getSkillString() {
+        return skillString;
     }
 
-    public void setSvcString(String svcString) {
-        SvcString = svcString;
+    public void setSkillString(String svcString) {
+        skillString = svcString;
     }
-}
 }

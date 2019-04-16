@@ -17,7 +17,7 @@ public class ReportsService {
     @Autowired
     SvcRepository svcRepository;
 
-    public List<ServiceOrderPresentation> serviceOrderPresentations() {
+    public List<ServiceOrderPresentation> getServicesProvidedPresentation() {
         List<ServiceOrderPresentation> serviceOrderPresentations = new ArrayList<>();
 
         List<Svc> svcs = svcRepository.findActiveSvcs();
@@ -40,17 +40,22 @@ public class ReportsService {
 
             int count = 0;
 
+           String skillString = new String();
             for (Skill skill : skills) {
-                String skillString = new String();
+
                 if (count > 0) {
-                    skillString += " ,";
+                    skillString += ", ";
                 }
 
-                skillString += skill;
+                skillString += skill.getSkill();
 
                 count++;
 
             }
+
+            serviceOrderPresentation.setSkillString(skillString);
+
+            serviceOrderPresentations.add(serviceOrderPresentation);
         }
 
         return serviceOrderPresentations;

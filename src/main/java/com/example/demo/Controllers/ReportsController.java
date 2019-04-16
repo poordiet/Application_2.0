@@ -110,4 +110,14 @@ public class ReportsController {
         return("serviceOrderProfileForReport");
     }
 
+    // Service Order Profile Handling
+    @GetMapping("/servicesProvided")
+    public String showServicesProvided( Model theModel)
+    {
+        List<ServiceOrderPresentation> serviceOrderPresentations = reportsService.getServicesProvidedPresentation();
+
+        theModel.addAttribute("serviceOrderPresentations",serviceOrderPresentations);
+        return("reportServicesProvided");
+    }
+
 }
