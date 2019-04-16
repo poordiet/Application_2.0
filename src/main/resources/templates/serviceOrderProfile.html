@@ -193,10 +193,10 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td th:text="${serviceOrderPresentation.dateRequested}" />
-                        <td th:text="${serviceOrderPresentation.dateScheduled}" />
-                        <td th:text="${serviceOrderPresentation.dateStarted}"/>
-                        <td th:text="${serviceOrderPresentation.dateFinished}"/>
+                        <td th:text="${#dates.format(serviceOrderPresentation.dateRequested, 'MM/dd/YYY ')}" />
+                        <td th:text="${#dates.format(serviceOrderPresentation.dateScheduled, 'MM/dd/YYY HH:mm')}" />
+                        <td th:text="${#dates.format(serviceOrderPresentation.dateStarted, 'MM/dd/YYY HH:mm')}"/>
+                        <td th:text="${#dates.format(serviceOrderPresentation.dateFinished, 'MM/dd/YYY HH:mm')}"/>
                     </tr>
                     </tbody>
                 </table>
@@ -271,7 +271,7 @@
                     <tr th:each="incident : ${incidents}">
                         <td th:text="${incident.incidentId}" />
                         <td th:text="${incident.incident}" />
-                        <td th:text="${incident.incidentDate}"/>
+                        <td th:text="${#dates.format(incident.incidentDate, 'MM/dd/YYYY')}"/>
                     </tr>
                     </tbody>
                 </table>
@@ -312,7 +312,8 @@
                     <tr th:each="payment: ${payments}">
                         <td th:text="${payment.pmtId}" />
                         <td th:text="${payment.amt}" />
-                        <td th:text="${payment.datePaid}"/>
+                        <td th:text="${#dates.format(payment.datePaid, 'MM/dd/YYYY')}"/>
+
                     </tr>
                     </tbody>
                 </table>

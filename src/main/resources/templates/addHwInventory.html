@@ -158,148 +158,105 @@
 
 	  <!-- /Valerie Bar -->
 		<!-- The Form Title -->
-		<!-- The Table Title -->
-		<div class="container-fluid" id="table">
-			<h1 class="mt-4 text-center">Search Hardware Inventory</h1>
+		<div class="container-fluid" id="form">
+			<h1 class="mt-4 text-center">Hardware Inventory Profile</h1>
 		</div>
-		<br>
 
-		<!-- Search at the top -->
-		<div class="container">
-			<div class="row justify-content-end">
-				<form action="#" th:action="@{/index}" method="post">
-					<div class="row">
-						<div class = "col-sm-4">
-							<select class="form-control">
-								<option selected disabled>Search By</option>
+		<!-- The Form -->
+
+		<div class="container" id="form">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+
+					<form th:action="@{/hwInventory/addHwInventory}" th:object="${hwPresentation}" method="POST">
+
+
+							<!--<div>-->
+								<!--<div class ="form-group">-->
+									<!--<label>Date Purchased</label>-->
+									<!--<input th:value="${#dates.format(hwPresentation.hwPurchaseDate, 'MM/dd/YYY')}" class="form-control" type="text" readonly/>-->
+								<!--</div>-->
+							<!--</div>-->
+
+						<div class ="form-group">
+						<label>Date Purchased</label>
+						<input th:field="*{hwPurchaseDate}" type="date" class=form-control name="schedule_date" id="cust_date">
+						</div>
+
+						<div class ="form-group">
+							<label>Hardware Provider</label>
+							<select class="form-control" th:field = "*{hwProviderId}">
+								<option th:each = "hwProvider: ${hwProviders}" th:value="${hwProvider.hwProviderId}" th:text="${hwProvider.hwProviderName}"></option>
 							</select>
 						</div>
 
-						<div class = "col-sm-8">
-							<div class="input-group">
-								<input type="search" class="form-control" placeholder="Search for...">
+						<div class ="form-group">
+							<label>Hardware Type</label>
+							<select class="form-control" th:field = "*{hwTypeId}">
+								<option th:each = "hwType: ${hwTypes}" th:value="${hwType.hwTypeId}" th:text="${hwType.hwType}"></option>
+							</select>
+						</div>
 
-								<div class="input-group-append">
-				<span class="input-group-search">
-        		<button class="btn btn-light" type="submit"><i class="fa fa-search fa-fw"></i>Search</button>
-      			</span>
+
+
+						<div >
+								<div class ="form-group">
+									<label>Manufacturer</label>
+									<select class="form-control" th:field = "*{hwManuId}" >
+										<option th:each = "hwManufacturer: ${hwManufacturers}" th:value="${hwManufacturer.hwManuId}" th:text="${hwManufacturer.hwManuName}"></option>
+									</select>
 								</div>
 							</div>
 
+
+							<div>
+								<div class ="form-group">
+									<label>Series</label>
+									<select class="form-control" th:field = "*{hwSeriesId}">
+										<option th:each = "hwSeries: ${hwSeriesList}" th:value="${hwSeries.hwSeriesId}" th:text="${hwSeries.hwSeriesName}"></option>
+									</select>
+								</div>
+							</div>
+
+							<div >
+								<div class ="form-group">
+									<label>Model</label>
+									<select class="form-control" th:field = "*{hwModelId}" >
+										<option th:each = "hwModel: ${hwModels}" th:value="${hwModel.hwModelId}" th:text="${hwModel.hwModel}"></option>
+									</select>
+								</div>
+							</div>
+
+
+						<div class ="form-group">
+							<label>Serial Number</label>
+							<input th:field="*{hwSerialNumber}" class="form-control" type="text"/>
 						</div>
 
-					</div>
-				</form>
-			</div>
+
+
+						<div class ="form-group">
+							<label>MAC Address</label>
+							<input th:field="*{hwMacAddress}" class="form-control" type="text"/>
+						</div>
 
 
 
-			<br>
-		</div>
-
-		<!-- The Table -->
-		<div class="container table">
-			<div class="row justify-content-center">
-				<div class="col-sm-13">
-					<table class="table table-hover">
-						<thead class="thead-light">
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Manufacturer</th>
-							<th scope="col">Series</th>
-							<th scope="col">Model</th>
-							<th scope="col">Serial Number</th>
-							<th scope="col">MAC Address</th>
-							<th scope="col">Date Acquired</th>
-							<th scope="col">Price</th>
-							<th scope="col">Status</th>
-							<th scope="col">Activity</th>
-						</tr>
-						</thead>
-
-						<!-- Sample Data just to show data in GUI -->
-						<tbody>
-
-						<tr>
-							<!-- Search Each Row-->
-
-							<td><div class="form-group row">
-								<div class="col-12">
-									<input class="form-control" type="text">
-								</div>
-							</div></td>
-							<td><div class="form-group row">
-								<div class="col-12">
-									<input class="form-control" type="text">
-								</div>
-							</div></td>
-							<td><div class="form-group row">
-								<div class="col-12">
-									<input class="form-control"  type="text">
-								</div></div></td>
-							<td><div class="form-group row">
-								<div class="col-12">
-									<input class="form-control" type="text">
-								</div></div></td>
-							<td><div class="form-group row">
-								<div class="col-12">
-									<input class="form-control" type="text">
-								</div></div></td>
-							<td><div class="form-group row">
-								<div class="col-12">
-									<input class="form-control"  type="text">
-								</div></div></td>
-							<td><div class="form-group row">
-								<div class="col-12">
-									<input class="form-control"  type="text">
-								</div></div></td>
-							<td><div class="form-group row">
-								<div class="col-12">
-									<input class="form-control" type="text">
-								</div></div></td>
-							<td><div class="form-group row">
-								<div class="col-12">
-									<input class="form-control" type="text">
-								</div></div></td>
-							<td><button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button></td>
-						</tr>
-
-						<style>
-							#td_overflow{
-								overflow:hidden;
-								text-overflow:ellipsis;
-								white-space:nowrap;
-							}
-						</style>
-
-						<tr th:onclick="'javascript:rowClicked(\'' + ${hwPresentation.hwInvId} + '\');'" th:href="@{/home/home}"
-							th:each="hwPresentation : ${hwPresentations}">
-
-							<td th:text="${hwPresentation.hwInvId}" />
-							<td th:text="${hwPresentation.hwManuName}" />
-							<td th:text="${hwPresentation.hwSeriesName}" />
-							<td th:text="${hwPresentation.hwModel}" />
-							<td th:text="${hwPresentation.hwSerialNumber}" />
-							<td th:text="${hwPresentation.hwMacAddress}" />
-							<td th:text="${#dates.format(hwPresentation.hwPurchaseDate, 'MM/dd/YYY')}" />
-							<td th:text="${hwPresentation.hwCost}" />
-							<td th:text="${hwPresentation.hwInvStatus}" />
-							<td id= "td_overflow">
-								<a type="button" class="btn btn-danger" th:href="@{/hwInventory/delete(hwInvId=${hwPresentation.hwInvId})}"
-								   onclick="if(!(confirm('Are you sure you would like to delete this piece of hardware?')))return false">Delete</a></td>
-
-						</tr>
-
-						<!-- Click row in table and return this link -->
-						<script>
-                            function rowClicked(value) {
-                                location.href = "/hwInventory/hwInventoryProfile?hwInvId=" + value;
-                            }
-						</script>
+						<div class ="form-group">
+							<label>Purchase Price</label>
+							<input th:field="*{hwCost}" class="form-control" type="text"/>
+						</div>
 
 
-						</tbody>
-					</table>
+
+						<div class ="form-group">
+							<label>Sale Price</label>
+							<input th:field=*{hwSalePrice} class="form-control" type="text" />
+						</div>
+
+						<button href="#" type="submit" class="btn btn-success" >Submit</button>
+
+					</form>
 				</div>
 			</div>
 		</div>

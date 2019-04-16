@@ -25,11 +25,13 @@ public interface HwInventoryRepository extends CrudRepository<HwInventory,Intege
     @Query(value = "select * from HW_INVENTORY  WHERE HW_INVENTORY.hw_inv_status_id = 1" , nativeQuery = true)
     List<HwInventory> findAllHwInventoryOrderByHwModel_HwSeries_HwManufacturer_HwManuName();
 
-
+    @Query(value="select * from HW_INVENTORY INNER JOIN HW_INVENTORY_STATUS ON HW_INVENTORY_STATUS.hw_inv_status_id=HW_INVENTORY.hw_inv_status_id WHERE hw_inv_status != 'Deleted' ORDER BY HW_INVENTORY_STATUS.hw_inv_status_id, HW_INVENTORY.hw_inv_id", nativeQuery = true)
     List<HwInventory> findAllByOrderByHwInventoryStatusAscHwInvId();
 
 
     HwInventory findByHwInvId(int id);
+
+
 
 
 }

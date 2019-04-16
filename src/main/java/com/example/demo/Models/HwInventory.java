@@ -20,7 +20,7 @@ public class HwInventory {
     @Autowired
     HwInventoryRepository hwInventoryRepository;
 
-    // M:1 with Hw Inventory
+    // M:1 with Hw Inventory Status
     private HwInventoryStatus hwInventoryStatus;
 
     @ManyToOne
@@ -31,6 +31,19 @@ public class HwInventory {
 
     public void setHwInventoryStatus(HwInventoryStatus hwInventoryStatus) {
         this.hwInventoryStatus = hwInventoryStatus;
+    }
+
+    // M:1 with Hw Provider
+    private HwProvider hwProvider;
+
+    @ManyToOne
+    @JoinColumn(name="hw_provider_id")
+    public HwProvider getHwProvider() {
+        return hwProvider;
+    }
+
+    public void setHwProvider(HwProvider hwProvider) {
+        this.hwProvider = hwProvider;
     }
 
     //To String

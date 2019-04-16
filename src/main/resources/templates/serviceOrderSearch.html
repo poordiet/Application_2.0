@@ -292,10 +292,10 @@
                         <td th:text="${tempServiceOrder.custSiteName}" />
                         <td th:text="${tempServiceOrder.custSiteLocation}" />
                         <td th:text="${tempServiceOrder.contactName}" />
-                        <td th:text="${#dates.format(tempServiceOrder.dateFinished, 'MM/dd/YYY')}" />
+                        <td th:text="${#dates.format(tempServiceOrder.dateFinished, 'MM/dd/YYYY HH:mm')}" />
                         <td th:text="${tempServiceOrder.svoStatus}" />
                         <td th:text="${tempServiceOrder.contractors}" />
-                        <td id= "td_overflow"><button type="button" class="btn btn-primary">Edit</button>
+                        <td id= "td_overflow">
                             <a type="button" class="btn btn-danger" th:href="@{/service_orders/delete(svoId=${tempServiceOrder.svoId})}"
                             onclick="if(!(confirm('Are you sure you would like to delete this service order?')))return false">Delete</a></td>
 

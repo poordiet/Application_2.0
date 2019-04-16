@@ -2,6 +2,7 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class HwProvider {
@@ -13,6 +14,18 @@ public class HwProvider {
     private String hwProviderPhone;
     private String hwProviderEmail;
     private String hwProviderWeb;
+
+    // 1:M with Hardware Inventory
+    private Set<HwInventory> hwInventories;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hwProvider")
+    public Set<HwInventory> getHwInventories() {
+        return hwInventories;
+    }
+
+    public void setHwInventories(Set<HwInventory> hwInventories) {
+        this.hwInventories = hwInventories;
+    }
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
