@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -8,13 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Contractor Hired Report</title>
+    <title>Search Contractor</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -23,7 +23,7 @@
 
 <body>
 
-<div class="d-flex toggled" id="wrapper">
+<div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
 
@@ -44,7 +44,7 @@
 
             <div id="so" class="collapse">
                 <a href="#" class="list-group-item ">Search</a>
-                <a href="#" class="list-group-item ">Create</a>
+                <a href="http://localhost:63342/Front-End%20Template/create_service_order.html?_ijt=7s5r49f43mjdoau4ne94gkufeo" class="list-group-item ">Create</a>
                 <a href="#" class="list-group-item ">Incident</a>
             </div>
 
@@ -56,7 +56,7 @@
 
             <div id="customer" class="collapse">
                 <a href="#" class="list-group-item ">Search</a>
-                <a href="#" class="list-group-item ">Add</a>
+                <a href="http://localhost:63342/Front-End%20Template/add_customer.html?_ijt=7qep0tfp9qdrar87ckjhp58vr5" class="list-group-item ">Add</a>
             </div>
 
 
@@ -154,123 +154,114 @@
     </div>
     <!-- /Not Really Sure TBH -->
     <!-- The Form Title -->
-    <div class="container-fluid" id="form">
-        <h1 class="mt-4 text-center">Contractors Hired Report</h1>
+    <!-- The Table Title -->
+    <div class="container-fluid" id="table">
+        <h1 class="mt-4 text-center">Contractors Hired in last 30 Days</h1>
+    </div>
+    <br>
+
+        <br>
     </div>
 
-    <!-- The Form -->
-    <div class="container" id="form">
-        <div class="row justify-content-center">
-            <div class="col-md-auto">
-                <form id="monthly_service_order_report" onsubmit="return false;">
-                    <div class="row justify-content-center">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                <div class ="form-group">
-                                    <label>Month</label>
-                                    <p class="h5 inlineText" th:text=${customer.email}>March</p>
-                                </div>
-                            </div>
+    <!-- The Table -->
+    <div  class="container table">
+        <div class="mb-4"><a th:href="@{/reports/reportsPage}"><button class="btn btn-info" >Back to Reports</button></a></div>
 
-                                <div class="col-md-6">
-                                    <div class ="form-group">
-                                        <label>Year</label>
-                                        <p class="h5 inlineText" th:text=${customer.email}>2019</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="justify-content-center">
-                        <table class="table">
-                            <thead>
-                            <th>Total Contractors Hired This Month</th>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>4</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="justify-content-center">
-                        <table class="table">
-                            <thead>
-                            <th>State</th>
-                            <th>Total Number of Contractors</th>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Louisiana</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>Oklahoma</td>
-                                <td>1</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <table class="table">
-                        <thead>
-                        <th>Contractor ID</th>
-                        <th>Contractor</th>
-                        <th>Hire Date</th>
-                        <th>Location</th>
-                        <th>Phone Number</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Contractor Type</th>
-                        <th>Availability</th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>31</td>
-                            <td>Ash Normstrung</td>
-                            <td>03-15-2019</td>
-                            <td>Baton Rouge, Louisiana</td>
-                            <td>2250123256</td>
-                            <td>norm@gmail.com</td>
-                            <td>Active</td>
-                            <td>Entry-Level</td>
-                            <td>NULL</td>
-                        </tr>
-                        <tr>
-                            <td>32</td>
-                            <td>Benjamin Yuri</td>
-                            <td>>03-20-2019</td>
-                            <td>Baton Rouge, Louisiana</td>
-                            <td>2257859874</td>
-                            <td>yuri83@outlook.com</td>
-                            <td>Active</td>
-                            <td>Entry-Level</td>
-                            <td>Weekdays</td>
-                        </tr>
-                        <tr>
-                            <td>33</td>
-                            <td>Michael Thomas</td>
-                            <td>>03-25-2019</td>
-                            <td>Baton Rouge, Louisiana</td>
-                            <td>2256983126</td>
-                            <td>toms84@gmail.com</td>
-                            <td>Active</td>
-                            <td>Entry-Level</td>
-                            <td>NULL</td>
-                        </tr>
-                        <tr>
-                            <td>34</td>
-                            <td>Sarah Torres</td>
-                            <td>>03-25-2019</td>
-                            <td>Houston, Texas</td>
-                            <td>8397986350</td>
-                            <td>k2bt@njdxa.org</td>
-                            <td>Active</td>
-                            <td>Manager</td>
-                            <td>Weekdays</td>
-                        </tbody>
-                    </table>
-                </form>
+        <div>
+            <h5 th:text = " 'Report Dates: '+ ${pastMonth}+ ' - ' + ${currentDate}"></h5>
+        </div>
+        <div >
+            <div class="col-sm-4"><h5 th:text="'Number of Contractors Hired: '+${count}"></h5></div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-sm-13">
+                <table name="customer_table" class="table" id="customer_table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Contractor First Name</th>
+                        <th scope="col">Contractor Last Name</th>
+                        <th scope="col">Contractor Email</th>
+                        <th scope="col">Contractor Phone</th>
+                        <th scope="col">Contractor City</th>
+                        <th scope="col">Contractor State</th>
+                        <th scope="col">Contractor Availability</th>
+                        <th scope="col">Contractor Status</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <!-- Sample Data just to show data in GUI -->
+                    <tbody>
+
+                    <style>
+                        #td_overflow{
+                            overflow:hidden;
+                            text-overflow:ellipsis;
+                            white-space:nowrap;
+                        }
+                    </style>
+
+
+                    <tr th:onclick="'javascript:rowClicked(\'' + ${tempContractors.contractorId} + '\');'" th:href="@{/home/home}" th:each="tempContractors : ${serviceOrderPresentations}">
+
+                        <td th:text="${tempContractors.contractorId}" />
+                        <td th:text="${tempContractors.contractorFname}" />
+                        <td th:text="${tempContractors.contractorLname}" />
+                        <td th:text="${tempContractors.contractorEmail}" />
+                        <td th:text="${tempContractors.contractorPhone}" />
+                        <td th:text="${tempContractors.contractorCity}" />
+                        <td th:text="${tempContractors.stateName}" />
+                        <td th:text="${tempContractors.contractorAvailability}" />
+                        <td th:text="${tempContractors.contractorStatus}" />
+                        <td th:text="${tempContractors.contractorHireDate}" />
+
+                    </tr>
+
+                    <script>
+                        function rowClicked(value) {
+                            location.href = "/contractors/contractorProfile?contractorId=" + value;
+                        }
+                    </script>
+
+                    <!-- IDK, I was trying to make the overflow of the contractor names cut off, but not sure how to do this
+                        This code makes it to where the names do not wrap, but the ellipses does not work. I suspect it has
+                        something to do with the bootstrap autosizing the table columns?
+                    <style>
+                        #td_overflow{
+                            overflow:hidden;
+                            text-overflow:ellipsis;
+                            white-space:nowrap;
+                        }
+                    </style>
+                    -->
+                    <style>
+                        #td_overflow{
+                            overflow:hidden;
+                            text-overflow:ellipsis;
+                            white-space:nowrap;
+                        }
+                    </style>
+
+
+                    <!-- Crappy Placeholder Text for future connection with database etc
+                    <tr th:each="tempServiceOrder : ${serviceOrders}, tempCustomerSite : ${customerSites}">
+
+                        <td th:text="${tempServiceOrder.id}" />
+                        <td th:text="${tempServiceOrder.date_scheduled}" />
+                        <td th:text="${tempServiceOrder.service}" />
+                        <td th:text="${tempCustomerSite.customer_num}" />
+                        <td th:text="${tempCustomerSite.customer_name}" />
+                        <td th:text="${tempServiceOrder.date_completed}" />
+                        <td th:text="${tempServiceOrder.status}" />
+                        <td><button type="button">Edit</button> <button type="button">Delete</button></td>
+
+                    </tr>
+                    -->
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -295,8 +286,8 @@
 <script>
     $(document).ready(function(){
         $("a").click(function(){
-            $(".fas fa-plus-circle").toggleClass("fas fa-plus-circle fas fa-minus-circle")
-        })});
+            $(".fas fa-plus-circle").toggleClass("fas fa-plus-circle fas fa-minus-circle"))};
+    });
 </script>
 
 <!-- Attempting to get the icons to change -->
@@ -305,7 +296,12 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+
+
+
 </script>
+
+
 
 </body>
 

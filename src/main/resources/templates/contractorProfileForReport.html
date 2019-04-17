@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:overflow="http://www.w3.org/1999/xhtml" xmlns:white-space="http://www.w3.org/1999/xhtml"
+	  xmlns:text-overflow="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>LARI</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+	<!-- Bootstrap core JavaScript -->
+	<script th:src="@{/vendor/jquery/jquery.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+	
+    <div class="bg-primary border-right pre-scrollable" id="sidebar-wrapper" style="background-color: #cacbce !important;">
+      <div class="sidebar-heading"></div>
+		<div class="sidebar-heading"></div>
+	  
+			<!-- Nav Bar Items -->
+			<div id="nav" class="list-group  list-group-flush">
+			
+				<!-- Home -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >Home</a>
+				
+				<!-- Service Order -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#so" id="plus">
+				Service Order <i class="fas fa-plus-circle" id="circle"></i>
+				</a>
+		
+					<div id="so" class="collapse">
+						<a th:href="@{/service_orders/search}" class="list-group-item ">Search</a>
+						<a th:href="@{/service_orders/showFormForAddCurrentCustomer}" class="list-group-item ">Create</a>
+						<a href="#" class="list-group-item ">Incident</a>
+					</div>
+				
+			
+				<!-- Customer -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#customer">
+				Customer <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="customer" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+			
+		
+				<!-- Contractor -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#contractor">
+				Contractor <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="contractor" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+				
+				
+				<!-- Hardware -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#hardware">
+				Hardware <i class="fas fa-plus-circle"></i>
+				</a>
+		
+					<div id="hardware" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+				
+		
+				<!-- Knowledge base -->
+				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
+					Knowledge Base <i class="fas fa-plus-circle"></i>
+					</a>
+		
+					<div id="kb" class="collapse">
+						<a href="#" class="list-group-item ">Search</a>
+						<a href="#" class="list-group-item ">Add</a>
+					</div>
+		
+				<!-- Reports -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+				
+				<!-- DB Management -->
+				<a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
+				
+				<!-- Logout -->
+				<a class="list-group-item nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+
+
+		
+		</div>
+		<!-- /Nav Bar Items -->
+
+
+      </div>
+	  <!-- /SideBar -->
+
+    </div>
+	
+			
+	
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+	
+		<!-- Not Really Sure TBH -->
+
+		
+		<!-- Grey bar at the top (the sticky one) -->
+		<nav class="navbar fixed-top navbar-expand-lg bg-primary" >
+
+			<div class="col-sm-1" id="toplogo">
+			<img class="img-fluid" id="logo" src="logo.emf"/>
+			</div>
+
+			<!-- Valerie Bar -->
+			<div class="col-sm-12" id="valeriebar1"></div>
+			
+				<!-- Hamburger Button -->
+				<button class="btn btn-primary" id="menu-toggle"><span class="dark-blue-text"><i
+				class="fa fa-bars fa-1x"></i></span></button></button>
+
+				<!-- Top Right Logout -->
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+					<a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+					</li>
+				</ul>
+			</div>
+      </nav>
+	  <!-- /Grey bar at the top (the sticky one) -->
+	  
+	  <!-- Valerie Bar -->
+      <!-- <div class="col-sm-12" id="valeriebar1"></div> -->
+	  
+
+	  <!-- /Valerie Bar -->
+		<!-- The Form Title -->
+		<div class="container-fluid" id="form">
+			<h1 class="mt-4 text-center">Contractor Profile</h1>
+		</div>
+
+		<!-- The Form -->
+
+		<div class="container" id="form">
+
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="mb-4"><a th:href="@{/reports/reportsPage}"><button class="btn btn-info" >Back to Reports</button></a></div>
+
+					<form th:object="${serviceOrderPresentation}">
+
+
+						<div>
+							<div class ="form-group">
+								<label>ID</label>
+								<input th:field="*{contractorId}" class="form-control" type="text" readonly/>
+							</div>
+						</div>
+
+						<div>
+							<div class ="form-group">
+								<label>First Name</label>
+								<input th:field="*{contractorFname}" class="form-control" type="text" readonly/>
+							</div>
+						</div>
+
+						<div>
+							<div class ="form-group">
+								<label>Last Name</label>
+								<input th:field="*{contractorLname}" class="form-control" type="text" readonly/>
+							</div>
+						</div>
+
+						<div>
+							<div class ="form-group">
+								<label>Email</label>
+								<input th:field="*{contractorEmail}" class="form-control" type="text" readonly/>
+							</div>
+						</div>
+
+
+
+						<div class ="form-group">
+							<label>Phone Number</label>
+							<input th:field=*{contractorPhone} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Street Address</label>
+							<input th:field=*{contractorAddress} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>City</label>
+							<input th:field=*{contractorCity} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Zipcode</label>
+							<input th:field=*{contractorZip} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Country</label>
+							<input th:field=*{countryName} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>State</label>
+							<input th:field=*{stateName} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Status</label>
+							<input th:field=*{contractorStatus} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Type</label>
+							<input th:field=*{contractorType} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Availability</label>
+							<input th:field=*{contractorAvailability} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Access Level</label>
+							<input th:field=*{accLevelName} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Username</label>
+							<input th:field=*{contractorUsername} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Contractor Password</label>
+							<input th:field=*{accLevelName} class="form-control" type="text" readonly/>
+						</div>
+
+						<!--						<div class="col-sm-12">-->
+						<!--							<div class ="form-group">-->
+						<!--								<label>Contacts</label>-->
+						<!--								<select th:field="*{contacts}" class ="form-control" multiple size="8" id="contractor_selected0">-->
+						<!--									<option th:each="contact:${contacts}" th:value="${contact.contactId}" th:text = "${contact.contactLname}"></option>-->
+						<!--								</select>-->
+						<!--							</div>-->
+						<!--						</div>-->
+
+						<p class="h5 inlineText">Skills</p>
+						<table class="table">
+							<thead>
+							<th>Skill</th>
+							</thead>
+							<tbody>
+
+							<tr th:each="skill:${skills}">
+								<td th:text="${skill.skill}" />
+							</tr>
+							</tbody>
+						</table>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /The Form-->
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Make Headings Bold -->
+  <style>
+		.bold {font-weight: bold}
+  </style>
+
+
+  <!-- Menu Toggle Script -->
+    <script>
+
+		$("#plus").click(function(e){
+			e.preventDefault();
+			$("i.fa-plus-circle").toggleClass("fas fa-minus-circle")});
+
+  </script>
+  
+  <!-- Attempting to get the icons to change -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+	
+
+	
+  </script>
+
+
+  <!-- Allows for multiple selections without having to hold ctrl-->
+  <script>
+      $('option').mousedown(function(e) {
+          e.preventDefault();
+          $(this).prop('selected', !$(this).prop('selected'));
+          return false;
+      });
+  </script>
+
+
+  <script>
+      function getValue()
+      {
+          var x=document.getElementById("selection");
+          var j=0;
+          var selectionList=[]
+          for (var i = 0; i < x.options.length; i++) {
+              if(x.options[i].selected)
+              {
+                  j++;
+                  selectionList.push(x.options[i].value)
+              }
+          }
+          window.localStorage.setItem("selectionList", JSON.stringify(selectionList)); // Saving
+
+      }
+  </script>
+
+
+  <script>
+      var myarray = [];
+      $('#new_customer').find(':input').each(function(){
+          myarray.push($(this).val());
+      });
+  </script>
+
+
+</body>
+
+</html>

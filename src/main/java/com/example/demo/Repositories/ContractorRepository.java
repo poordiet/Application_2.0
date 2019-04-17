@@ -19,4 +19,6 @@ public interface ContractorRepository extends CrudRepository<Contractor,Integer>
     @Query(value = "select * from CONTRACTOR where CONTRACTOR.contractor_status_id <> 8 order by CONTRACTOR.state_id, CONTRACTOR.contractor_status_id, CONTRACTOR.contractor_lname, CONTRACTOR.contractor_fname;", nativeQuery = true)
     List<Contractor> findAllNotDeleted();
 
+    @Query(value="select * from CONTRACTOR where contractor_status_id = 1 AND DATEDIFF(day,contractor_hire_date,getdate()) between 0 AND 30 AND contractor_leave_date IS NULL ORDER BY contractor_city,contractor_lname", nativeQuery = true)
+    List<Contractor> findAllContractorsGained();
 }

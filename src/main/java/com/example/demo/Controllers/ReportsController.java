@@ -5,15 +5,14 @@ import com.example.demo.Presentation.CustomerPresentation;
 import com.example.demo.Presentation.HwPresentation;
 import com.example.demo.Presentation.IncidentPresentation;
 import com.example.demo.Presentation.ServiceOrderPresentation;
+import com.example.demo.Repositories.ContractorRepository;
 import com.example.demo.Repositories.CustomerSiteRepository;
 import com.example.demo.Repositories.ServiceOrderRepository;
 import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -25,9 +24,20 @@ import java.util.Set;
 
 import static jdk.nashorn.internal.objects.NativeMath.round;
 
+@SessionAttributes({"serviceOrderPresentation","skills"})
 @RequestMapping("/reports")
 @Controller
 public class ReportsController {
+
+    @ModelAttribute("serviceOrderPresentation")
+    public ServiceOrderPresentation getServiceOrderPresentation(){
+        return new ServiceOrderPresentation();
+    }
+
+    @ModelAttribute("skills")
+    public Skill getSkills(){
+        return new Skill();
+    }
 
     @Autowired
     ReportsService reportsService;
@@ -43,6 +53,10 @@ public class ReportsController {
     CustomerSiteRepository customerSiteRepository;
     @Autowired
     CustomerService customerService;
+    @Autowired
+    ContractorRepository contractorRepository;
+    @Autowired
+    ContractorService contractorService;
 
     @GetMapping("/reportsPage")
     public String reportsPage()
@@ -286,6 +300,71 @@ public class ReportsController {
 
         return("reportOperationalCustomers");
     }
+
+
+
+    @GetMapping("/contractorsGained")
+    public String contractorsGained(Model theModel)
+    {
+
+        List<ServiceOrderPresentation> serviceOrderPresentations = contractorService.getContractors(contractorRepository.findAllContractorsGained());
+
+        theModel.addAttribute("serviceOrderPresentations",serviceOrderPresentations);
+
+        int count =0;
+
+        for(ServiceOrderPresentation serviceOrderPresentation: serviceOrderPresentations)
+        {
+            count++;
+        }
+
+        theModel.addAttribute("count",count);
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+
+        Calendar cal1 = Calendar.getInstance();
+        Date result1 = cal1.getTime();
+        String currentDate = dateFormat.format(result1);
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date result2 = cal.getTime();
+        String pastMonth = dateFormat.format(result2);
+
+        theModel.addAttribute("currentDate", currentDate);
+        theModel.addAttribute("pastMonth",pastMonth);
+
+        return("reportContractorsHired");
+    }
+
+    @GetMapping("/contractorSearch")
+    public String searchContractor(Model theModel)
+    {
+
+
+        List<ServiceOrderPresentation> serviceOrderPresentations = contractorService.getContractors(contractorRepository.findAllNotDeleted());
+
+        theModel.addAttribute("serviceOrderPresentations",serviceOrderPresentations);
+
+        return("searchContractorsForReports");
+    }
+
+    @GetMapping("/contractorProfile")
+    public String showContractorProfile(@RequestParam("contractorId") int contractorId, Model theModel)
+    {
+
+
+        ServiceOrderPresentation serviceOrderPresentation = contractorService.getServiceOrderPresentationById(contractorId);
+
+        theModel.addAttribute("serviceOrderPresentation",serviceOrderPresentation);
+
+        List<Skill> skills = contractorService.getContractorSkills(contractorId);
+        theModel.addAttribute("skills", skills);
+
+        return("contractorProfileForReport");
+    }
+
+
 
 }
 
