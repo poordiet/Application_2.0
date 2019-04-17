@@ -131,7 +131,7 @@
 		<nav class="navbar fixed-top navbar-expand-lg bg-primary" >
 
 			<div class="col-sm-1" id="toplogo">
-			<img class="img-fluid" id="logo" th:src="@{/images/ComputerXpertsLogo.png}"/>
+			<img class="img-fluid" id="logo" src="logo.emf"/>
 			</div>
 
 			<!-- Valerie Bar -->
@@ -159,66 +159,151 @@
 	  <!-- /Valerie Bar -->
 		<!-- The Form Title -->
 		<div class="container-fluid" id="form">
-			<h1 class="mt-4 text-center">Reports</h1>
+			<h1 class="mt-4 text-center">Contractor Profile</h1>
 		</div>
 
 		<!-- The Form -->
+
 		<div class="container" id="form">
 			<div class="row justify-content-center">
-				<div class="col-sm-12">
-					<form id="new customer" onsubmit="return false;">
-						<div class="row justify-content-center">
-							<div class="col-md-auto">
-								<div class ="form-group">
-									<p class="h5 inlineText">Contractor Reports</p>
-									<table class="table">
-										<thead>
-										</thead>
-										<tbody>
-										<tr>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Profile</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractors Hired</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractors per State</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Incident</a> </td>
-										</tr>
-										</tbody>
-									</table>
-									<p class="h5 inlineText">Customer Site Reports</p>
-									<table class="table">
-										<thead>
-										</thead>
-										<tbody>
-										<tr>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Customers Gained</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Operating Customer Site</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractor per State</a></td>
-											<td><a href="@{/reports/hardwareSales}" class="btn btn-outline-primary btn-lg">Hardware Sale</a></td>
-										</tr>
-										</tbody>
-									</table>
-									<p class="h5 inlineText">Services & Service Order Reports</p>
-									<table class="table">
-										<thead>
-										</thead>
-										<tbody>
-										<tr>
-											<td><a th:href="@{/reports/serviceOrderSearch}" class="btn btn-outline-primary btn-lg">Service Order Profile</a></td>
-											<td><a th:href="@{/reports/servicesProvided}" class="btn btn-outline-primary btn-lg">Services Provided</a></td>
-											<td><a th:href="@{/reports/monthlyServiceOrders}" class="btn btn-outline-primary btn-lg">Monthly Service Orders</a></td>
-											<td><a th:href="@{/reports/serviceOrderIncidentReport}" class="btn btn-outline-primary btn-lg">Service Order Incident</a></td>
-										</tr>
-										</tbody>
-									</table>
-								</div>
+				<div class="col-md-6">
+
+					<div class="mb-4"><a th:href="@{/contractors/search}"><button class="btn btn-info" >Back to Search</button></a></div>
+
+
+					<form th:object="${serviceOrderPresentation}" th:action="@{/contractors/contractorEditSubmit}" method = "POST">
+
+
+						<div>
+							<div class ="form-group">
+								<label>ID</label>
+								<input th:field="*{contractorId}" class="form-control" type="text" readonly/>
 							</div>
 						</div>
 
-				<!-- CLOSE ROW-->
-				</form>
+							<div>
+								<div class ="form-group">
+									<label>First Name</label>
+									<input th:field="*{contractorFname}" class="form-control" type="text" />
+								</div>
+							</div>
+
+							<div>
+								<div class ="form-group">
+									<label>Last Name</label>
+									<input th:field="*{contractorLname}" class="form-control" type="text" />
+								</div>
+							</div>
+
+						<div>
+							<div class ="form-group">
+								<label>Email</label>
+								<input th:field="*{contractorEmail}" class="form-control" type="text" />
+							</div>
+						</div>
+
+
+
+						<div class ="form-group">
+							<label>Phone Number</label>
+							<input th:field=*{contractorPhone} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>Street Address</label>
+							<input th:field=*{contractorAddress} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>City</label>
+							<input th:field=*{contractorCity} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>Zipcode</label>
+							<input th:field=*{contractorZip} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>Country</label>
+							<select th:field=*{countryName} class="form-control" >
+								<option th:value = "*{countryId} " th:text="*{countryName} " ></option>
+							</select>
+						</div>
+
+						<div class ="form-group">
+							<label>State</label>
+							<select th:field=*{stateName} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>Status</label>
+							<select th:field=*{contractorStatus} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>Type</label>
+							<select th:field=*{contractorType} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>Availability</label>
+							<input th:field=*{contractorAvailability} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>Access Level</label>
+							<select th:field=*{accLevelName} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>Username</label>
+							<input th:field=*{contractorUsername} class="form-control" type="text" />
+						</div>
+
+						<div class ="form-group">
+							<label>Contractor Password</label>
+							<input th:field=*{accLevelName} class="form-control" type="text" />
+						</div>
+
+<!--						<div class="col-sm-12">-->
+<!--							<div class ="form-group">-->
+<!--								<label>Contacts</label>-->
+<!--								<select th:field="*{contacts}" class ="form-control" multiple size="8" id="contractor_selected0">-->
+<!--									<option th:each="contact:${contacts}" th:value="${contact.contactId}" th:text = "${contact.contactLname}"></option>-->
+<!--								</select>-->
+<!--							</div>-->
+<!--						</div>-->
+
+						<p class="h5 inlineText">Skills</p>
+						<table class="table">
+							<thead>
+							<th>Skill</th>
+							</thead>
+							<tbody>
+
+							<tr>
+								<td th:text="${serviceOrderPresentation.skill}" />
+							</tr>
+							</tbody>
+						</table>
+
+
+
+
+
+
+
+
+
+						<button  class="btn btn-success" >update</button>
+					</form>
+
+
+				</div>
 			</div>
 		</div>
-	</div>
-  <!-- /The Form-->
+		<!-- /The Form-->
     </div>
     <!-- /#page-content-wrapper -->
 

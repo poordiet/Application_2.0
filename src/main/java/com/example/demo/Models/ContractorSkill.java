@@ -7,6 +7,28 @@ import java.util.Objects;
 public class ContractorSkill {
     private int contractorSkillId;
 
+    //M:1 with Contractor
+    private Contractor contractor;
+
+    @ManyToOne
+    @JoinColumn(name="contractor_id")
+    public Contractor getContractor(){return contractor;}
+
+    public void setContractor(Contractor contractor) {
+        this.contractor = contractor;
+    }
+
+    //M:1 with Skill
+    private Skill skill;
+
+    @ManyToOne
+    @JoinColumn(name="skill_id")
+    public Skill getSkill(){return skill;}
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     @Column(name = "contractor_skill_id", nullable = false)

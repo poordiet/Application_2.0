@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Search Contractor</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+
+    <div class="bg-primary border-right " id="sidebar-wrapper" style="background-color: #cacbce !important;">
+        <div class="sidebar-heading"></div>
+        <div class="sidebar-heading"></div>
+
+        <!-- Nav Bar Items -->
+        <div id="nav" class="list-group pre-scrollable list-group-flush">
+
+            <!-- Home -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" >Home</a>
+
+            <!-- Service Order -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#so">
+                Service Order <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="so" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="http://localhost:63342/Front-End%20Template/create_service_order.html?_ijt=7s5r49f43mjdoau4ne94gkufeo" class="list-group-item ">Create</a>
+                <a href="#" class="list-group-item ">Incident</a>
+            </div>
+
+
+            <!-- Customer -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#customer">
+                Customer <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="customer" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="http://localhost:63342/Front-End%20Template/add_customer.html?_ijt=7qep0tfp9qdrar87ckjhp58vr5" class="list-group-item ">Add</a>
+            </div>
+
+
+            <!-- Contractor -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#contractor">
+                Contractor <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="contractor" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+
+            <!-- Hardware -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#hardware">
+                Hardware <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="hardware" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+
+            <!-- Knowledge base -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
+                Knowledge Base <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="kb" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+            <!-- Reports -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+
+            <!-- DB Management -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
+
+            <!-- Logout -->
+            <a class="list-group-item nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+
+
+
+        </div>
+        <!-- /Nav Bar Items -->
+
+
+    </div>
+    <!-- /SideBar -->
+
+</div>
+
+
+
+<!-- /#sidebar-wrapper -->
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+
+    <!-- Not Really Sure TBH -->
+    <div class="col-sm-12">
+
+        <!-- Grey bar at the top (the sticky one) -->
+        <nav class="navbar fixed-top navbar-expand-lg bg-primary" >
+
+            <div class="col-sm-1" id="toplogo">
+                <img class="img-fluid" id="logo" src="logo.emf"/>
+            </div>
+
+            <!-- Valerie Bar -->
+            <div class="col-sm-12" id="valeriebar1"></div>
+
+            <!-- Hamburger Button -->
+            <button class="btn btn-primary" id="menu-toggle"><span class="dark-blue-text"><i
+                    class="fa fa-bars fa-1x"></i></span></button></button>
+
+            <!-- Top Right Logout -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /Grey bar at the top (the sticky one) -->
+
+
+        <!-- Valerie Bar -->
+        <div class="col-sm-12" id="valeriebar1"></div>
+
+    </div>
+    <!-- /Not Really Sure TBH -->
+    <!-- The Form Title -->
+    <!-- The Table Title -->
+    <div class="container-fluid" id="table">
+        <h1 class="mt-4 text-center">Find Contractor</h1>
+    </div>
+    <br>
+
+    <!-- Search at the top -->
+    <div class="container">
+        <div class="row justify-content-end">
+            <form action="#" th:action="@{/index}" method="post">
+                <div class="row">
+                    <div class = "col-sm-4">
+                        <select class="form-control">
+                            <option selected disabled>Search By</option>
+                            <option name="id">Id</option>
+                            <option name="contractor_fname">First Name</option>
+                            <option name="contractor_lname">Last Name</option>
+                            <option name="contractor_email">Email</option>
+                            <option name="contractor_phone">Phone Number</option>
+                        </select>
+                    </div>
+
+                    <div class = "col-sm-8">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Search for...">
+
+                            <div class="input-group-append">
+				<span class="input-group-search">
+        		<button class="btn btn-light" type="submit"><i class="fa fa-search fa-fw"></i>Search</button>
+      			</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+
+
+        <br>
+    </div>
+
+    <!-- The Table -->
+    <div  class="container table">
+        <div class="row justify-content-center">
+            <div class="col-sm-13">
+                <table name="customer_table" class="table table-hover" id="customer_table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Contractor First Name</th>
+                        <th scope="col">Contractor Last Name</th>
+                        <th scope="col">Contractor Email</th>
+                        <th scope="col">Contractor Phone</th>
+                        <th scope="col">Contractor City</th>
+                        <th scope="col">Contractor State</th>
+                        <th scope="col">Contractor Availability</th>
+                        <th scope="col">Contractor Status</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <!-- Sample Data just to show data in GUI -->
+                    <tbody>
+
+                    <tr>
+                        <!-- Search Each Row-->
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div>
+                        </div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control"  type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control"  type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control"  type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button></td>
+                    </tr>
+
+                    <style>
+                        #td_overflow{
+                            overflow:hidden;
+                            text-overflow:ellipsis;
+                            white-space:nowrap;
+                        }
+                    </style>
+
+
+                    <tr th:onclick="'javascript:rowClicked(\'' + ${tempContractors.contractorId} + '\');'" th:href="@{/home/home}" th:each="tempContractors : ${serviceOrderPresentations}">
+
+                        <td th:text="${tempContractors.contractorId}" />
+                        <td th:text="${tempContractors.contractorFname}" />
+                        <td th:text="${tempContractors.contractorLname}" />
+                        <td th:text="${tempContractors.contractorEmail}" />
+                        <td th:text="${tempContractors.contractorPhone}" />
+                        <td th:text="${tempContractors.contractorCity}" />
+                        <td th:text="${tempContractors.stateName}" />
+                        <td th:text="${tempContractors.contractorAvailability}" />
+                        <td th:text="${tempContractors.contractorStatus}" />
+
+
+                            <td><a type="button" class="btn btn-danger" href="#" th:href="@{/contractors/delete(contractorId=${tempContractors.contractorId})}"
+                               onclick="if(!(confirm('Are you sure you would like to delete this Contractor?')))return false">Delete</a></td>
+
+                        </tr>
+
+                    <script>
+                        function rowClicked(value) {
+                            location.href = "/contractors/contractorProfile?contractorId=" + value;
+                        }
+                    </script>
+
+                    <!-- IDK, I was trying to make the overflow of the contractor names cut off, but not sure how to do this
+                        This code makes it to where the names do not wrap, but the ellipses does not work. I suspect it has
+                        something to do with the bootstrap autosizing the table columns?
+                    <style>
+                        #td_overflow{
+                            overflow:hidden;
+                            text-overflow:ellipsis;
+                            white-space:nowrap;
+                        }
+                    </style>
+                    -->
+                    <style>
+                        #td_overflow{
+                            overflow:hidden;
+                            text-overflow:ellipsis;
+                            white-space:nowrap;
+                        }
+                    </style>
+
+
+                    <!-- Crappy Placeholder Text for future connection with database etc
+                    <tr th:each="tempServiceOrder : ${serviceOrders}, tempCustomerSite : ${customerSites}">
+
+                        <td th:text="${tempServiceOrder.id}" />
+                        <td th:text="${tempServiceOrder.date_scheduled}" />
+                        <td th:text="${tempServiceOrder.service}" />
+                        <td th:text="${tempCustomerSite.customer_num}" />
+                        <td th:text="${tempCustomerSite.customer_name}" />
+                        <td th:text="${tempServiceOrder.date_completed}" />
+                        <td th:text="${tempServiceOrder.status}" />
+                        <td><button type="button">Edit</button> <button type="button">Delete</button></td>
+
+                    </tr>
+                    -->
+
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-outline-danger btn-block" onclick="self.close()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <!-- /The Form-->
+
+    <hr>
+
+
+</div>
+<!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $(document).ready(function(){
+        $("a").click(function(){
+            $(".fas fa-plus-circle").toggleClass("fas fa-plus-circle fas fa-minus-circle"))};
+    });
+</script>
+
+<!-- Attempting to get the icons to change -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Add Customer</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/simple-sidebar.css}" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- Bootstrap core JavaScript -->
+    <script th:src="@{/vendor/jquery/jquery.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+
+</head>
+
+<body>
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+
+    <div class="bg-primary border-right " id="sidebar-wrapper" style="background-color: #cacbce !important;">
+        <div class="sidebar-heading"></div>
+        <div class="sidebar-heading"></div>
+
+        <!-- Nav Bar Items -->
+        <div id="nav" class="list-group pre-scrollable list-group-flush">
+
+            <!-- Home -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" >Home</a>
+
+            <!-- Service Order -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#so">
+                Service Order <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="so" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="http://localhost:63342/Front-End%20Template/create_service_order.html?_ijt=7s5r49f43mjdoau4ne94gkufeo" class="list-group-item ">Create</a>
+                <a href="#" class="list-group-item ">Incident</a>
+            </div>
+
+
+            <!-- Customer -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#customer">
+                Customer <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="customer" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+
+            <!-- Contractor -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#contractor">
+                Contractor <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="contractor" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+
+            <!-- Hardware -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#hardware">
+                Hardware <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="hardware" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+
+            <!-- Knowledge base -->
+            <a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#kb">
+                Knowledge Base <i class="fas fa-plus-circle"></i>
+            </a>
+
+            <div id="kb" class="collapse">
+                <a href="#" class="list-group-item ">Search</a>
+                <a href="#" class="list-group-item ">Add</a>
+            </div>
+
+            <!-- Reports -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+
+            <!-- DB Management -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
+
+            <!-- Logout -->
+            <a class="list-group-item nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+
+
+
+        </div>
+        <!-- /Nav Bar Items -->
+
+
+    </div>
+    <!-- /SideBar -->
+
+</div>
+
+
+
+<!-- /#sidebar-wrapper -->
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+
+    <!-- Not Really Sure TBH -->
+    <div class="col-sm-12">
+
+        <!-- Grey bar at the top (the sticky one) -->
+        <nav class="navbar fixed-top navbar-expand-lg bg-primary" >
+
+            <div class="col-sm-1" id="toplogo">
+                <img class="img-fluid" id="logo" src="logo.emf"/>
+            </div>
+
+            <!-- Valerie Bar -->
+            <div class="col-sm-12" id="valeriebar1"></div>
+
+            <!-- Hamburger Button -->
+            <button class="btn btn-primary" id="menu-toggle"><span class="dark-blue-text"><i
+                    class="fa fa-bars fa-1x"></i></span></button></button>
+
+            <!-- Top Right Logout -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /Grey bar at the top (the sticky one) -->
+
+
+        <!-- Valerie Bar -->
+        <div class="col-sm-12" id="valeriebar1"></div>
+
+    </div>
+    <!-- /Not Really Sure TBH -->
+    <!-- The Form Title -->
+    <div class="container-fluid" id="form">
+        <h1 class="mt-4 text-center">Add Customer</h1>
+    </div>
+
+    <!-- The Form -->
+    <div class="container" id="form">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <form action="#" th:action="@{/customers/addNewCustomer}" th:object="${customerPresentation}" method = "POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class ="form-group">
+                                <label>Customer Name</label>
+                                <input th:field="*{custSiteName}" type="text" class ="form-control" placeholder="Name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class ="form-group">
+                                <label>Customer Site Number</label>
+                                <input th:field="*{custSiteNumber}" type="text" class ="form-control" placeholder="Site Number">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CLOSE ROW-->
+
+                    <div class ="form-group">
+                        <label>Email</label>
+                        <input th:field="*{custSiteEmail}" type="email" class ="form-control" placeholder="Email">
+                    </div>
+
+                    <div class ="form-group">
+                        <label>Phone Number</label>
+                        <input th:field="*{custSitePhone}" type="text" class ="form-control" placeholder="Phone Number">
+                    </div>
+
+                    <div class ="form-group">
+                        <label>Street Address</label>
+                        <input th:field="*{custSiteAddress}" type="text" class ="form-control" placeholder="Street Address">
+                    </div>
+
+                    <div class ="form-group">
+                        <label>City</label>
+                        <input th:field="*{custSiteCity}" type="text" class ="form-control" placeholder="City">
+                    </div>
+
+                    <div class ="form-group">
+                        <label>Zip code</label>
+                        <input th:field="*{custSiteZip}" type="text" class ="form-control" placeholder="Zip code">
+                    </div>
+
+
+                    <div class ="form-group">
+                        <label>Country</label>
+                        <select th:field="*{countryId}" class ="form-control" id="cust_country">
+                            <option th:each="country:${countries}"  th:value="${country.countryId}" th:text="${country.countryName}"></option>
+                        </select>
+                    </div>
+
+                    <div class ="form-group">
+                        <label>State</label>
+                        <select th:field="*{stateId}"  class ="form-control" id="cust_state">
+                            <option th:each="stateProvince:${states}" th:value="${stateProvince.stateId}" th:text="${stateProvince.stateName}"></option>
+                        </select>
+                    </div>
+
+                    <div class ="form-group">
+                        <label>Customer Site Type</label>
+                        <select th:field="*{custSiteTypeId}"class ="form-control">
+                            <option th:each="customerSiteType:${customerSiteTypes}" th:value="${customerSiteType.custSiteTypeId}" th:text="${customerSiteType.custSiteType}"></option>
+                        </select>
+                    </div>
+
+<!--                    <div class ="form-group">-->
+<!--                        <label>Customer Site Status</label>-->
+<!--                        <select th:field="*{custSiteId}"class ="form-control">-->
+<!--                            <option th:each="customerSiteStatus:${customerStatus}" th:value="${customerSiteStatus.customerSiteStatusId}" th:text="${customerSiteStatus.custSiteStatus}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+
+
+
+
+<!--                   <! <form>-->
+<!--                        Customer Start Date-->
+<!--                        <input th:field="*{start}" type="date" name="bday">-->
+<!--                    </form>-->
+<!--                    <br>-->
+
+                    <a href="@{/customers/addNewCustomers}"> <button type="submit" class="btn btn-success"> Submit</button></a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /The Form-->
+
+    <hr>
+
+
+</div>
+<!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $(document).ready(function(){
+        $("a").click(function(){
+            $(".fas fa-plus-circle").toggleClass("fas fa-plus-circle fas fa-minus-circle"))
+    }});
+</script>
+
+<!-- Attempting to get the icons to change -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var max_fields      = 10; //maximum input boxes allowed
+        var wrapper   		= $(".contact"); //Fields wrapper
+        var add_button      = $(".add_field_button"); //Add button ID
+
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+            e.preventDefault();
+            if(x < max_fields){ //max input box allowed
+                x++; //text box increment
+                $(wrapper).append('<div>' +
+                    '<div class="row">\n' +
+                    '                            <div class="col-md-6">\n' +
+                    '                                <div class ="form-group">\n' +
+                    '                                    <label>Contact First Name</label>\n' +
+                    '                                    <input type="text" class ="form-control" placeholder="Enter Site Name" name="contact_first">\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '\n' +
+                    '                            <div class="col-md-6">\n' +
+                    '                                <div class ="form-group">\n' +
+                    '                                    <label>Contact Last Name</label>\n' +
+                    '                                    <input type="text" class ="form-control" placeholder="Enter Site Number" name="contact_last">\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '\n' +
+                    '                        <div class ="form-group">\n' +
+                    '                            <label>Contact Phone Number</label>\n' +
+                    '                            <input type="text" class ="form-control" placeholder="Phone Number" name="contact_phone">\n' +
+                    '                        </div>\n' +
+                    '\n' +
+                    '                        <div class ="form-group">\n' +
+                    '                            <label>Contact Email</label>\n' +
+                    '                            <input type="email" class ="form-control" placeholder="Add Email" name="contact_email">\n' +
+                    '                        </div>\n' +
+                    '\n' +
+                    '<a href="#" class="remove_field btn btn-outline-danger btn-block" id="remove_button">Remove</a>' +
+                    '</div>'); //add input box
+            }
+        });
+
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+            e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+    });
+</script>
+
+
+</body>
+
+</html>

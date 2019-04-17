@@ -131,7 +131,7 @@
 		<nav class="navbar fixed-top navbar-expand-lg bg-primary" >
 
 			<div class="col-sm-1" id="toplogo">
-			<img class="img-fluid" id="logo" th:src="@{/images/ComputerXpertsLogo.png}"/>
+			<img class="img-fluid" id="logo" src="logo.emf"/>
 			</div>
 
 			<!-- Valerie Bar -->
@@ -159,66 +159,114 @@
 	  <!-- /Valerie Bar -->
 		<!-- The Form Title -->
 		<div class="container-fluid" id="form">
-			<h1 class="mt-4 text-center">Reports</h1>
+			<h1 class="mt-4 text-center">Customer Profile</h1>
 		</div>
 
 		<!-- The Form -->
+
 		<div class="container" id="form">
 			<div class="row justify-content-center">
-				<div class="col-sm-12">
-					<form id="new customer" onsubmit="return false;">
-						<div class="row justify-content-center">
-							<div class="col-md-auto">
+				<div class="col-md-6">
+
+					<div class="mb-4"><a th:href="@{/customers/search}"><button class="btn btn-info" >Back to Search</button></a></div>
+
+
+					<form th:object="${serviceOrderPresentation}">
+
+
+							<div>
 								<div class ="form-group">
-									<p class="h5 inlineText">Contractor Reports</p>
-									<table class="table">
-										<thead>
-										</thead>
-										<tbody>
-										<tr>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Profile</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractors Hired</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractors per State</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Incident</a> </td>
-										</tr>
-										</tbody>
-									</table>
-									<p class="h5 inlineText">Customer Site Reports</p>
-									<table class="table">
-										<thead>
-										</thead>
-										<tbody>
-										<tr>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Customers Gained</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Operating Customer Site</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractor per State</a></td>
-											<td><a href="@{/reports/hardwareSales}" class="btn btn-outline-primary btn-lg">Hardware Sale</a></td>
-										</tr>
-										</tbody>
-									</table>
-									<p class="h5 inlineText">Services & Service Order Reports</p>
-									<table class="table">
-										<thead>
-										</thead>
-										<tbody>
-										<tr>
-											<td><a th:href="@{/reports/serviceOrderSearch}" class="btn btn-outline-primary btn-lg">Service Order Profile</a></td>
-											<td><a th:href="@{/reports/servicesProvided}" class="btn btn-outline-primary btn-lg">Services Provided</a></td>
-											<td><a th:href="@{/reports/monthlyServiceOrders}" class="btn btn-outline-primary btn-lg">Monthly Service Orders</a></td>
-											<td><a th:href="@{/reports/serviceOrderIncidentReport}" class="btn btn-outline-primary btn-lg">Service Order Incident</a></td>
-										</tr>
-										</tbody>
-									</table>
+									<label>Customer Site Id</label>
+									<input th:field="*{custSiteId}" class="form-control" type="text" readonly/>
 								</div>
 							</div>
+
+							<div>
+								<div class ="form-group">
+									<label>Date Started</label>
+									<input th:value="${#dates.format(serviceOrderPresentation.custSiteStart, 'MM/dd/YYY')}" class="form-control" type="text" readonly/>
+								</div>
+							</div>
+
+
+
+						<div class ="form-group">
+							<label>Site Name</label>
+							<input th:field=*{custSiteName} class="form-control" type="text" readonly/>
 						</div>
 
-				<!-- CLOSE ROW-->
-				</form>
+						<div class ="form-group">
+							<label>Site Number</label>
+							<input th:field=*{custSiteNumber} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Site Address</label>
+							<input th:field=*{custSiteAddress} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Site City</label>
+							<input th:field=*{custSiteCity} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Country</label>
+							<input th:field=*{countryName} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>State</label>
+							<input th:field=*{stateName} class="form-control" type="text" readonly/>
+						</div>
+
+						<div class ="form-group">
+							<label>Site Phone</label>
+							<input th:field=*{custSitePhone} class="form-control" type="text" readonly/>
+						</div>
+
+<!--						<div class="col-sm-12">-->
+<!--							<div class ="form-group">-->
+<!--								<label>Contacts</label>-->
+<!--								<select th:field="*{contacts}" class ="form-control" multiple size="8" id="contractor_selected0">-->
+<!--									<option th:each="contact:${contacts}" th:value="${contact.contactId}" th:text = "${contact.contactLname}"></option>-->
+<!--								</select>-->
+<!--							</div>-->
+<!--						</div>-->
+
+						<p class="h5 inlineText">Contacts</p>
+						<table class="table">
+							<thead>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Phone</th>
+							</thead>
+							<tbody>
+
+							<tr>
+								<td th:text="${serviceOrderPresentation.contactFname}" />
+								<td th:text="${serviceOrderPresentation.contactLname}" />
+								<td th:text="${serviceOrderPresentation.contactPhone}"/>
+							</tr>
+							</tbody>
+						</table>
+
+
+
+
+
+
+
+
+
+
+					</form>
+					<a th:href="@{/hwInventory/hwInventoryProfileEdit}"><button class="btn btn-success" >Edit</button></a>
+					<button href="#" type="submit" class="btn btn-danger" >Delete</button>
+				</div>
 			</div>
 		</div>
-	</div>
-  <!-- /The Form-->
+		<!-- /The Form-->
     </div>
     <!-- /#page-content-wrapper -->
 

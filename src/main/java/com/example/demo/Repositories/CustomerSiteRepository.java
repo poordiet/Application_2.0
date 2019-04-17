@@ -18,4 +18,9 @@ CustomerSiteRepository extends CrudRepository<CustomerSite, Integer> {
             "Order by cust_site_name, cust_site_number;", nativeQuery = true)
     List<CustomerSite> findActiveCustomerSiteOrderByNameThenNumber();
 
+    @Query(value = "select * from CUSTOMER_SITE where CUSTOMER_SITE.cust_site_status_id <> 4 order by CUSTOMER_SITE.state_id, CUSTOMER_SITE.cust_site_status_id, CUSTOMER_SITE.cust_site_name, CUSTOMER_SITE.cust_site_number;", nativeQuery = true)
+    List<CustomerSite> findCustomerSiteByABunch();
+
+    List<CustomerSite> findAllByOrderByCustSiteId();
+
 }

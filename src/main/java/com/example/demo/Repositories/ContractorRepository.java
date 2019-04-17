@@ -15,4 +15,8 @@ public interface ContractorRepository extends CrudRepository<Contractor,Integer>
     List<Contractor> findActiveContractors();
 
     Contractor findByContractorId(int contractorId);
+
+    @Query(value = "select * from CONTRACTOR where CONTRACTOR.contractor_status_id <> 8 order by CONTRACTOR.state_id, CONTRACTOR.contractor_status_id, CONTRACTOR.contractor_lname, CONTRACTOR.contractor_fname;", nativeQuery = true)
+    List<Contractor> findAllNotDeleted();
+
 }

@@ -21,6 +21,32 @@ public class Contractor {
     private String contractorPassword;
     private String contractorAvailability;
 
+    // Country
+    private Country country;
+
+    @ManyToOne
+    @JoinColumn(name="country_id")
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    // M:1 with State
+    private StateProvince stateProvince;
+
+    @ManyToOne
+    @JoinColumn(name="state_id")
+    public StateProvince getStateProvince() {
+        return stateProvince;
+    }
+
+    public void setStateProvince(StateProvince stateProvince) {
+        this.stateProvince = stateProvince;
+    }
+
     // 1:M with Assignment
     private Set<Assignment> assignments;
 
@@ -32,6 +58,53 @@ public class Contractor {
     public void setAssignments(Set<Assignment> assignments) {
         assignments.forEach(assignment -> assignment.setContractor(this));
         this.assignments = assignments;
+    }
+
+    // M:1 with ContractorType
+    private ContractorType contractorType;
+
+    @ManyToOne
+    @JoinColumn(name="contractor_type_id")
+    public ContractorType getContractorType(){return contractorType;}
+
+    public void setContractorType(ContractorType contractorType) {
+        this.contractorType = contractorType;
+    }
+
+    // M:1 with ContractorStatus
+    private ContractorStatus contractorStatus;
+
+    @ManyToOne
+    @JoinColumn(name="contractor_status_id")
+    public ContractorStatus getContractorStatus(){return contractorStatus;}
+
+    public void setContractorStatus(ContractorStatus contractorStatus) {
+        this.contractorStatus = contractorStatus;
+    }
+
+
+    // 1:M with Contractor Skill
+
+    private Set<ContractorSkill> contractorSkills;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contractor")
+    public Set<ContractorSkill> getContractorSkills() {
+        return contractorSkills;
+    }
+
+    public void setContractorSkills(Set<ContractorSkill> contractorSkills) {
+
+        this.contractorSkills = contractorSkills;
+    }
+
+    //M:1 with Access Level
+    private AccessLevel accessLevel;
+    @ManyToOne
+    @JoinColumn(name="acc_level_id")
+    public AccessLevel getAccessLevel(){return accessLevel;}
+
+    public void setAccessLevel(AccessLevel accessLevel) {
+        this.accessLevel = accessLevel;
     }
 
 

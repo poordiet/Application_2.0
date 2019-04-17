@@ -982,4 +982,139 @@ public class ServiceOrderPresentation {
     public void setSkillString(String svcString) {
         skillString = svcString;
     }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
+
+    private List<Skill> skills;
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
+    // Contractor Status
+    //Contractor Status
+
+    private int contractorStatusId;
+    private String contractorStatus;
+    private String contractorStatusDesc;
+
+    @Id
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @Column(name = "contractor_status_id", nullable = false)
+    public int getContractorStatusId() {
+        return contractorStatusId;
+    }
+
+    public void setContractorStatusId(int contractorStatusId) {
+        this.contractorStatusId = contractorStatusId;
+    }
+
+    @Basic
+    @Column(name = "contractor_status", nullable = false, length = 50)
+    public String getContractorStatus() {
+        return contractorStatus;
+    }
+
+    public void setContractorStatus(String contractorStatus) {
+        this.contractorStatus = contractorStatus;
+    }
+
+    @Basic
+    @Column(name = "contractor_status_desc", nullable = false, length = 250)
+    public String getContractorStatusDesc() {
+        return contractorStatusDesc;
+    }
+
+    public void setContractorStatusDesc(String contractorStatusDesc) {
+        this.contractorStatusDesc = contractorStatusDesc;
+    }
+
+    //Contractor Type
+    private int contractorTypeId;
+    private String contractorType;
+    private String contractorTypeDesc;
+
+    @Id
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @Column(name = "contractor_type_id", nullable = false)
+    public int getContractorTypeId() {
+        return contractorTypeId;
+    }
+
+    public void setContractorTypeId(int contractorTypeId) {
+        this.contractorTypeId = contractorTypeId;
+    }
+
+    @Basic
+    @Column(name = "contractor_type", nullable = false, length = 24)
+    public String getContractorType() {
+        return contractorType;
+    }
+
+    public void setContractorType(String contractorType) {
+        this.contractorType = contractorType;
+    }
+
+    @Basic
+    @Column(name = "contractor_type_desc", nullable = false, length = 250)
+    public String getContractorTypeDesc() {
+        return contractorTypeDesc;
+    }
+
+    public void setContractorTypeDesc(String contractorTypeDesc) {
+        this.contractorTypeDesc = contractorTypeDesc;
+    }
+
+    // Access Level
+
+    private int accLevelId;
+    private String accLevelName;
+    private String accLevelDesc;
+
+    @Id
+    @GeneratedValue(strategy  = GenerationType.IDENTITY)
+    @Column(name = "acc_level_id", nullable = false)
+    public int getAccLevelId() {
+        return accLevelId;
+    }
+
+    public void setAccLevelId(int accLevelId) {
+        this.accLevelId = accLevelId;
+    }
+
+    @Basic
+    @Column(name = "acc_level_name", nullable = false, length = 50)
+    public String getAccLevelName() {
+        return accLevelName;
+    }
+
+    public void setAccLevelName(String accLevelName) {
+        this.accLevelName = accLevelName;
+    }
+
+    @Basic
+    @Column(name = "acc_level_desc", nullable = false, length = 500)
+    public String getAccLevelDesc() {
+        return accLevelDesc;
+    }
+
+    public void setAccLevelDesc(String accLevelDesc) {
+        this.accLevelDesc = accLevelDesc;
+    }
+
+    // Skill List
+
+
+    public List<Skill> getSkillList() {
+        return skillList;
+    }
+
+    public void setSkillList(List<Skill> skillList) {
+        this.skillList = skillList;
+    }
+
+    private List<Skill> skillList;
+
 }
