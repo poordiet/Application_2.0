@@ -233,17 +233,23 @@
 
 						<div class ="form-group">
 							<label>State</label>
-							<select th:field=*{stateName} class="form-control" type="text" />
+							<select th:field=*{stateName} class="form-control" >
+								<option th:value = "*{stateId} " th:text="*{stateName} " ></option>
+							</select>
 						</div>
 
 						<div class ="form-group">
 							<label>Status</label>
-							<select th:field=*{contractorStatus} class="form-control" type="text" />
+							<select th:field=*{contractorStatus} class="form-control" >
+								<option th:value = "*{contractorStatus} " th:text="*{contractorStatus} " ></option>
+							</select>
 						</div>
 
 						<div class ="form-group">
 							<label>Type</label>
-							<select th:field=*{contractorType} class="form-control" type="text" />
+							<select th:field=*{contractorType} class="form-control" >
+								<option th:value = "*{contractorTypeId} " th:text="*{contractorType} " ></option>
+							</select>
 						</div>
 
 						<div class ="form-group">
@@ -253,7 +259,9 @@
 
 						<div class ="form-group">
 							<label>Access Level</label>
-							<select th:field=*{accLevelName} class="form-control" type="text" />
+							<select th:field=*{accLevelName} class="form-control" >
+								<option th:value = "*{accLevelId} " th:text="*{accLevelName} " ></option>
+							</select>
 						</div>
 
 						<div class ="form-group">
@@ -282,11 +290,13 @@
 							</thead>
 							<tbody>
 
-							<tr>
-								<td th:text="${serviceOrderPresentation.skill}" />
+							<tr th:each="skill:${skills}">
+								<td th:text="${skill.skill}" />
 							</tr>
 							</tbody>
 						</table>
+
+
 
 
 
