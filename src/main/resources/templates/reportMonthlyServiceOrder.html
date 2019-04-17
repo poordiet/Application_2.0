@@ -177,7 +177,7 @@
 					<div class="col-sm-3"><h5 th:text="'Total Gross Income: $'+${monthTotal}"></h5></div>
 				</div>
 			  <br>
-			  <table class="table">
+			  <table class="table" >
 				  <thead class="thead-light">
 				  <tr>
 					  <th scope="col">Id</th>
@@ -206,7 +206,7 @@
 				  </style>
 
 
-				  <tr th:each="tempServiceOrder : ${serviceOrderPresentations}">
+				  <tr th:onclick="'javascript:rowClicked(\'' + ${tempServiceOrder.svoId} + '\');'" th:each="tempServiceOrder : ${serviceOrderPresentations}">
 
 					  <td th:text="${tempServiceOrder.svoId}" />
 					  <td th:text="${#dates.format(tempServiceOrder.dateScheduled, 'MM/dd/YYYY HH:mm' )}" />
@@ -221,6 +221,13 @@
 					  <td th:text="'$' + ${tempServiceOrder.total}" />
 
 				  </tr>
+
+				  <!-- Click row in table and return this link -->
+				  <script>
+                      function rowClicked(value) {
+                          location.href = "/service_orders/serviceOrderProfile?svoId=" + value;
+                      }
+				  </script>
 
 				  </tbody>
 			  </table>

@@ -1,16 +1,13 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Models.Incident;
-import com.example.demo.Models.Payment;
-import com.example.demo.Models.ServiceOrder;
-import com.example.demo.Models.Svc;
+import com.example.demo.Models.*;
+import com.example.demo.Presentation.CustomerPresentation;
 import com.example.demo.Presentation.HwPresentation;
 import com.example.demo.Presentation.IncidentPresentation;
 import com.example.demo.Presentation.ServiceOrderPresentation;
+import com.example.demo.Repositories.CustomerSiteRepository;
 import com.example.demo.Repositories.ServiceOrderRepository;
-import com.example.demo.Service.ReportsService;
-import com.example.demo.Service.ServiceOrderService;
-import com.example.demo.Service.ServiceOrderServiceImpl;
+import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +37,13 @@ public class ReportsController {
 
     @Autowired
     ServiceOrderRepository serviceOrderRepository;
+    @Autowired
+    CustomerSiteService customerSiteService;
+    @Autowired
+    CustomerSiteRepository customerSiteRepository;
+    @Autowired
+    CustomerService customerService;
+
     @GetMapping("/reportsPage")
     public String reportsPage()
     {
@@ -191,6 +195,96 @@ public class ReportsController {
         theModel.addAttribute("pastMonth",pastMonth);
 
         return("reportServiceOrderIncidentReport");
+    }
+
+    @GetMapping("/customerSiteSearch")
+    public String searchCustomer(Model theModel)
+    {
+
+        List<CustomerPresentation> customerPresentation = customerService.getCustomerPresentation(customerSiteRepository.findCustomerSiteByABunch());
+
+        theModel.addAttribute("customerPresentations",customerPresentation);
+
+        return("reportCustomerSearch");
+    }
+
+    @GetMapping("/operationalCustomers")
+    public String operationalCustomers(Model theModel)
+    {
+
+        List<CustomerPresentation> customerPresentation = customerService.getCustomerPresentation(customerSiteRepository.findCustomerSiteByABunch());
+
+        theModel.addAttribute("customerPresentations",customerPresentation);
+
+        return("reportCustomerSearch");
+    }
+
+    @GetMapping("/customersGained")
+    public String customersGained(Model theModel)
+    {
+
+        List<CustomerPresentation> customerPresentations = customerService.getCustomerPresentation(customerSiteRepository.findAllCustomersGainedMonthly());
+
+        theModel.addAttribute("customerPresentations",customerPresentations);
+
+        int count =0;
+
+        for(CustomerPresentation customerPresentation1: customerPresentations)
+        {
+            count++;
+        }
+
+        theModel.addAttribute("count",count);
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+
+        Calendar cal1 = Calendar.getInstance();
+        Date result1 = cal1.getTime();
+        String currentDate = dateFormat.format(result1);
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date result2 = cal.getTime();
+        String pastMonth = dateFormat.format(result2);
+
+        theModel.addAttribute("currentDate", currentDate);
+        theModel.addAttribute("pastMonth",pastMonth);
+
+        return("reportCustomersGained");
+    }
+
+    @GetMapping("/operatingCustomers")
+    public String operatingCustomers(Model theModel)
+    {
+
+        List<CustomerPresentation> customerPresentations = customerService.getCustomerPresentation(customerSiteRepository.findActiveCustomerSiteOrderByNameThenNumber());
+
+        theModel.addAttribute("customerPresentations",customerPresentations);
+
+        int count =0;
+
+        for(CustomerPresentation customerPresentation1: customerPresentations)
+        {
+            count++;
+        }
+
+        theModel.addAttribute("count",count);
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+
+        Calendar cal1 = Calendar.getInstance();
+        Date result1 = cal1.getTime();
+        String currentDate = dateFormat.format(result1);
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date result2 = cal.getTime();
+        String pastMonth = dateFormat.format(result2);
+
+        theModel.addAttribute("currentDate", currentDate);
+        theModel.addAttribute("pastMonth",pastMonth);
+
+        return("reportOperationalCustomers");
     }
 
 }

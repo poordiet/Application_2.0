@@ -108,6 +108,7 @@ public class CustomerService {
             customerPresentation.setCustSiteCity(customerSite1.getCustSiteCity());
             customerPresentation.setStateName(customerSite1.getStateProvince().getStateName());
             customerPresentation.setCustSiteStatus(customerSite1.getCustomerSiteStatus().getCustSiteStatus());
+            customerPresentation.setCustSiteStart(customerSite1.getCustSiteStart());
 
 
 
