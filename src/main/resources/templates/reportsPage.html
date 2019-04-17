@@ -40,7 +40,7 @@
 			<div id="nav" class="list-group  list-group-flush">
 			
 				<!-- Home -->
-				<a href="#" class="list-group-item list-group-item-action bg-light" >Home</a>
+				<a th:href="@{/home/home}" class="list-group-item list-group-item-action bg-light" >Home</a>
 				
 				<!-- Service Order -->
 				<a href="#"class="list-group-item list-group-item-action bg-light" data-toggle="collapse" data-target="#so" id="plus">
@@ -50,7 +50,7 @@
 					<div id="so" class="collapse">
 						<a th:href="@{/service_orders/search}" class="list-group-item ">Search</a>
 						<a th:href="@{/service_orders/showFormForAddCurrentCustomer}" class="list-group-item ">Create</a>
-						<a href="#" class="list-group-item ">Incident</a>
+						<a href="#" class="list-group-item disabled ">Incident</a>
 					</div>
 				
 			
@@ -60,8 +60,8 @@
 				</a>
 		
 					<div id="customer" class="collapse">
-						<a href="#" class="list-group-item ">Search</a>
-						<a href="#" class="list-group-item ">Add</a>
+						<a th:href="@{/customers/search}" class="list-group-item ">Search</a>
+						<a th:href="@{/customers/showAddNewCustomer}" class="list-group-item ">Add</a>
 					</div>
 			
 		
@@ -71,8 +71,8 @@
 				</a>
 		
 					<div id="contractor" class="collapse">
-						<a href="#" class="list-group-item ">Search</a>
-						<a href="#" class="list-group-item ">Add</a>
+						<a th:href="@{/contractors/search}" class="list-group-item ">Search</a>
+						<a th:href="@{/contractors/showAddNewContractor}" class="list-group-item ">Add</a>
 					</div>
 				
 				
@@ -82,8 +82,8 @@
 				</a>
 		
 					<div id="hardware" class="collapse">
-						<a href="#" class="list-group-item ">Search</a>
-						<a href="#" class="list-group-item ">Add</a>
+						<a th:href="@{/hwInventory/search}" class="list-group-item ">Search</a>
+						<a th:href="@{/hwInventory/showAddNewHwInventory}" class="list-group-item ">Add</a>
 					</div>
 				
 		
@@ -93,15 +93,15 @@
 					</a>
 		
 					<div id="kb" class="collapse">
-						<a href="#" class="list-group-item ">Search</a>
-						<a href="#" class="list-group-item ">Add</a>
+						<a class="list-group-item disabled">Search</a>
+						<a href="#" class="list-group-item disabled">Add</a>
 					</div>
 		
 				<!-- Reports -->
-				<a href="#" class="list-group-item list-group-item-action bg-light" >Reports</a>
+				<a th:href="@{/reports/reportsPage}" class="list-group-item list-group-item-action bg-light" >Reports</a>
 				
 				<!-- DB Management -->
-				<a href="#" class="list-group-item list-group-item-action bg-light" >DB Management</a>
+				<a th:href="@{/reports/reportsPage}" class="list-group-item list-group-item-action bg-light" >DB Management</a>
 				
 				<!-- Logout -->
 				<a class="list-group-item nav-link" href="#">Logout<span class="sr-only">(current)</span></a>
@@ -176,10 +176,10 @@
 										</thead>
 										<tbody>
 										<tr>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Profile</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractors Hired</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractors per State</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Incident</a> </td>
+											<td><a th:href="@{/reports/contractorSearch}" class="btn btn-outline-primary btn-lg">Contractor Profile</a></td>
+											<td><a th:href="@{/reports/contractorsGained}" class="btn btn-outline-primary btn-lg">Contractors Hired</a></td>
+											<td><a href="" class="btn btn-outline-primary disabled btn-lg">Active Contractors per State</a></td>
+											<td><a href="" class="btn btn-outline-primary disabled btn-lg">Contractor Incident</a> </td>
 										</tr>
 										</tbody>
 									</table>
@@ -189,10 +189,10 @@
 										</thead>
 										<tbody>
 										<tr>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Customers Gained</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Operating Customer Site</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractor per State</a></td>
-											<td><a href="@{/reports/hardwareSales}" class="btn btn-outline-primary btn-lg">Hardware Sale</a></td>
+											<td><a th:href="@{/reports/customersGained}" class="btn btn-outline-primary btn-lg">Customers Gained</a></td>
+											<td><a th:href="@{/reports/operationalCustomers}" class="btn btn-outline-primary btn-lg">Operating Customer Site</a></td>
+											<td><a href="" class="btn btn-outline-primary btn-lg disabled" >Active Contractor per State</a></td>
+											<td><a th:href="@{/reports/hardwareSales}" class="btn btn-outline-primary btn-lg">Hardware Sale</a></td>
 										</tr>
 										</tbody>
 									</table>

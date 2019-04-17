@@ -159,7 +159,7 @@
 	  <!-- /Valerie Bar -->
 		<!-- The Form Title -->
 		<div class="container-fluid" id="form">
-			<h1 class="mt-4 text-center">Service Order For Current Customer</h1>
+			<h1 class="mt-4 text-center">Select a State</h1>
 		</div>
 
 		<!-- The Form -->
@@ -170,143 +170,17 @@
 					<p>
 
 					</p>
-					<form action="#" th:action="@{/service_orders/addCurrentCustomer}" th:object="${customer}" method = "POST" id="new customer">
+					<form action="#" th:action="@{/reports/chooseStateForContractor}" th:object="${serviceOrderPresentation}"  method = "POST" id="new customer">
 
-									<input th:field="*{custSiteId}" th:value="${customer.custSiteId}"  type="text" class ="form-control" readonly>
-
-
-						<div class="row">
-							<div class="col-md-6">
-								<div class ="form-group">
-									<label>Customer Name</label>
-									<input th:field="*{custSiteName}" th:value="${customer.custSiteName}"  type="text" class ="form-control" readonly>
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class ="form-group">
-									<label>Customer Number</label>
-									<input th:field="*{custSiteNumber}" type="text" class ="form-control" placeholder="Enter Customer Number" id="cust_number" readonly>
-								</div>
-							</div>
-						</div>
-						<!-- CLOSE ROW-->
-
-						<div class ="form-group">
-							<label>Phone Number</label>
-							<input th:field="${customer.custSitePhone}" th:value="${customer.custSitePhone}" type="text" class ="form-control" placeholder="Phone Number" id="cust_phone" readonly>
-						</div>
-
-						<div class ="form-group">
-							<label>Email</label>
-							<input th:field="*{custSiteEmail}" type="email" class ="form-control" placeholder="Add Email" id="cust_email" readonly>
-						</div>
-
-						<div class ="form-group">
-							<label>Street Address</label>
-							<input th:field="*{custSiteAddress}" type="text" class ="form-control" placeholder="Street Address" id="cust_address" readonly>
-						</div>
-
-						<div class ="form-group">
-							<label>City</label>
-							<input th:field="*{custSiteCity}" type="text" class ="form-control" placeholder="City" id="cust_city" readonly>
-						</div>
-
-						<div class ="form-group">
-							<label>Zipcode</label>
-							<input th:field="*{custSiteZip}" type="text" class ="form-control" placeholder="Zipcode" id="cust_zip" readonly>
-						</div>
-
-
-						<div class ="form-group">
-							<label>Country</label>
-							<input th:field="*{countryName}" th:value="*{countryId}"  type="text" class ="form-control" placeholder="Country" readonly>
-							<!--<select th:field="*{countryId}" class ="form-control" id="cust_country">
-								<option th:value="${country.countryId}" th:text="${country.countryName}" readonly></option>
-							</select>-->
-						</div>
 
 						<div class ="form-group">
 							<label>State</label>
-							<input th:field="*{stateName}" th:value="*{stateId}" type="text" class ="form-control" placeholder="State" readonly>
-							<!--
 							<select th:field="*{stateId}"  class ="form-control" id="cust_state">
-								<option th:each="stateProvince:${states}" th:value="${stateProvince.stateId}" th:text="${stateProvince.stateName}" readonly></option>
-							</select>-->
-						</div>
-
-						<div class ="form-group">
-							<label>Request Details</label>
-							<textarea  th:field="*{workRequest}" class ="form-control" placeholder="Input Request Information" id="cust_request"></textarea>
-						</div>
-
-
-                        <div class="form-group">
-                        <input th:field="*{dateScheduledString}" type="datetime-local">
-                        </div>
-						<!-- Need to add time <div>
-							Schedule Date:
-							<input th:field="*{dateScheduled}" type="date" class=form-control name="schedule_date" id="cust_date">
-						</div>
-						-->
-						<br>
-
-						<div class ="form-group">
-							<label>Select Service(s) to be Provided</label>
-							<select th:field="*{svcs}" class ="form-control" multiple size="17" id="selection">
-								<option th:each="svc:${svcs}" th:value="${svc.svcId}" th:text = "${svc.svcName}"></option>
+								<option th:each="stateProvince:${states}" th:value="${stateProvince.stateId}" th:text="${stateProvince.stateName}"></option>
 							</select>
 						</div>
 
-						<div class="row">
-							<div class="col-sm-12">
-							<div class ="form-group">
-								<label>Select Existing Contact</label>
-								<select th:field="*{contactId}" class="form-control">
-									<option value="0">Select Contact</option>
-									<option th:each="contact:${contacts}" th:value="${contact.contactId}" th:text="${contact.contactFname + ' ' + contact.contactLname}"></option>
-								</select>
-							</div>
-							</div>
-							<div class="col-sm-12" align="center"><h2>OR</h2>
-							</div>
-							<div class="col-sm-12">
-							<label class="bold">Create New Contact:</label>
-							</div>
-							<div class="col-md-6">
-								<div class ="form-group">
-									<label>Contact First Name</label>
-									<input th:field="*{contactFname}" type="text" class ="form-control" placeholder="Enter Site Name" id="con_first">
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class ="form-group">
-									<label>Contact Last Name</label>
-									<input th:field="*{contactLname}" type="text" class ="form-control" placeholder="Enter Site Number" id="con_last">
-								</div>
-							</div>
-						</div>
-
-						<div class ="form-group">
-							<label>Contact Phone Number</label>
-							<input th:field="*{contactPhone}" type="text" class ="form-control" placeholder="Phone Number" id="con_phone">
-						</div>
-
-						<div class ="form-group">
-							<label>Contact Email</label>
-							<input th:field="*{contactEmail}" type="email" class ="form-control" placeholder="Add Email" id="con_email">
-						</div>
-
-						<div class ="form-group">
-							<label>Contact Type</label>
-							<select th:field="*{contactType}" class="form-control">
-								<option value="" th:default="default" th:selected="selected">Select Contact Type....</option>
-								<option th:each="contactType:${contactTypes}" th:value="${contactType.contactTypeId}" th:text="${contactType.contactType}"></option>
-							</select>
-						</div>
-
-						<a th:href="@{/service_orders/showFormForAssigningContractors}"><button type="submit" class="btn btn-info">Submit Service Order</button></a>
+						<a th:href="@{/service_orders/showFormForAssigningContractors}"><button type="submit" class="btn btn-info">Submit</button></a>
 					</form>
 				</div>
 			</div>

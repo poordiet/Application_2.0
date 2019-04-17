@@ -8,6 +8,7 @@ import com.example.demo.Presentation.ServiceOrderPresentation;
 import com.example.demo.Repositories.ContractorRepository;
 import com.example.demo.Repositories.CustomerSiteRepository;
 import com.example.demo.Repositories.ServiceOrderRepository;
+import com.example.demo.Repositories.StateProvinceRepository;
 import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ import java.util.Set;
 
 import static jdk.nashorn.internal.objects.NativeMath.round;
 
-@SessionAttributes({"serviceOrderPresentation","skills"})
+@SessionAttributes({"serviceOrderPresentation","skills","states"})
 @RequestMapping("/reports")
 @Controller
 public class ReportsController {
@@ -37,6 +38,11 @@ public class ReportsController {
     @ModelAttribute("skills")
     public Skill getSkills(){
         return new Skill();
+    }
+
+    @ModelAttribute("states")
+    public StateProvince getStates(){
+        return new StateProvince();
     }
 
     @Autowired
@@ -57,6 +63,8 @@ public class ReportsController {
     ContractorRepository contractorRepository;
     @Autowired
     ContractorService contractorService;
+    @Autowired
+    StateProvinceRepository stateProvinceRepository;
 
     @GetMapping("/reportsPage")
     public String reportsPage()
@@ -362,6 +370,54 @@ public class ReportsController {
         theModel.addAttribute("skills", skills);
 
         return("contractorProfileForReport");
+    }
+
+    @GetMapping("/chooseStateForContractor")
+    public String chooseStateForContractor(Model theModel)
+    {
+        ServiceOrderPresentation serviceOrderPresentation = new ServiceOrderPresentation();
+        theModel.addAttribute("serviceOrderPresentation",serviceOrderPresentation);
+
+        List<StateProvince> states = stateProvinceRepository.findAll();
+
+
+        theModel.addAttribute("states",states);
+
+
+        return("chooseStateForContractor");
+    }
+
+
+    @PostMapping("/chooseStateForContractor")
+    public String chooseStateForContractor(@ModelAttribute("serviceOrderPresentation") ServiceOrderPresentation serviceOrderPresentation, Model theModel)
+    {
+        System.out.println(serviceOrderPresentation.getStateId());
+
+
+        return "redirect:/reports/contractorsPerState";
+    }
+
+
+    @GetMapping("/contractorsPerState")
+    public String contractorsPerState(@ModelAttribute("serviceOrderPresentations") ServiceOrderPresentation serviceOrderPresentation,Model theModel)
+    {
+        System.out.println(serviceOrderPresentation.getStateId());
+        StateProvince state = stateProvinceRepository.findByStateId(serviceOrderPresentation.getStateId());
+        List<Contractor> contractors = contractorRepository.findContractorByState(state);
+        List<ServiceOrderPresentation> serviceOrderPresentations = contractorService.getContractors(contractors);
+
+        for(ServiceOrderPresentation serviceOrderPresentation1: serviceOrderPresentations)
+        {
+            System.out.println(serviceOrderPresentation1.getStateId());
+            System.out.println(serviceOrderPresentation1.getContractorFname());
+        }
+
+        System.out.println(serviceOrderPresentation.getContractorFname());
+        System.out.println(serviceOrderPresentation);
+        theModel.addAttribute("serviceOrderPresentations",serviceOrderPresentation);
+
+
+        return("reportContractorsPerState");
     }
 
 

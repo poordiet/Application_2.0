@@ -156,27 +156,54 @@
     <!-- The Form Title -->
     <!-- The Table Title -->
     <div class="container-fluid" id="table">
-        <h1 class="mt-4 text-center">Contractors Hired in last 30 Days</h1>
+        <h1 class="mt-4 text-center">Find Contractor</h1>
     </div>
     <br>
+
+    <!-- Search at the top -->
+    <div class="container">
+        <div class="mb-4"><a th:href="@{/reports/reportsPage}"><button class="btn btn-info" >Back to Reports</button></a></div>
+        <div class="row justify-content-end">
+            <form action="#" th:action="@{/index}" method="post">
+                <div class="row">
+                    <div class = "col-sm-4">
+                        <select class="form-control">
+                            <option selected disabled>Search By</option>
+                            <option name="id">Id</option>
+                            <option name="contractor_fname">First Name</option>
+                            <option name="contractor_lname">Last Name</option>
+                            <option name="contractor_email">Email</option>
+                            <option name="contractor_phone">Phone Number</option>
+                        </select>
+                    </div>
+
+                    <div class = "col-sm-8">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Search for...">
+
+                            <div class="input-group-append">
+				<span class="input-group-search">
+        		<button class="btn btn-light" type="submit"><i class="fa fa-search fa-fw"></i>Search</button>
+      			</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+
 
         <br>
     </div>
 
     <!-- The Table -->
     <div  class="container table">
-        <div class="mb-4"><a th:href="@{/reports/reportsPage}"><button class="btn btn-info" >Back to Reports</button></a></div>
-
-        <div>
-            <h5 th:text = " 'Report Dates: '+ ${pastMonth}+ ' - ' + ${currentDate}"></h5>
-        </div>
-        <div >
-            <div class="col-sm-4"><h5 th:text="'Number of Contractors Hired: '+${count}"></h5></div>
-        </div>
-        <br>
         <div class="row justify-content-center">
             <div class="col-sm-13">
-                <table name="customer_table" class="table" id="customer_table">
+                <table name="customer_table" class="table table-hover" id="customer_table">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">Id</th>
@@ -188,13 +215,54 @@
                         <th scope="col">Contractor State</th>
                         <th scope="col">Contractor Availability</th>
                         <th scope="col">Contractor Status</th>
-                        <th scope="col">Hire Date</th>
                         <th></th>
                     </tr>
                     </thead>
 
                     <!-- Sample Data just to show data in GUI -->
                     <tbody>
+
+                    <tr>
+                        <!-- Search Each Row-->
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div>
+                        </div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control"  type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control"  type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control"  type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><div class="form-group row">
+                            <div class="col-12">
+                                <input class="form-control" type="text">
+                            </div></div></td>
+                        <td><button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button></td>
+                    </tr>
 
                     <style>
                         #td_overflow{
@@ -216,13 +284,13 @@
                         <td th:text="${tempContractors.stateName}" />
                         <td th:text="${tempContractors.contractorAvailability}" />
                         <td th:text="${tempContractors.contractorStatus}" />
-                        <td th:text="${#dates.format(tempContractors.contractorHireDate,'MM/dd/YYY')}" />
 
-                    </tr>
+
+                        </tr>
 
                     <script>
                         function rowClicked(value) {
-                            location.href = "/contractors/contractorProfile?contractorId=" + value;
+                            location.href = "/reports/contractorProfile?contractorId=" + value;
                         }
                     </script>
 

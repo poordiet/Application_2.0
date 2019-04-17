@@ -60,6 +60,7 @@ public class ContractorService {
             ServiceOrderPresentation serviceOrderPresentation = new ServiceOrderPresentation();
 
 
+            serviceOrderPresentation.setContractorHireDate(contractor1.getContractorHireDate());
             serviceOrderPresentation.setContractorId(contractor1.getContractorId());
             serviceOrderPresentation.setContractorFname(contractor1.getContractorFname());
             serviceOrderPresentation.setContractorLname(contractor1.getContractorLname());
