@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.plaf.nimbus.State;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.Format;
@@ -200,7 +201,10 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         List<ServiceOrderPresentation> serviceOrderPresentations = new ArrayList<>();
 
 
+
         for (ServiceOrder serviceOrder1:serviceOrders) {
+
+
 
             int count = 0;
 
@@ -236,6 +240,7 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             Set<ServiceOrderLine> serviceOrderLines = serviceOrder1.getServiceOrderLines();
 
 
+
             int count2 = 0;
 
             for(ServiceOrderLine serviceOrderLine1:serviceOrderLines)
@@ -268,6 +273,8 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             serviceOrderPresentations.add(serviceOrderPresentation);
 
         }
+
+
         return serviceOrderPresentations;
     }
 
@@ -704,6 +711,24 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             System.out.println(serviceOrderLine.getSvoLineId());
         }
 
+        CustomerSite customerSite2 = new CustomerSite();
+        Set<Contact> contacts = customerSite2.getContacts();
+
+        customerSite2.setCustomerSiteStatus(customerSiteStatusRepository.findByCustSiteStatusId(4));
+
+        for(Contact contact1: contacts)
+        {
+            contact1.setContactStatus(contactStatusRepository.findByContactStatusId(4));
+
+            contactService.saveContact(contact1);
+        }
+
+        customerSiteService.saveCustomerSite(customerSite2);
+
+
     }
+
+
+
 
 }

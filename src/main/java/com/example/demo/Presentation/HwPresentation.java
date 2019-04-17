@@ -5,6 +5,7 @@ import com.example.demo.Models.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.Set;
 
@@ -449,5 +450,15 @@ public class HwPresentation {
     }
 
 
+    // Sale Date
+    private Timestamp hwSaleDate;
 
+
+    public Timestamp getHwSaleDate() {
+        return hwSaleDate;
+    }
+
+    public void setHwSaleDate(Timestamp hwSaleDate) {
+        this.hwSaleDate = hwSaleDate;
+    }
 }

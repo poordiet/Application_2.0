@@ -32,6 +32,9 @@ public interface HwInventoryRepository extends CrudRepository<HwInventory,Intege
     HwInventory findByHwInvId(int id);
 
 
+    HwInventory findByHwSerialNumber(String hwSerialNumber);
+
+
 
 
 }

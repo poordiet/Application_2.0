@@ -9,7 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CustomerSiteRepository extends CrudRepository<CustomerSite, Integer> {
+public interface
+CustomerSiteRepository extends CrudRepository<CustomerSite, Integer> {
     CustomerSite findCustomerSiteByCustSiteId(int custSiteId);
 
     // Retrieve all ACTIVE customer sites and order by Customer name then Customer Number

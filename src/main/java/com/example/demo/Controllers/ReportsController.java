@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 @RequestMapping("/reports")
 @Controller
@@ -50,6 +53,17 @@ public class ReportsController {
         List<ServiceOrderPresentation> serviceOrderPresentations = serviceOrderService.getServiceOrderPresentation(serviceOrderRepository.findMonthlyServiceOrders());
 
         theModel.addAttribute("serviceOrderPresentations",serviceOrderPresentations);
+
+        double monthTotal = 0.0;
+        int countServiceOrder = 0;
+
+        for(ServiceOrderPresentation serviceOrderPresentation: serviceOrderPresentations) {
+            monthTotal += serviceOrderPresentation.getTotal().doubleValue();
+            countServiceOrder += 1;
+        }
+        monthTotal = Math.round(monthTotal*100)/100;
+        theModel.addAttribute("monthTotal",monthTotal);
+        theModel.addAttribute("countServiceOrder",countServiceOrder);
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
 
@@ -118,6 +132,39 @@ public class ReportsController {
 
         theModel.addAttribute("serviceOrderPresentations",serviceOrderPresentations);
         return("reportServicesProvided");
+    }
+
+    // Hardware Sales Report
+    @GetMapping("/hardwareSales")
+    public String showHardwareSales( Model theModel)
+    {
+        List<HwPresentation> hwPresentations = reportsService.getHardwareSales();
+
+        double totalSalePrice = 0.0;
+
+        for(HwPresentation hwPresentation:hwPresentations)
+        {
+            totalSalePrice+= hwPresentation.getHwSalePrice().doubleValue();
+        }
+        totalSalePrice = Math.round(totalSalePrice*100)/100;
+        theModel.addAttribute("totalSalePrice",totalSalePrice);
+        theModel.addAttribute("hwPresentations",hwPresentations);
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+
+        Calendar cal1 = Calendar.getInstance();
+        Date result1 = cal1.getTime();
+        String currentDate = dateFormat.format(result1);
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date result2 = cal.getTime();
+        String pastMonth = dateFormat.format(result2);
+
+        theModel.addAttribute("currentDate", currentDate);
+        theModel.addAttribute("pastMonth",pastMonth);
+
+        return("reportHwSales");
     }
 
 }
