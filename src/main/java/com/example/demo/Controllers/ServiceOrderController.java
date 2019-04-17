@@ -117,13 +117,18 @@ public class ServiceOrderController {
 //        theModel.addAttribute("hwPresentations", hwPresentations);
 
         int svoId = serviceOrderPresentation.getSvoId();
-        System.out.println(svoId);
+        ServiceOrder serviceOrder=serviceOrderService.findServiceOrderBySvoId(svoId);
+
+        serviceOrder.setTotal(serviceOrderPresentation.getTotal());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        serviceOrder.setDateStarted(timestamp);
+        serviceOrderService.saveServiceOrder(serviceOrder);
+
         List<ServiceOrderLinePresentation> serviceOrderLinePresentations =
                 serviceOrderService.getServiceOrderLinePresentation(serviceOrderService.findServiceOrderBySvoId(svoId).getServiceOrderLines());
 
         theModel.addAttribute("serviceOrderLinePresentations",serviceOrderLinePresentations);
 
-        ServiceOrder serviceOrder = serviceOrderService.findServiceOrderBySvoId(svoId);
         theModel.addAttribute("serviceOrder", serviceOrder);
 
         return("serviceOrderSummary");

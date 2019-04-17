@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -88,7 +89,9 @@ public class ReportsController {
             monthTotal += serviceOrderPresentation.getTotal().doubleValue();
             countServiceOrder += 1;
         }
-        monthTotal = Math.round(monthTotal*100)/100;
+//        monthTotal = Math.round(monthTotal*100)/100;
+        DecimalFormat df2 = new DecimalFormat("###.##");
+        monthTotal = Double.valueOf(df2.format(monthTotal));
         theModel.addAttribute("monthTotal",monthTotal);
         theModel.addAttribute("countServiceOrder",countServiceOrder);
 
@@ -173,7 +176,10 @@ public class ReportsController {
         {
             totalSalePrice+= hwPresentation.getHwSalePrice().doubleValue();
         }
-        totalSalePrice = Math.round(totalSalePrice*100)/100;
+//        totalSalePrice = Math.round(totalSalePrice*100)/100;
+        DecimalFormat df2 = new DecimalFormat("###.##");
+        totalSalePrice = Double.valueOf(df2.format(totalSalePrice));
+
         theModel.addAttribute("totalSalePrice",totalSalePrice);
         theModel.addAttribute("hwPresentations",hwPresentations);
 
@@ -201,6 +207,15 @@ public class ReportsController {
         List<IncidentPresentation> incidentPresentations = reportsService.getIncidents();
 
         theModel.addAttribute("incidentPresentations", incidentPresentations);
+
+        int count = 0;
+
+        for(IncidentPresentation incidentPresentation: incidentPresentations)
+        {
+        count ++;
+        }
+
+        theModel.addAttribute("count",count);
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
 
@@ -230,16 +245,7 @@ public class ReportsController {
         return("reportCustomerSearch");
     }
 
-    @GetMapping("/operationalCustomers")
-    public String operationalCustomers(Model theModel)
-    {
 
-        List<CustomerPresentation> customerPresentation = customerService.getCustomerPresentation(customerSiteRepository.findCustomerSiteByABunch());
-
-        theModel.addAttribute("customerPresentations",customerPresentation);
-
-        return("reportCustomerSearch");
-    }
 
     @GetMapping("/customersGained")
     public String customersGained(Model theModel)
@@ -275,7 +281,7 @@ public class ReportsController {
         return("reportCustomersGained");
     }
 
-    @GetMapping("/operatingCustomers")
+    @GetMapping("/operationalCustomers")
     public String operatingCustomers(Model theModel)
     {
 

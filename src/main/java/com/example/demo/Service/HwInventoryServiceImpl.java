@@ -64,6 +64,7 @@ public class HwInventoryServiceImpl implements HwInventoryService {
             hwPresentation.setHwMacAddress(hwInventory.getHwMacAddress());
             hwPresentation.setHwPurchaseDate(hwInventory.getHwPurchaseDate());
             hwPresentation.setHwCost(hwInventory.getHwCost());
+            hwPresentation.setHwSalePrice(hwInventory.getHwSalePrice());
             hwPresentation.setHwInvStatus(hwInventory.getHwInventoryStatus().getHwInvStatus());
 
             hwPresentations.add(hwPresentation);

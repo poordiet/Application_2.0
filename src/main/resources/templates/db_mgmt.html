@@ -152,162 +152,43 @@
 	</nav>
 	<!-- /Grey bar at the top (the sticky one) -->
 
-
 	  <!-- /Not Really Sure TBH -->
 	  
-	  <!-- The Form Title -->
-      <div class="container-fluid" id="form">
-        <h1 class="mt-4 text-center">Add Contractor</h1>
-      </div>
+
 
 		<!-- The Form -->
 		<div class="container" id="form">
 			<div class="row justify-content-center">
 				<div class="col-md-6">
-	  
-					<form>
-						<div class="row">
-							<div class="col-md-6">
-								<div class ="form-group">
-									<label>First Name</label>
-									<input type="text" class ="form-control" placeholder="First Name">
-								</div>
-							</div>
-						
-							<div class="col-md-6">
-								<div class ="form-group">
-									<label>Last Name</label>
-									<input type="text" class ="form-control" placeholder="Last Name">
-								</div>
-							</div>
-						</div>
-						<!-- CLOSE ROW-->
-						
-								<div class ="form-group">
-									<label>Email</label>
-									<input type="email" class ="form-control" placeholder="Add Email">
-								</div>
-						
-								<div class ="form-group">
-									<label>Phone Number</label>
-									<input type="text" class ="form-control" placeholder="Phone Number">
-								</div>
-								
-								<div class ="form-group">
-									<label>Street Address</label>
-									<input type="text" class ="form-control" placeholder="Street Address">
-								</div>
-								
-								<div class ="form-group">
-									<label>City</label>
-									<input type="text" class ="form-control" placeholder="City">
-								</div>
-								
-								<div class ="form-group">
-									<label>Zipcode</label>
-									<input type="text" class ="form-control" placeholder="Zipcode">
-								</div>
-								
-								
-								<div class ="form-group">
-									<label>Country</label>
-									<select class ="form-control">
-										<option value="United States">United States</option>
-										<option value="Canada">Canada</option>
-										<option value="Mexico">Mexico</option>
-									</select>
-								</div>
-								
-								<div class ="form-group">
-									<label>State</label>
-									<select class ="form-control">
-										<option value="Texas">Texas</option>
-										<option value="Oklahoma">Oklahoma</option>
-										<option value="Louisiana">Louisiana</option>
-									</select>
-								</div>
-								
-								<div class ="form-group">
-									<label>Contractor Status</label>
-									<select class ="form-control">
-										<option value="Active">Active</option>
-										<option value="Not Active">Not Active</option>
-										<option value="Fired">Fired</option>
-									</select>
-								</div>
-								
-								<div class ="form-group">
-									<label>Contractor Type</label>
-									<select class ="form-control">
-										<option value="Manager">Manager</option>
-										<option value="Entry Level">Entry Level</option>
-										<option value="Engineer">Engineer</option>
-									</select>
-								</div>
-								
-								<div class ="form-group">
-									<label>Availability</label>
-									<textarea class ="form-control" placeholder="Add Availability"></textarea>
-								</div>
-						
+					<div class="row">
+					<div class="list-group">
+						<h5>Statuses</h5>
+						<a href="#" class="list-group-item list-group-item-action">Contractor Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Customer Site Hardware Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Customer Site Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Hardware Model Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Hardware Inventory Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Hardware Manufacturer Status </a>
+						<a href="#" class="list-group-item list-group-item-action">Hardware Provider Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Hardware Series Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Incident Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Payment Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Service Order Status</a>
+						<a href="#" class="list-group-item list-group-item-action">Service Status </a>
 
-								<div class="form-group">
-									<label>Skills</label>
-									<select class="custom-select" multiple>
-									<option selected>One</option>
-										<option>Two</option>
-										<option>Three</option>
-									</select>
-								</div>
+					</div>
+						<div class="col-md-1"></div>
+					<div class="list-group">
+						<h5>Types</h5>
+						<a href="#" class="list-group-item list-group-item-action">Contractor Type</a>
+						<a href="#" class="list-group-item list-group-item-action">Customer Site Type</a>
+						<a th:href="@{/dbMgmt/showHardwareTypes}" class="list-group-item list-group-item-action">Hardware Type</a>
+						<a href="#" class="list-group-item list-group-item-action">Incident Type</a>
+						<a href="#" class="list-group-item list-group-item-action">Payment Type</a>
+						<a href="#" class="list-group-item list-group-item-action">Service Type</a>
 
-							<div class ="form-group">
-								<label>Access Level</label>
-								<select class ="form-control">
-									<option value="Super User">Super User</option>
-									<option value="Contractor">Contractor</option>
-									<option value="Disabled">Disabled</option>
-								</select>
-							</div>
-
-						<div class ="form-group">
-							<label>Username</label>
-							<input type="text" class ="form-control" placeholder="Username">
-						</div>
-
-						<div class ="form-group">
-							<label>Password</label>
-							<input type="text" class ="form-control" placeholder="Password">
-						</div>
-
-
-						<div class = "form-group">
-							<label>Social Media</label>
-
-							<div class="input_fields_wrap">
-								<button class="add_field_button btn btn-primary">Add More Fields</button>
-
-								<div class="row top-buffer">
-									<div class="col-sm-4">
-									<select class ="form-control">
-										<option value = "Twitter">Twitter</option>
-										<option value = "Instagram">Instagram</option>
-									</select>
-									</div>
-
-									<div class="col-sm-7">
-									<input type="text" class="form-control" name="mytext[]" placeholder="Account URL">
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-
-
-
-							<button type="submit" class="btn btn-success"> Submit</button>
-						
-					</form>
+					</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -376,7 +257,16 @@
 	.top-buffer{margin-top:20px;}
 </style>
 
-<!-- Menu Toggle Script -->
+<!-- Allows for multiple selections without having to hold ctrl-->
+<script>
+    $('option').mousedown(function(e) {
+        e.preventDefault();
+        $(this).prop('selected', !$(this).prop('selected'));
+        return false;
+    });
+</script>
+
+<!-- Menu Toggle -->
 <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
@@ -385,6 +275,6 @@
 </script>
 
 
-</body>
+    </body>
 
 </html>

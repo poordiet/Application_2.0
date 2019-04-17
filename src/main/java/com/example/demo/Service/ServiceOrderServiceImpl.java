@@ -153,18 +153,30 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
         contactService.saveContact(contact);
         serviceOrder.setContact(contact);
 
+        //Add work request
+        serviceOrder.setWorkRequest(serviceOrderPresentation.getWorkRequest());
+
+        // Add Service order Information
+        serviceOrder.setDateRequested(currentSqlDate);
+
+
         // Add Service Order Status
-        ServiceOrderStatus serviceOrderStatus = serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(1);
+        ServiceOrderStatus serviceOrderStatus = serviceOrderStatusRepository.findServiceOrderStatusBySvoStatusId(4);
         serviceOrder.setServiceOrderStatus(serviceOrderStatus);
 
         // Add Service order Information
         serviceOrder.setDateRequested(currentSqlDate);
 
-        //serviceOrder.setDateScheduled(serviceOrderPresentation.getDateScheduled());
-        // temp place holder
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        serviceOrder.setDateScheduled(timestamp);
-        serviceOrder.setWorkRequest(serviceOrderPresentation.getWorkRequest());
+
+        /*Datetime picker returns 2019-04-19T01:59 -- Have to replace T with a space and append seconds (:00) to make it correct format
+         for Timestamp (java.sql.timestamp) */
+        String formattedTime = serviceOrderPresentation.getDateScheduledString().replace("T"," ");
+        formattedTime+=":00";
+        Timestamp ts = Timestamp.valueOf(formattedTime);
+
+        // Set Date Scheduled
+        serviceOrderPresentation.setDateScheduled(ts);
+        serviceOrder.setDateScheduled(ts);
 
         // This must be before the service order lines because service order lines need the Service Order Id, and Svo_id is assigned once it is saved
         serviceOrderRepository.save(serviceOrder);
@@ -711,19 +723,22 @@ public class ServiceOrderServiceImpl implements ServiceOrderService {
             System.out.println(serviceOrderLine.getSvoLineId());
         }
 
-        CustomerSite customerSite2 = new CustomerSite();
-        Set<Contact> contacts = customerSite2.getContacts();
+//        CustomerSite customerSite2 = new CustomerSite();
+//        Set<Contact> contacts = customerSite2.getContacts();
+        Contact contact2 = serviceOrder.getContact();
 
-        customerSite2.setCustomerSiteStatus(customerSiteStatusRepository.findByCustSiteStatusId(4));
+//        customerSite2.setCustomerSiteStatus(customerSiteStatusRepository.findByCustSiteStatusId(4));
 
-        for(Contact contact1: contacts)
-        {
-            contact1.setContactStatus(contactStatusRepository.findByContactStatusId(4));
+//        for(Contact contact1: contacts)
+//        {
+//            contact1.setContactStatus(contactStatusRepository.findByContactStatusId(4));
+//
+//            contactService.saveContact(contact1);
+//        }
 
-            contactService.saveContact(contact1);
-        }
-
-        customerSiteService.saveCustomerSite(customerSite2);
+        contact2.setContactStatus(contactStatusRepository.findByContactStatusId(1));
+        contactService.saveContact(contact2);
+//        customerSiteService.saveCustomerSite(customerSite2);
 
 
     }
