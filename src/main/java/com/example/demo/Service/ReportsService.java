@@ -2,11 +2,9 @@ package com.example.demo.Service;
 
 import com.example.demo.Models.*;
 import com.example.demo.Presentation.HwPresentation;
+import com.example.demo.Presentation.IncidentPresentation;
 import com.example.demo.Presentation.ServiceOrderPresentation;
-import com.example.demo.Repositories.HwInventoryRepository;
-import com.example.demo.Repositories.HwSvoLineRepository;
-import com.example.demo.Repositories.ServiceOrderLineRepository;
-import com.example.demo.Repositories.SvcRepository;
+import com.example.demo.Repositories.*;
 import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +27,9 @@ public class ReportsService {
 
     @Autowired
     HwInventoryRepository hwInventoryRepository;
+
+    @Autowired
+    IncidentRepository incidentRepository;
 
     public List<ServiceOrderPresentation> getServicesProvidedPresentation() {
         List<ServiceOrderPresentation> serviceOrderPresentations = new ArrayList<>();
@@ -53,7 +54,7 @@ public class ReportsService {
 
             int count = 0;
 
-           String skillString = new String();
+            String skillString = new String();
             for (Skill skill : skills) {
 
                 if (count > 0) {
@@ -76,7 +77,7 @@ public class ReportsService {
     }
 
 
-    public List<HwPresentation> getHardwareSales(){
+    public List<HwPresentation> getHardwareSales() {
         List<HwPresentation> hwPresentations = new ArrayList<>();
 
         List<HwSvoLine> hwSvoLines = hwSvoLineRepository.findAllHwSale();
@@ -84,7 +85,7 @@ public class ReportsService {
 
         Double totalSalePrice = 0.0;
 
-        for(HwSvoLine hwSvoLine: hwSvoLines) {
+        for (HwSvoLine hwSvoLine : hwSvoLines) {
             HwPresentation hwPresentation = new HwPresentation();
             HwInventory hwInventory = hwInventoryRepository.findByHwSerialNumber(hwSvoLine.getCustomerSiteHw().getCustSiteSerialNumber());
 
@@ -103,5 +104,30 @@ public class ReportsService {
 
         return hwPresentations;
     }
+
+    public List<IncidentPresentation> getIncidents() {
+
+        List<Incident> incidents = incidentRepository.findMonthlyIncident();
+        List<IncidentPresentation> incidentPresentations = new ArrayList<>();
+
+        for (Incident incident : incidents) {
+            IncidentPresentation incidentPresentation = new IncidentPresentation();
+            incidentPresentation.setIncidentDate(incident.getIncidentDate());
+            incidentPresentation.setIncidentStatus(incident.getIncidentStatus().getIncidentStatus());
+            incidentPresentation.setIncidentType(incident.getIncidentType().getIncidentType());
+            incidentPresentation.setIncidentId(incident.getIncidentId());
+            incidentPresentation.setIncident(incident.getIncident());
+            incidentPresentation.setSvoId(incident.getServiceOrder().getSvoId());
+            incidentPresentation.setCustSiteName(incident.getServiceOrder().getCustomerSite().getCustSiteName());
+            incidentPresentation.setCustSiteNumber(incident.getServiceOrder().getCustomerSite().getCustSiteNumber());
+            incidentPresentation.setWorkRequest(incident.getServiceOrder().getWorkRequest());
+
+            incidentPresentations.add(incidentPresentation);
+        }
+
+        return incidentPresentations;
+
+    }
+
 }
 

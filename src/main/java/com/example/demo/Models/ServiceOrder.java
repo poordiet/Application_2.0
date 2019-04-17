@@ -67,7 +67,6 @@ public class ServiceOrder {
     }
 
     public void setIncidents(Set<Incident> incidents) {
-//        incidents.forEach(incident -> incident.setServiceOrder(this));
         this.incidents = incidents;
     }
 

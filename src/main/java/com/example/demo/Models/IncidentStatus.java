@@ -2,12 +2,27 @@ package com.example.demo.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class IncidentStatus {
     private int incidentStatusId;
     private String incidentStatus;
     private String incidentStatusDesc;
+
+    // 1:M with Incidents
+
+    private Set<Incident> incidents;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "serviceOrder")
+    public Set<Incident> getIncidents() {
+        return incidents;
+    }
+
+    public void setIncidents(Set<Incident> incidents) {
+        this.incidents = incidents;
+    }
+
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

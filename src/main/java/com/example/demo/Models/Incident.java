@@ -24,6 +24,33 @@ public class Incident {
         this.serviceOrder = serviceOrder;
     }
 
+    // M:1 with Incident Status
+    private IncidentStatus incidentStatus;
+
+    @ManyToOne
+    @JoinColumn(name="incident_status_id")
+    public IncidentStatus getIncidentStatus() {
+        return incidentStatus;
+    }
+
+    public void setIncidentStatus(IncidentStatus incidentStatus) {
+        this.incidentStatus = incidentStatus;
+    }
+
+    // M:1 with Incident Type
+    private IncidentType incidentType;
+
+    @ManyToOne
+    @JoinColumn(name="incident_type_id")
+    public IncidentType getIncidentType() {
+        return incidentType;
+    }
+
+    public void setIncidentType(IncidentType incidentType) {
+        this.incidentType = incidentType;
+    }
+
+
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)

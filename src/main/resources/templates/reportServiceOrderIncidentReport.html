@@ -159,66 +159,53 @@
 	  <!-- /Valerie Bar -->
 		<!-- The Form Title -->
 		<div class="container-fluid" id="form">
-			<h1 class="mt-4 text-center">Reports</h1>
+			<h1 class="mt-4 text-center">Service Order Incident Report</h1>
 		</div>
 
 		<!-- The Form -->
 		<div class="container" id="form">
 			<div class="row justify-content-center">
-				<div class="col-sm-12">
-					<form id="new customer" onsubmit="return false;">
+				<div class="col-md-auto">
+
+						<div class="mb-4"><a th:href="@{/reports/reportsPage}"><button class="btn btn-info" >Back to Reports</button></a></div>
+
+						<br>
+						<div class="row">
+							<h5 th:text = " 'Report Dates: '+ ${pastMonth}+ ' - ' + ${currentDate}"></h5>
+						</div>
 						<div class="row justify-content-center">
-							<div class="col-md-auto">
-								<div class ="form-group">
-									<p class="h5 inlineText">Contractor Reports</p>
-									<table class="table">
-										<thead>
-										</thead>
-										<tbody>
-										<tr>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Profile</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractors Hired</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractors per State</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Contractor Incident</a> </td>
-										</tr>
-										</tbody>
-									</table>
-									<p class="h5 inlineText">Customer Site Reports</p>
-									<table class="table">
-										<thead>
-										</thead>
-										<tbody>
-										<tr>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Customers Gained</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Operating Customer Site</a></td>
-											<td><a href="" class="btn btn-outline-primary btn-lg">Active Contractor per State</a></td>
-											<td><a href="@{/reports/hardwareSales}" class="btn btn-outline-primary btn-lg">Hardware Sale</a></td>
-										</tr>
-										</tbody>
-									</table>
-									<p class="h5 inlineText">Services & Service Order Reports</p>
-									<table class="table">
-										<thead>
-										</thead>
-										<tbody>
-										<tr>
-											<td><a th:href="@{/reports/serviceOrderSearch}" class="btn btn-outline-primary btn-lg">Service Order Profile</a></td>
-											<td><a th:href="@{/reports/servicesProvided}" class="btn btn-outline-primary btn-lg">Services Provided</a></td>
-											<td><a th:href="@{/reports/monthlyServiceOrders}" class="btn btn-outline-primary btn-lg">Monthly Service Orders</a></td>
-											<td><a th:href="@{/reports/serviceOrderIncidentReport}" class="btn btn-outline-primary btn-lg">Service Order Incident</a></td>
-										</tr>
-										</tbody>
-									</table>
-								</div>
+							<div class="form-group">
+
 							</div>
 						</div>
-
-				<!-- CLOSE ROW-->
-				</form>
+						<table class="table light">
+							<thead >
+							<th>Incident Date</th>
+							<th>Service Order Id</th>
+							<th>Work Request Details</th>
+							<th>Incident</th>
+							<th>Incident Type</th>
+							<th>Customer Number</th>
+							<th>Customer Name</th>
+							<th>Investigation Status</th>
+							</thead>
+							<tbody>
+							<tr th:each="incidentPresentation:${incidentPresentations}">
+								<td th:text="${#dates.format(incidentPresentation.incidentDate,'MM/dd/YYYY')}"></td>
+								<td th:text="${incidentPresentation.svoId}"></td>
+								<td th:text="${incidentPresentation.workRequest}"></td>
+								<td th:text="${incidentPresentation.incident}"></td>
+								<td th:text="${incidentPresentation.incidentType}"></td>
+								<td th:text="${incidentPresentation.custSiteNumber}"></td>
+								<td th:text="${incidentPresentation.custSiteName}"></td>
+								<td th:text="${incidentPresentation.incidentStatus}"></td>
+							</tr>
+							</tbody>
+						</table>
+				</div>
 			</div>
 		</div>
-	</div>
-  <!-- /The Form-->
+		<!-- /The Form-->
     </div>
     <!-- /#page-content-wrapper -->
 

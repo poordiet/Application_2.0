@@ -5,6 +5,7 @@ import com.example.demo.Models.Payment;
 import com.example.demo.Models.ServiceOrder;
 import com.example.demo.Models.Svc;
 import com.example.demo.Presentation.HwPresentation;
+import com.example.demo.Presentation.IncidentPresentation;
 import com.example.demo.Presentation.ServiceOrderPresentation;
 import com.example.demo.Repositories.ServiceOrderRepository;
 import com.example.demo.Service.ReportsService;
@@ -167,4 +168,30 @@ public class ReportsController {
         return("reportHwSales");
     }
 
+    // Hardware Sales Report
+    @GetMapping("/serviceOrderIncidentReport")
+    public String serviceOrderIncidentReport( Model theModel)
+    {
+        List<IncidentPresentation> incidentPresentations = reportsService.getIncidents();
+
+        theModel.addAttribute("incidentPresentations", incidentPresentations);
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+
+        Calendar cal1 = Calendar.getInstance();
+        Date result1 = cal1.getTime();
+        String currentDate = dateFormat.format(result1);
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date result2 = cal.getTime();
+        String pastMonth = dateFormat.format(result2);
+
+        theModel.addAttribute("currentDate", currentDate);
+        theModel.addAttribute("pastMonth",pastMonth);
+
+        return("reportServiceOrderIncidentReport");
+    }
+
 }
+
