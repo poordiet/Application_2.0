@@ -3,6 +3,11 @@
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body {
   overflow-x: hidden;
 }
@@ -17,6 +22,12 @@ body {
 
 #form {
 	padding-top: 3%;
+}
+
+#dashArea {
+    position: fixed;
+    padding-left: 100px;
+    padding-top:  40px;
 }
 
 
@@ -72,6 +83,8 @@ body {
 	
 	
 }
+
+
 
 
 

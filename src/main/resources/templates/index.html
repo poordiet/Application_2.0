@@ -28,7 +28,7 @@
 
 <body>
 
-<div class="d-flex" id="wrapper">
+ <div class="d-flex" id="wrapper">
 
 	<!-- Sidebar -->
 
@@ -115,14 +115,14 @@
 	</div>
 	<!-- /SideBar -->
 
-</div>
+  </div>
 
 
 
 <!-- /#sidebar-wrapper -->
 
 <!-- Page Content -->
-<div id="page-content-wrapper">
+ <div id="page-content-wrapper">
 
 	<!-- Not Really Sure TBH -->
 
@@ -155,9 +155,10 @@
 
 	<!-- /Valerie Bar -->
 
+
 		<!-- The Table Title -->
 	<div class="container-fluid" id="dashArea">
-		<div class="row">
+	  <div class="row">
 		<div class="col-sm-2">
 			<div class="card" style="background-color: #f9530c">
 				<div class="card-body">
@@ -202,7 +203,162 @@
 					</div>
 				</div>
 			</div>
+	    </div>
+		<div class="row ">
+			<div class="col-sm-10">
+				<div class="table table-hover" >
+					<h2 class="text-center">Service Orders In-Progress</h2>
 
+					<div class="col-sm-13">
+						<table class="table">
+							<thead class="thead-light">
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Date Started</th>
+								<th scope="col">Service</th>
+								<th scope="col">Customer Number</th>
+								<th scope="col">Customer Name</th>
+								<th scope="col">Contractors</th>
+							</tr>
+							</thead>
+
+
+							<tbody>
+
+							<tr th:each="tempServiceOrder : ${serviceOrderPresentations}">
+
+								<td th:text="${tempServiceOrder.svoId}" />
+								<td th:text="${#dates.format(tempServiceOrder.dateStarted, 'MM/dd/yyyy HH:mm')}" />
+								<td th:text="${tempServiceOrder.svcName}" />
+								<td th:text="${tempServiceOrder.custSiteNumber}" />
+								<td th:text="${tempServiceOrder.custSiteName}" />
+								<!--<td th:text="${tempServiceOrder.custSiteLocation}" />
+                                <td th:text="${tempServiceOrder.contactName}" />
+                                <td th:text="${#dates.format(tempServiceOrder.dateFinished, 'MM/dd/YYY')}" />
+                                <td th:text="${tempServiceOrder.svoStatus}" />-->
+								<td th:text="${tempServiceOrder.contractors}" />
+
+							</tr>
+
+
+
+
+							<!-- IDK, I was trying to make the overflow of the contractor names cut off, but not sure how to do this
+                                This code makes it to where the names do not wrap, but the ellipses does not work. I suspect it has
+                                something to do with the bootstrap autosizing the table columns?
+                            <style>
+                                #td_overflow{
+                                    overflow:hidden;
+                                    text-overflow:ellipsis;
+                                    white-space:nowrap;
+                                }
+                            </style>
+                            -->
+							<style>
+								#td_overflow{
+									overflow:hidden;
+									text-overflow:ellipsis;
+									white-space:nowrap;
+								}
+							</style>
+
+
+							<!-- Crappy Placeholder Text for future connection with database etc
+                            <tr th:each="tempServiceOrder : ${serviceOrders}, tempCustomerSite : ${customerSites}">
+
+                                <td th:text="${tempServiceOrder.id}" />
+                                <td th:text="${tempServiceOrder.date_scheduled}" />
+                                <td th:text="${tempServiceOrder.service}" />
+                                <td th:text="${tempCustomerSite.customer_num}" />
+                                <td th:text="${tempCustomerSite.customer_name}" />
+                                <td th:text="${tempServiceOrder.date_completed}" />
+                                <td th:text="${tempServiceOrder.status}" />
+                                <td><button type="button">Edit</button> <button type="button">Delete</button></td>
+
+                            </tr>
+                            -->
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+<!--		  <div class="table table-hover" >-->
+<!--			<h2 class="text-center">Service Orders In-Progress</h2>-->
+
+<!--				<div class="col-sm-13">-->
+<!--					<table class="table">-->
+<!--						<thead class="thead-light">-->
+<!--						<tr>-->
+<!--							<th scope="col">Id</th>-->
+<!--							<th scope="col">Date Started</th>-->
+<!--							<th scope="col">Service</th>-->
+<!--							<th scope="col">Customer Number</th>-->
+<!--							<th scope="col">Customer Name</th>-->
+<!--							<th scope="col">Contractors</th>-->
+<!--						</tr>-->
+<!--						</thead>-->
+
+
+<!--						<tbody>-->
+
+<!--						<tr th:each="tempServiceOrder : ${serviceOrderPresentations}">-->
+
+<!--							<td th:text="${tempServiceOrder.svoId}" />-->
+<!--							<td th:text="${#dates.format(tempServiceOrder.dateStarted, 'MM/dd/yyyy HH:mm')}" />-->
+<!--							<td th:text="${tempServiceOrder.svcName}" />-->
+<!--							<td th:text="${tempServiceOrder.custSiteNumber}" />-->
+<!--							<td th:text="${tempServiceOrder.custSiteName}" />-->
+<!--							&lt;!&ndash;<td th:text="${tempServiceOrder.custSiteLocation}" />-->
+<!--							<td th:text="${tempServiceOrder.contactName}" />-->
+<!--							<td th:text="${#dates.format(tempServiceOrder.dateFinished, 'MM/dd/YYY')}" />-->
+<!--							<td th:text="${tempServiceOrder.svoStatus}" />&ndash;&gt;-->
+<!--							<td th:text="${tempServiceOrder.contractors}" />-->
+
+<!--						</tr>-->
+
+
+
+
+<!--						&lt;!&ndash; IDK, I was trying to make the overflow of the contractor names cut off, but not sure how to do this-->
+<!--                            This code makes it to where the names do not wrap, but the ellipses does not work. I suspect it has-->
+<!--                            something to do with the bootstrap autosizing the table columns?-->
+<!--                        <style>-->
+<!--                            #td_overflow{-->
+<!--                                overflow:hidden;-->
+<!--                                text-overflow:ellipsis;-->
+<!--                                white-space:nowrap;-->
+<!--                            }-->
+<!--                        </style>-->
+<!--                        &ndash;&gt;-->
+<!--						<style>-->
+<!--							#td_overflow{-->
+<!--								overflow:hidden;-->
+<!--								text-overflow:ellipsis;-->
+<!--								white-space:nowrap;-->
+<!--							}-->
+<!--						</style>-->
+
+
+<!--						&lt;!&ndash; Crappy Placeholder Text for future connection with database etc-->
+<!--                        <tr th:each="tempServiceOrder : ${serviceOrders}, tempCustomerSite : ${customerSites}">-->
+
+<!--                            <td th:text="${tempServiceOrder.id}" />-->
+<!--                            <td th:text="${tempServiceOrder.date_scheduled}" />-->
+<!--                            <td th:text="${tempServiceOrder.service}" />-->
+<!--                            <td th:text="${tempCustomerSite.customer_num}" />-->
+<!--                            <td th:text="${tempCustomerSite.customer_name}" />-->
+<!--                            <td th:text="${tempServiceOrder.date_completed}" />-->
+<!--                            <td th:text="${tempServiceOrder.status}" />-->
+<!--                            <td><button type="button">Edit</button> <button type="button">Delete</button></td>-->
+
+<!--                        </tr>-->
+<!--                        &ndash;&gt;-->
+
+<!--						</tbody>-->
+<!--					</table>-->
+<!--				</div>-->
+<!--			</div>-->
 		</div>
 	</div>
 
@@ -211,92 +367,18 @@
 
 
 		<!-- The Table -->
-        <div class="d-flex justify-content-center" style="margin-top: 15%; margin-right: 10%">
-		<div class="table table-hover" >
-			<h2 class="text-center">Service Orders In-Progress</h2>
-			<div class="row justify-content-center">
-				<div class="col-sm-13">
-					<table class="table">
-						<thead class="thead-light">
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Date Started</th>
-							<th scope="col">Service</th>
-							<th scope="col">Customer Number</th>
-							<th scope="col">Customer Name</th>
-							<th scope="col">Contractors</th>
-						</tr>
-						</thead>
+	<!--<div class="d-flex justify-content-center" style="margin-top: 15%; margin-right: 10%">-->
 
 
-						<tbody>
-
-						<tr th:each="tempServiceOrder : ${serviceOrderPresentations}">
-
-							<td th:text="${tempServiceOrder.svoId}" />
-							<td th:text="${#dates.format(tempServiceOrder.dateStarted, 'MM/dd/yyyy HH:mm')}" />
-							<td th:text="${tempServiceOrder.svcName}" />
-							<td th:text="${tempServiceOrder.custSiteNumber}" />
-							<td th:text="${tempServiceOrder.custSiteName}" />
-							<!--<td th:text="${tempServiceOrder.custSiteLocation}" />
-							<td th:text="${tempServiceOrder.contactName}" />
-							<td th:text="${#dates.format(tempServiceOrder.dateFinished, 'MM/dd/YYY')}" />
-							<td th:text="${tempServiceOrder.svoStatus}" />-->
-							<td th:text="${tempServiceOrder.contractors}" />
-
-						</tr>
-
-
-
-
-						<!-- IDK, I was trying to make the overflow of the contractor names cut off, but not sure how to do this
-                            This code makes it to where the names do not wrap, but the ellipses does not work. I suspect it has
-                            something to do with the bootstrap autosizing the table columns?
-                        <style>
-                            #td_overflow{
-                                overflow:hidden;
-                                text-overflow:ellipsis;
-                                white-space:nowrap;
-                            }
-                        </style>
-                        -->
-						<style>
-							#td_overflow{
-								overflow:hidden;
-								text-overflow:ellipsis;
-								white-space:nowrap;
-							}
-						</style>
-
-
-						<!-- Crappy Placeholder Text for future connection with database etc
-                        <tr th:each="tempServiceOrder : ${serviceOrders}, tempCustomerSite : ${customerSites}">
-
-                            <td th:text="${tempServiceOrder.id}" />
-                            <td th:text="${tempServiceOrder.date_scheduled}" />
-                            <td th:text="${tempServiceOrder.service}" />
-                            <td th:text="${tempCustomerSite.customer_num}" />
-                            <td th:text="${tempCustomerSite.customer_name}" />
-                            <td th:text="${tempServiceOrder.date_completed}" />
-                            <td th:text="${tempServiceOrder.status}" />
-                            <td><button type="button">Edit</button> <button type="button">Delete</button></td>
-
-                        </tr>
-                        -->
-
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		</div>
+<!--	</div>-->
+  </div>
 
 		<!-- /The Form-->
 
 
   
-	  
-    </div>
+
+
     <!-- /#page-content-wrapper -->
 
 
